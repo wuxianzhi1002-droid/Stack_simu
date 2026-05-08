@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Lumerical / Simulation
+*.log
+*.bak
+
+# IDE
+.vscode/
+.idea/
