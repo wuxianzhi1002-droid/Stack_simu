@@ -31,6 +31,9 @@ def main():
             res = sim.run_stack(stack_config)
             results[name] = res
             
+            print(f"Generating FDTD layout (.fsp) for {name}...")
+            sim.generate_fsp(stack_config, "results")
+            
         # Analysis phase
         print("Analyzing results...")
         analyzer.check_validity(results)

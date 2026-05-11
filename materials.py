@@ -13,9 +13,11 @@ class MaterialManager:
     def get_hsq(self):
         """
         HSQ (Hydrogen Silsesquioxane).
-        Approximate model: n ~ 1.41 (400-800nm range).
+        Updated Cauchy model: n = 1.39 + 0.003 / (lambda^2 in um)
+        Reference: Dow Corning XR-1541 Datasheet / Literature.
         """
-        n = 1.41 * np.ones_like(self.wavelengths)
+        w_um = self.wavelengths / 1000.0
+        n = 1.39 + 0.003 / (w_um**2)
         k = np.zeros_like(self.wavelengths)
         return n, k
 
@@ -32,9 +34,11 @@ class MaterialManager:
     def get_pss(self):
         """
         PSS conductive layer.
-        Approximate model: n ~ 1.5, k ~ 0.05.
+        Updated dispersive model: n = 1.48 + 0.004 / (lambda^2 in um), k ~ 0.05.
+        Reference: PEDOT:PSS optical properties in visible range.
         """
-        n = 1.5 * np.ones_like(self.wavelengths)
+        w_um = self.wavelengths / 1000.0
+        n = 1.48 + 0.004 / (w_um**2)
         k = 0.05 * np.ones_like(self.wavelengths)
         return n, k
 
@@ -77,7 +81,7 @@ class MaterialManager:
         """
         SiN (Silicon Nitride).
         """
-        return "Si3N4 (Silicon Nitride) - Philip"
+        return "Si3N4 (Silicon Nitride) - Luke"
 
     def add_custom_materials(self, fdtd):
         """
@@ -96,8 +100,8 @@ class MaterialManager:
             try:
                 # Check if material already exists
                 if not fdtd.materialexists(name):
-                    fdtd.addmaterial("Sampled 3D data")
-                    fdtd.set("name", name)
+                    new_mat = fdtd.addmaterial("Sampled data")
+                    fdtd.setmaterial(new_mat, "name", name)
                 
                 # Convert wavelengths to frequency
                 # stackrt expects freq in descending order if lambda is ascending, 
@@ -107,5 +111,7 @@ class MaterialManager:
                 sort_idx = np.argsort(self.freqs)
                 data = np.vstack((self.freqs[sort_idx], eps[sort_idx])).T
                 fdtd.setmaterial(name, "sampled data", data)
+                # Ensure color doesn't conflict
+                fdtd.setmaterial(name, "color", np.random.rand(4))
             except Exception as e:
                 print(f"Warning: Could not add material {name}: {e}")

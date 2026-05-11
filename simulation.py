@@ -96,3 +96,67 @@ class SimulationEngine:
         if self.fdtd:
             self.fdtd.close()
             self.fdtd = None
+
+    def generate_fsp(self, stack_config, export_dir="results"):
+        """
+        Generates an FDTD layout (.fsp) file to visualize the layer stack.
+        """
+        if not self.fdtd:
+            self.start_session()
+            
+        self.fdtd.switchtolayout()
+        self.fdtd.selectall()
+        self.fdtd.delete()
+        
+        layers = stack_config["layers"]
+        name = stack_config["name"]
+        
+        # Build from bottom to top
+        current_z = 0.0 # Substrate top surface is at z=0
+        
+        for mat_name, thickness in reversed(layers):
+            actual_thickness = thickness
+            if thickness == 0:
+                actual_thickness = 2e-6 # 2 microns for semi-infinite substrate
+                z_min = current_z - actual_thickness
+                z_max = current_z
+            else:
+                z_min = current_z
+                z_max = current_z + actual_thickness
+                current_z = z_max
+                
+            self.fdtd.addrect()
+            # Clean up material name for object naming
+            obj_name = mat_name.replace(" ", "_").replace("(", "").replace(")", "")
+            self.fdtd.set("name", obj_name)
+            self.fdtd.set("x span", 5e-6)
+            self.fdtd.set("y span", 5e-6)
+            self.fdtd.set("z min", z_min)
+            self.fdtd.set("z max", z_max)
+            
+            use_mat = mat_name
+            if "custom" not in mat_name:
+                try:
+                    if not self.fdtd.materialexists(mat_name):
+                        all_mats = self.fdtd.getmaterial().split("\n")
+                        for m in all_mats:
+                            if mat_name.split(" ")[0] in m:
+                                use_mat = m
+                                break
+                except Exception:
+                    pass
+            self.fdtd.set("material", use_mat)
+            
+        # Add an FDTD region to encapsulate the interesting part of the stack
+        self.fdtd.addfdtd()
+        self.fdtd.set("x span", 2e-6)
+        self.fdtd.set("y span", 2e-6)
+        self.fdtd.set("z min", -0.5e-6)
+        self.fdtd.set("z max", current_z + 0.5e-6)
+
+        import os
+        if not os.path.exists(export_dir):
+            os.makedirs(export_dir)
+        filepath = os.path.join(export_dir, f"{name}.fsp")
+        self.fdtd.save(os.path.abspath(filepath))
+
