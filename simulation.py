@@ -148,11 +148,38 @@ class SimulationEngine:
             self.fdtd.set("material", use_mat)
             
         # Add an FDTD region to encapsulate the interesting part of the stack
+        fdtd_z_min = -1.0e-6
+        fdtd_z_max = current_z + 1.0e-6
         self.fdtd.addfdtd()
+        self.fdtd.set("dimension", "2D") # 2D is enough for 1D stack
         self.fdtd.set("x span", 2e-6)
-        self.fdtd.set("y span", 2e-6)
-        self.fdtd.set("z min", -0.5e-6)
-        self.fdtd.set("z max", current_z + 0.5e-6)
+        self.fdtd.set("z min", fdtd_z_min)
+        self.fdtd.set("z max", fdtd_z_max)
+        
+        # Add Plane Wave Source
+        self.fdtd.addplane()
+        self.fdtd.set("name", "source")
+        self.fdtd.set("injection axis", "z-axis")
+        self.fdtd.set("direction", "backward") # Injection from top down
+        self.fdtd.set("x span", 2e-6)
+        self.fdtd.set("z", current_z + 0.5e-6)
+        self.fdtd.set("wavelength start", self.mm.wavelengths[0] * 1e-9)
+        self.fdtd.set("wavelength stop", self.mm.wavelengths[-1] * 1e-9)
+        
+        # Add Monitors
+        # Reflection (above source)
+        self.fdtd.addpower()
+        self.fdtd.set("name", "R_monitor")
+        self.fdtd.set("monitor type", "Linear X")
+        self.fdtd.set("x span", 2e-6)
+        self.fdtd.set("z", current_z + 0.8e-6)
+        
+        # Transmission (in substrate)
+        self.fdtd.addpower()
+        self.fdtd.set("name", "T_monitor")
+        self.fdtd.set("monitor type", "Linear X")
+        self.fdtd.set("x span", 2e-6)
+        self.fdtd.set("z", -0.5e-6)
 
         import os
         if not os.path.exists(export_dir):
