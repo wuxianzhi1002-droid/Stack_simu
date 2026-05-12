@@ -3,15 +3,20 @@ import sys
 import numpy as np
 
 # Try to find and import lumapi
-# Default path for Lumerical 2024
 LUMERICAL_PATH = r"D:\Program Files\Lumerical\v241\api\python"
-if LUMERICAL_PATH not in sys.path:
-    sys.path.append(LUMERICAL_PATH)
+
+if os.path.exists(LUMERICAL_PATH):
+    if LUMERICAL_PATH not in sys.path:
+        sys.path.append(LUMERICAL_PATH)
+    # Set environment variable for Lumerical API to find its own libraries
+    os.environ['PATH'] += os.pathsep + r"D:\Program Files\Lumerical\v241\bin"
+else:
+    print(f"Warning: Lumerical API path not found at {LUMERICAL_PATH}")
 
 try:
     import lumapi
-except ImportError:
-    print("Error: lumapi not found. Please check Lumerical installation path.")
+except ImportError as e:
+    print(f"Error: lumapi not found. {e}")
     lumapi = None
 
 class SimulationEngine:

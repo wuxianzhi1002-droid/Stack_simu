@@ -16,20 +16,24 @@
 ## 2. 环境配置
 
 - **软件**: Ansys Lumerical 2024
-- **Python**: 必须使用 Lumerical 自带的嵌入式 Python
-  - 路径: `D:\Program Files\Lumerical\v241\python-3.9.9-embed-amd64\python.exe`
-- **依赖库**: 
-  - `numpy (1.26.4)`
-  - `pandas (2.0.3)`
-  - `matplotlib (3.7.1)`
-  - 已在仿真过程中通过脚本自动配置和修复版本兼容性。
+- **Python**: 推荐使用 **Anaconda** 环境（如 `my_ML`）以获得更好的包管理稳定性。
+  - **环境要求**: Python 3.9 - 3.11
+  - **必要操作**: 请在你的 Anaconda 环境中安装以下依赖：
+    ```powershell
+    pip install numpy pandas matplotlib
+    ```
+- **Lumerical API 链接**: 脚本会自动寻找 `D:\Program Files\Lumerical\v241\api\python` 路径。
 
 ## 3. 使用方法
 
-在项目根目录下，使用 Lumerical 嵌入式 Python 运行：
+激活你的 Anaconda 环境后，在项目根目录下运行：
 
 ```powershell
-& "D:\Program Files\Lumerical\v241\python-3.9.9-embed-amd64\python.exe" main.py
+# 激活环境 (示例)
+conda activate my_ML
+
+# 运行仿真
+python main.py
 ```
 
 执行后，可以在 `results/` 目录下找到各膜层结构的 `.fsp` 文件，直接双击使用 Lumerical 软件打开即可查看 3D 建模结果。
