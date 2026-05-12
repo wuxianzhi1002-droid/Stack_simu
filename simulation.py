@@ -151,17 +151,25 @@ class SimulationEngine:
         fdtd_z_min = -1.0e-6
         fdtd_z_max = current_z + 1.0e-6
         self.fdtd.addfdtd()
-        self.fdtd.set("dimension", "2D") # 2D is enough for 1D stack
-        self.fdtd.set("x span", 2e-6)
+        self.fdtd.set("dimension", "3D") # 3D with periodic is clearer for visualization
+        self.fdtd.set("x span", 0.5e-6)
+        self.fdtd.set("y span", 0.5e-6)
         self.fdtd.set("z min", fdtd_z_min)
         self.fdtd.set("z max", fdtd_z_max)
+        
+        # Explicitly set Boundary Conditions
+        self.fdtd.set("x min bc", "Periodic")
+        self.fdtd.set("y min bc", "Periodic")
+        self.fdtd.set("z min bc", "PML")
+        self.fdtd.set("z max bc", "PML")
         
         # Add Plane Wave Source
         self.fdtd.addplane()
         self.fdtd.set("name", "source")
         self.fdtd.set("injection axis", "z-axis")
         self.fdtd.set("direction", "backward") # Injection from top down
-        self.fdtd.set("x span", 2e-6)
+        self.fdtd.set("x span", 1.0e-6)
+        self.fdtd.set("y span", 1.0e-6)
         self.fdtd.set("z", current_z + 0.5e-6)
         self.fdtd.set("wavelength start", self.mm.wavelengths[0] * 1e-9)
         self.fdtd.set("wavelength stop", self.mm.wavelengths[-1] * 1e-9)
@@ -170,15 +178,17 @@ class SimulationEngine:
         # Reflection (above source)
         self.fdtd.addpower()
         self.fdtd.set("name", "R_monitor")
-        self.fdtd.set("monitor type", "Linear X")
-        self.fdtd.set("x span", 2e-6)
+        self.fdtd.set("monitor type", "2D Z-normal") # 3D monitor in Z-normal
+        self.fdtd.set("x span", 1.0e-6)
+        self.fdtd.set("y span", 1.0e-6)
         self.fdtd.set("z", current_z + 0.8e-6)
         
         # Transmission (in substrate)
         self.fdtd.addpower()
         self.fdtd.set("name", "T_monitor")
-        self.fdtd.set("monitor type", "Linear X")
-        self.fdtd.set("x span", 2e-6)
+        self.fdtd.set("monitor type", "2D Z-normal")
+        self.fdtd.set("x span", 1.0e-6)
+        self.fdtd.set("y span", 1.0e-6)
         self.fdtd.set("z", -0.5e-6)
 
         import os
