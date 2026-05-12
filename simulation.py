@@ -156,13 +156,18 @@ class SimulationEngine:
         fdtd_z_min = -1.0e-6
         fdtd_z_max = current_z + 1.0e-6
         self.fdtd.addfdtd()
-        self.fdtd.set("dimension", "3D") # 3D with periodic is clearer for visualization
-        self.fdtd.set("x span", 0.5e-6)
-        self.fdtd.set("y span", 0.5e-6)
+        self.fdtd.set("dimension", "3D") # Use 3D for maximum compatibility
+        self.fdtd.set("x span", 2.0e-6) # Increased to 2um to allow MPI partitioning (8 cores)
+        self.fdtd.set("y span", 2.0e-6)
         self.fdtd.set("z min", fdtd_z_min)
         self.fdtd.set("z max", fdtd_z_max)
         
+        # Set Global Monitor Settings (Safe way to set resolution)
+        self.fdtd.set("global monitor use source limits", True)
+        self.fdtd.set("global monitor frequency points", 50)
+        
         # Explicitly set Boundary Conditions
+        # Note: In some versions, setting 'Periodic' automatically handles both min and max
         self.fdtd.set("x min bc", "Periodic")
         self.fdtd.set("y min bc", "Periodic")
         self.fdtd.set("z min bc", "PML")
@@ -173,8 +178,8 @@ class SimulationEngine:
         self.fdtd.set("name", "source")
         self.fdtd.set("injection axis", "z-axis")
         self.fdtd.set("direction", "backward") # Injection from top down
-        self.fdtd.set("x span", 1.0e-6)
-        self.fdtd.set("y span", 1.0e-6)
+        self.fdtd.set("x span", 2.0e-6)
+        self.fdtd.set("y span", 2.0e-6)
         self.fdtd.set("z", current_z + 0.5e-6)
         self.fdtd.set("wavelength start", self.mm.wavelengths[0] * 1e-9)
         self.fdtd.set("wavelength stop", self.mm.wavelengths[-1] * 1e-9)
@@ -183,18 +188,30 @@ class SimulationEngine:
         # Reflection (above source)
         self.fdtd.addpower()
         self.fdtd.set("name", "R_monitor")
-        self.fdtd.set("monitor type", "2D Z-normal") # 3D monitor in Z-normal
-        self.fdtd.set("x span", 1.0e-6)
-        self.fdtd.set("y span", 1.0e-6)
+        self.fdtd.set("monitor type", "2D Z-normal") 
+        self.fdtd.set("x span", 2.0e-6)
+        self.fdtd.set("y span", 2.0e-6)
         self.fdtd.set("z", current_z + 0.8e-6)
         
         # Transmission (in substrate)
         self.fdtd.addpower()
         self.fdtd.set("name", "T_monitor")
         self.fdtd.set("monitor type", "2D Z-normal")
-        self.fdtd.set("x span", 1.0e-6)
-        self.fdtd.set("y span", 1.0e-6)
+        self.fdtd.set("x span", 2.0e-6)
+        self.fdtd.set("y span", 2.0e-6)
         self.fdtd.set("z", -0.5e-6)
+
+        # Add Mesh Override for the thin layers
+        self.fdtd.addmesh()
+        self.fdtd.set("name", "mesh_thin_layers")
+        self.fdtd.set("x span", 2.0e-6)
+        self.fdtd.set("y span", 2.0e-6)
+        self.fdtd.set("z min", -0.05e-6)
+        self.fdtd.set("z max", current_z + 0.05e-6)
+        self.fdtd.set("override x mesh", False)
+        self.fdtd.set("override y mesh", False)
+        self.fdtd.set("override z mesh", True)
+        self.fdtd.set("dz", 1.0e-9) # 1nm resolution to resolve the 5nm PSS layer
 
         import os
         if not os.path.exists(export_dir):

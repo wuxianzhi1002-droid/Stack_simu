@@ -1,0 +1,3 @@
+select("FDTD");
+set("dimension", "2D");
+set("y span", 0);
