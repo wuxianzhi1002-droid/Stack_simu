@@ -2,26 +2,31 @@
 
 ## 1. Model Overview
 This report summarizes the 1D planar film stack optical modeling for focus and leveling research.
+**New Feature**: External 50% Reflector with 1mm Air Gap forming a multi-cavity coupled system.
 
-## 2. Summary Statistics
-| Stack Name | Avg Reflection | Max Reflection | Min Reflection | Oscillation Amp | Peak Count |
-|------------|----------------|----------------|----------------|-----------------|------------|
-| PSS_TiO2 | 0.5641 | 0.8942 | 0.1952 | 0.6989 | 0 |
-| Cr_TiO2 | 0.0434 | 0.1725 | 0.0121 | 0.1604 | 1 |
-| PSS_HfO2 | 0.6124 | 0.9057 | 0.2504 | 0.6553 | 0 |
-| Cr_HfO2 | 0.0357 | 0.0756 | 0.0110 | 0.0646 | 1 |
+## 2. Summary Statistics & Fringe Analysis
+| Stack Name | Avg R | Max R | Visibility | Fringe Period (nm) | Aliasing Risk | Peak Count |
+|------------|-------|-------|------------|--------------------|---------------|------------|
+| PSS_TiO2 | 0.7280 | 0.9736 | 0.9995 | 0.1599 | False | 2502 |
+| Cr_TiO2 | 0.5198 | 0.7846 | 0.7344 | 0.1599 | False | 2502 |
+| PSS_HfO2 | 0.7453 | 0.9768 | 0.9999 | 0.1599 | False | 2502 |
+| Cr_HfO2 | 0.5138 | 0.7093 | 0.4939 | 0.1599 | False | 2501 |
 
 ## 3. Key Analysis Insights
-- Conductive layer (PSS vs Cr) significantly shifts average reflectivity by 52.1%.
+- Conductive layer (PSS vs Cr) significantly shifts average reflectivity by 20.8%.
 - Hardmask material has minor impact on average reflectivity.
 
 ## 4. Visualizations
+### Broadband Spectrum
 ![All Stacks](all_stacks_reflection.png)
+
+### High-Frequency Fringe Detail (600nm Zoom)
+![Fringe Zoom](fringe_zoom_600nm.png)
+
+### Component Comparisons
 ![PSS vs Cr](PSS_vs_Cr_comparison.png)
-![TiO2 vs HfO2](TiO2_vs_HfO2_comparison.png)
 
 ## 5. Limitations & Future Work
-- Model is limited to 1D planar infinite layers.
-- Materials HSQ, SOC, PSS use approximate dispersive models.
-- Ultra-thin Cr (5nm) may show sensitive behavior depending on material model accuracy.
-- Future work: FDTD for 3D structures, angle scans, and sensitivity analysis.
+- Model includes 1mm air gap, requiring very high resolution (0.01nm).
+- FDTD visualization of 1mm gap is not practical; results are based on STACK analytical solver.
+- Future work: Analysis of phase shift and its impact on leveling precision.

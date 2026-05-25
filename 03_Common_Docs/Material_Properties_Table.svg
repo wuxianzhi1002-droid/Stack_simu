@@ -1,0 +1,88 @@
+<svg width="900" height="500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="900" height="500" fill="#ffffff" />
+  
+  <!-- Table Header Background -->
+  <rect x="50" y="50" width="800" height="50" fill="#2c3e50" rx="5" ry="5" />
+  
+  <!-- Table Body Row Backgrounds (Zebra) -->
+  <rect x="50" y="100" width="800" height="60" fill="#f8f9fa" />
+  <rect x="50" y="160" width="800" height="60" fill="#ffffff" />
+  <rect x="50" y="220" width="800" height="60" fill="#f8f9fa" />
+  <rect x="50" y="280" width="800" height="60" fill="#ffffff" />
+  <rect x="50" y="340" width="800" height="60" fill="#f8f9fa" />
+  <rect x="50" y="400" width="800" height="60" fill="#ffffff" />
+
+  <!-- Borders -->
+  <line x1="50" y1="100" x2="850" y2="100" stroke="#bdc3c7" stroke-width="1" />
+  <line x1="50" y1="160" x2="850" y2="160" stroke="#bdc3c7" stroke-width="1" />
+  <line x1="50" y1="220" x2="850" y2="220" stroke="#bdc3c7" stroke-width="1" />
+  <line x1="50" y1="280" x2="850" y2="280" stroke="#bdc3c7" stroke-width="1" />
+  <line x1="50" y1="340" x2="850" y2="340" stroke="#bdc3c7" stroke-width="1" />
+  <line x1="50" y1="400" x2="850" y2="400" stroke="#bdc3c7" stroke-width="1" />
+  <line x1="50" y1="460" x2="850" y2="460" stroke="#bdc3c7" stroke-width="1" />
+
+  <!-- Vertical Dividers -->
+  <line x1="200" y1="50" x2="200" y2="460" stroke="#bdc3c7" stroke-width="1" opacity="0.3" />
+  <line x1="500" y1="50" x2="500" y2="460" stroke="#bdc3c7" stroke-width="1" opacity="0.3" />
+  <line x1="700" y1="50" x2="700" y2="460" stroke="#bdc3c7" stroke-width="1" opacity="0.3" />
+
+  <!-- Header Text -->
+  <g font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff">
+    <text x="70" y="82">Material Name</text>
+    <text x="220" y="82">Optical Model (Cauchy)</text>
+    <text x="520" y="82">Key Indices (400-800nm)</text>
+    <text x="720" y="82">Primary Reference</text>
+  </g>
+
+  <!-- Row 1: HSQ -->
+  <g font-family="Arial, sans-serif" font-size="14" fill="#34495e">
+    <text x="70" y="135" font-weight="bold">HSQ</text>
+    <text x="220" y="135">n = 1.39 + 0.003 / λ² (μm)</text>
+    <text x="520" y="135">n ≈ 1.41 | k ≈ 0</text>
+    <text x="720" y="135">Dow Corning / JVSB</text>
+  </g>
+
+  <!-- Row 2: PSS -->
+  <g font-family="Arial, sans-serif" font-size="14" fill="#34495e">
+    <text x="70" y="195" font-weight="bold">PSS (Conductive)</text>
+    <text x="220" y="195">n = 1.48 + 0.004 / λ² (μm)</text>
+    <text x="520" y="195">n ≈ 1.50 | k ≈ 0.05</text>
+    <text x="720" y="195">Thin Solid Films</text>
+  </g>
+
+  <!-- Row 3: SOC -->
+  <g font-family="Arial, sans-serif" font-size="14" fill="#34495e">
+    <text x="70" y="255" font-weight="bold">SOC</text>
+    <text x="220" y="255">n = 1.55 + 0.005 / λ² (μm)</text>
+    <text x="520" y="255">n ≈ 1.57 | k ≈ 0.01</text>
+    <text x="720" y="255">Brewer Science</text>
+  </g>
+
+  <!-- Row 4: TiO2 -->
+  <g font-family="Arial, sans-serif" font-size="14" fill="#34495e">
+    <text x="70" y="315" font-weight="bold">TiO2 (HM)</text>
+    <text x="220" y="315">n = 2.40 + 0.020 / λ² (μm)</text>
+    <text x="520" y="315">n ≈ 2.45 | k ≈ 0</text>
+    <text x="720" y="315">Siefke et al. (2016)</text>
+  </g>
+
+  <!-- Row 5: HfO2 -->
+  <g font-family="Arial, sans-serif" font-size="14" fill="#34495e">
+    <text x="70" y="375" font-weight="bold">HfO2 (HM)</text>
+    <text x="220" y="375">n = 2.00 + 0.015 / λ² (μm)</text>
+    <text x="520" y="375">n ≈ 2.04 | k ≈ 0</text>
+    <text x="720" y="375">Al-Kuhaili (2004)</text>
+  </g>
+
+  <!-- Row 6: Substrate -->
+  <g font-family="Arial, sans-serif" font-size="14" fill="#34495e">
+    <text x="70" y="435" font-weight="bold">Cu / Cr / SiN</text>
+    <text x="220" y="435">Tabulated Data (3D Sampled)</text>
+    <text x="520" y="435">Material Dependent</text>
+    <text x="720" y="435">Lumerical (Palik/CRC)</text>
+  </g>
+  
+  <!-- Legend / Note -->
+  <text x="50" y="485" font-family="Arial, sans-serif" font-size="12" fill="#7f8c8d italic">Note: Cauchy coefficients λ are in micrometers (μm). Values updated for broadband 400-800nm modeling.</text>
+</svg>

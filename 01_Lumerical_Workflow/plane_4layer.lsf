@@ -1,0 +1,83 @@
+#############################################################
+# scriptfile: plane_4layer.lsf
+#
+# This file calculates the reflection spectrum for
+# a single dielectric interface for a given polarization and
+# compares to the analytic result.
+#
+# Copyright 2010, Lumerical Solutions, Inc.
+#############################################################
+runsweep("sweep");
+
+R = getsweepresult("sweep", "R");
+T = getsweepresult("sweep", "T"); 
+
+theta = T.source_angle;
+f = T.f;
+fmin=min(f);
+fmax=max(f);
+
+n = matrix(4);
+d = matrix(4);
+# define the indices and layer thicknesses
+n(1) = 1;       
+n(2) = 1.5;
+n(3) = 2.5;
+n(4) = 1.5;
+d(1) = 1; #does not matter
+d(2) = 2.5e-6; # layer thickness
+d(3) = 2.5e-6; # layer thickness
+d(4) = 1; #does not matter since n(4) is real
+
+RT_Theory = stackrt(n,d,f,theta);
+
+
+plot(theta,-R.T,T.T,RT_Theory.Rs,RT_Theory.Ts,"angle (degrees)","R and T","R,T vs angle");
+legend("R FDTD","T FDTD","R theory","T theory");
+
+# calculate analytic result for +- 5nm layer thickness
+# sensitivity.  Compare with measured FDTD reflection
+if (1) {
+
+dy=5e-9;
+Rs_bound=matrix(length(theta),4);
+Rs_more=matrix(length(theta));
+Rs_less=matrix(length(theta));
+# make both middle layers thicker
+d(2)=d(2)+dy;
+d(3)=d(3)+dy;
+RT_Theory = stackrt(n,d,f,theta);
+Rs_bound(1:length(theta),1)=RT_Theory.Rs;
+#Rp_11=Rp;
+
+d(2)=d(2)+0*dy;
+d(3)=d(3)-2*dy;
+RT_Theory = stackrt(n,d,f,theta);
+Rs_bound(1:length(theta),2)=RT_Theory.Rs;
+#Rp_12=Rp;
+
+d(2)=d(2)-2*dy;
+d(3)=d(3)+2*dy;
+RT_Theory = stackrt(n,d,f,theta);
+Rs_bound(1:length(theta),3)=RT_Theory.Rs;
+#Rp_21=Rp;
+
+d(2)=d(2)-0*dy;
+d(3)=d(3)-2*dy;
+RT_Theory = stackrt(n,d,f,theta);
+Rs_bound(1:length(theta),4)=RT_Theory.Rs;
+#Rp_22=Rp;
+
+for (i=1:length(theta)) {
+  Rs_more(i)= max( Rs_bound(i,1:4));
+  Rs_less(i)= min( Rs_bound(i,1:4)); 
+}
+
+
+
+
+# compare to theoretical values
+plot(theta,-R.T, Rs_more,Rs_less,"angle (degrees)","Reflection","Reflection vs angle");
+legend("R FDTD","R max","R min");
+
+}

@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" width="1000" height="500">
+  <defs>
+    <!-- Arrowhead definition (Softer colors) -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748B" />
+    </marker>
+    <marker id="arrowhead-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#60A5FA" />
+    </marker>
+    <marker id="arrowhead-cyan" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#38BDF8" />
+    </marker>
+
+    <!-- Lighter Pastel Gradients -->
+    <linearGradient id="pythonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DBEAFE" /> <!-- Light Blue 100 -->
+      <stop offset="100%" stop-color="#BFDBFE" /> <!-- Light Blue 200 -->
+    </linearGradient>
+    
+    <linearGradient id="lumapiGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F1F5F9" /> <!-- Slate 100 -->
+      <stop offset="100%" stop-color="#E2E8F0" /> <!-- Slate 200 -->
+    </linearGradient>
+    
+    <linearGradient id="lumericalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E0F2FE" /> <!-- Light Sky 100 -->
+      <stop offset="100%" stop-color="#BAE6FD" /> <!-- Light Sky 200 -->
+    </linearGradient>
+    
+    <linearGradient id="outputGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E0E7FF" /> <!-- Light Indigo 100 -->
+      <stop offset="100%" stop-color="#C7D2FE" /> <!-- Light Indigo 200 -->
+    </linearGradient>
+
+    <!-- Softer Box Shadow -->
+    <filter id="drop-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.1" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#FAFAF9" />
+
+  <!-- Title -->
+  <text x="500" y="45" font-family="sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#334155">Lumerical STACK 仿真工作流</text>
+  <text x="500" y="75" font-family="sans-serif" font-size="16" text-anchor="middle" fill="#64748B">Python (lumapi) + Lumerical stackrt (TMM 传输矩阵法)</text>
+
+  <!-- Group 1: Python Environment -->
+  <rect x="40" y="100" width="380" height="370" rx="15" fill="#FFFFFF" stroke="#93C5FD" stroke-width="2" stroke-dasharray="8,4" />
+  <text x="230" y="135" font-family="sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#3B82F6">1. Python 运行环境</text>
+  
+  <!-- Python Script Node -->
+  <rect x="60" y="155" width="340" height="110" rx="12" fill="url(#pythonGrad)" filter="url(#drop-shadow)" />
+  <text x="230" y="185" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#1E3A8A">主控脚本 (stack_compare.py)</text>
+  <text x="230" y="215" font-family="sans-serif" font-size="16" text-anchor="middle" fill="#1E40AF">• 计算等效折射率 (n, k)</text>
+  <text x="230" y="240" font-family="sans-serif" font-size="16" text-anchor="middle" fill="#1E40AF">• 定义膜层结构、波长/频率范围</text>
+
+  <!-- API Node -->
+  <rect x="100" y="295" width="260" height="65" rx="10" fill="url(#lumapiGrad)" stroke="#CBD5E1" stroke-width="2" filter="url(#drop-shadow)" />
+  <text x="230" y="325" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#334155">lumapi</text>
+  <text x="230" y="345" font-family="sans-serif" font-size="15" text-anchor="middle" fill="#475569">(Python API 接口桥梁)</text>
+
+  <!-- Output Node -->
+  <rect x="60" y="390" width="340" height="65" rx="12" fill="url(#outputGrad)" filter="url(#drop-shadow)" />
+  <text x="230" y="420" font-family="sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#312E81">数据处理与输出</text>
+  <text x="230" y="445" font-family="sans-serif" font-size="16" text-anchor="middle" fill="#3730A3">Pandas (CSV) + Matplotlib (PNG)</text>
+
+  <!-- Group 2: Lumerical Environment -->
+  <rect x="580" y="100" width="380" height="370" rx="15" fill="#FFFFFF" stroke="#7DD3FC" stroke-width="2" stroke-dasharray="8,4" />
+  <text x="770" y="135" font-family="sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#0EA5E9">2. Lumerical 后台进程</text>
+
+  <!-- FDTD Session Node -->
+  <rect x="610" y="155" width="320" height="90" rx="12" fill="#F0F9FF" stroke="#BAE6FD" stroke-width="2" filter="url(#drop-shadow)" />
+  <text x="770" y="195" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#0369A1">Lumerical 会话</text>
+  <text x="770" y="225" font-family="sans-serif" font-size="16" text-anchor="middle" fill="#0284C7">fdtd = lumapi.FDTD(hide=True)</text>
+
+  <!-- stackrt Node -->
+  <rect x="610" y="280" width="320" height="150" rx="12" fill="url(#lumericalGrad)" filter="url(#drop-shadow)" />
+  <text x="770" y="315" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#082F49">stackrt() 求解器</text>
+  <text x="770" y="345" font-family="sans-serif" font-size="15" font-style="italic" text-anchor="middle" fill="#164E63">解析法：传输矩阵法 (TMM)</text>
+  <line x1="630" y1="365" x2="910" y2="365" stroke="#082F49" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.3" />
+  <text x="770" y="390" font-family="sans-serif" font-size="16" text-anchor="middle" fill="#082F49">输入: n矩阵, d数组, 频率f</text>
+  <text x="770" y="415" font-family="sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#082F49">输出: Rp, Tp (相干叠加)</text>
+
+  <!-- Connections / Arrows -->
+  
+  <!-- Python Script -> lumapi -->
+  <line x1="230" y1="265" x2="230" y2="285" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrowhead)" />
+  
+  <!-- lumapi -> Lumerical Session (Start) -->
+  <path d="M 360 315 C 470 315, 470 200, 595 200" fill="none" stroke="#60A5FA" stroke-width="3" marker-end="url(#arrowhead-blue)" />
+  <text x="480" y="245" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#3B82F6">1. 初始化 / 传参</text>
+
+  <!-- Lumerical Session -> stackrt -->
+  <line x1="770" y1="245" x2="770" y2="270" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrowhead)" />
+
+  <!-- stackrt -> lumapi (Return Data) -->
+  <path d="M 610 340 C 470 340, 470 340, 375 340" fill="none" stroke="#38BDF8" stroke-width="3" marker-end="url(#arrowhead-cyan)" />
+  <text x="480" y="330" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#0EA5E9">2. 返回结构体</text>
+
+  <!-- lumapi -> Output Processing -->
+  <line x1="230" y1="360" x2="230" y2="380" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrowhead)" />
+
+</svg>
