@@ -1,0 +1,80 @@
+#############################################################
+# Lumerical Script: Multilayer R/T Spectrum Simulation
+# Structure: Air - 2mm (n=5.8284) - 1um (n=3.5349) - Substrate (n=2.9545)
+#############################################################
+clear;
+
+# 1. 定义波长扫描范围：500nm 到 700nm
+wavelength_start = 500e-9;
+wavelength_end   = 700e-9;
+num_points       = 20001; # 采样点数，由于2mm层很厚，建议设置较高的采样点
+
+wavelength = linspace(wavelength_start, wavelength_end, num_points);
+f = c / wavelength; # 将波长转换为频率向量 (stackrt 需要频率作为输入)
+
+# 2. 定义各膜层的折射率 (n) 
+# 结构顺序: 空气 -> 2mm层 -> 1um层 -> 衬底
+n_layers = [ 5.8284;       # 反射层
+             1;    # 2mm 特厚层
+             1.6488;    # 1um 薄膜层
+             1.9723 ];  # 衬底
+
+# 3. 定义各膜层的厚度 (d)，单位为米 (m)
+# 注：首尾两层（空气和衬底）作为半无限大空间，厚度设为 0
+d_layers = [ 0;         # 空气
+             2e-3;      # 2mm 空气层 (2 * 10^-3 m)
+             1e-6;      # 1um 薄膜层 (1 * 10^-6 m)
+             0 ];       # 衬底
+
+# 4. 定义入射角：设为 0 度（垂直入射）
+theta = 0;
+
+# 5. 调用内置解析求解器计算反射 (R) 和透射 (T)
+RT = stackrt(n_layers, d_layers, f, theta);
+
+# 6. 提取结果
+# Rs 和 Ts 分别代表 S 偏振下的反射率和透射率（垂直入射时S和P偏振相同）
+R_spectrum = RT.Rs;
+T_spectrum = RT.Ts;
+
+# 7. 绘图输出
+wavelength_nm = wavelength * 1e9; # 转换为纳米单位方便观察
+
+# 绘制反射率曲线
+plot(wavelength_nm, R_spectrum, "Wavelength (nm)", "Reflection / Transmission", "Multilayer Spectrum (Air - 2mm - 1um - Substrate)");
+# 在同一张图上添加透射率曲线
+holdon;
+# plot(wavelength_nm, T_spectrum);
+holdoff;
+
+legend("Reflection (R)", "Transmission (T)");
+
+# 8. 验证能量守恒：R + T 应该等于 1（因为材料折射率全为实数，无损耗）
+loss = 1 - (R_spectrum + T_spectrum);
+print("Max energy conservation error (Should be near 0): " + num2str(max(abs(loss))));
+# ==========================================
+# 数据导出（兼容安全模式，后缀改为 .txt）
+# ==========================================
+
+# 1. 将后缀改为安全模式允许的 .txt
+filename = "spectrum_results2.txt"; 
+
+# 2. 如果文件已经存在，先将其删除
+if (fileexists(filename)) {
+    rm(filename);
+}
+
+# 3. 写入表头：Wavelength(um) 和 Intensity
+header_string = "Wavelength(um)" + "\t" + "Intensity";
+write(filename, header_string);
+
+# 4. 循环追加数据
+for (i=1:length(wavelength)) {
+    w_um = wavelength(i) * 1e6; 
+    intensity_val = R_spectrum(i); 
+    row_string = num2str(w_um) + "\t" + num2str(intensity_val);
+    write(filename, row_string);
+}
+
+print("数据已成功导出至文本文件: " + filename);
+print("提示：该 .txt 文件可以直接用 Excel 或 Origin 打开。");
