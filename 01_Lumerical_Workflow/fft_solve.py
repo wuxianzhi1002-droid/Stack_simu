@@ -109,7 +109,7 @@ def process_sdi_signal_from_csv(csv_file):
 
 # ================== MAIN ==================
 if __name__ == "__main__":
-    csv_file = "../stackrt_result/raw_stack_length1mm.csv"
+    csv_file = "stackrt_result/raw_stack_length1mm.csv"
 
     if not os.path.exists(csv_file):
         print(f"文件不存在: {csv_file}")
