@@ -1,0 +1,53 @@
+<svg width="600" height="500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="300" y="35" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle">Multi-layer Stack Model (PSS-TiO2)</text>
+  
+  <!-- Headers -->
+  <text x="15" y="80" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#333">Material</text>
+  <text x="190" y="80" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#333" text-anchor="middle">Stack</text>
+  <text x="320" y="80" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#333">Thickness &amp; Index (n)</text>
+  
+  <!-- Layer 1: Reference Reflector -->
+  <rect x="140" y="100" width="100" height="40" fill="#d0d0d0" stroke="#333" stroke-width="1.5" />
+  <text x="15" y="125" font-family="Arial, sans-serif" font-size="16">Ref. Reflector</text>
+  <text x="320" y="125" font-family="Arial, sans-serif" font-size="15">Semi-inf | n = 5.8284 (R=0.5)</text>
+  
+  <!-- Layer 2: Air Gap -->
+  <rect x="140" y="140" width="100" height="80" fill="#ffffff" stroke="#333" stroke-width="1.5" stroke-dasharray="8,4" />
+  <text x="15" y="185" font-family="Arial, sans-serif" font-size="16">Air Cavity</text>
+  <text x="320" y="185" font-family="Arial, sans-serif" font-size="15">1000 μm | n = 1.0</text>
+  
+  <!-- Layer 3: HSQ -->
+  <rect x="140" y="220" width="100" height="35" fill="#e1f5fe" stroke="#333" stroke-width="1.5" />
+  <text x="15" y="242" font-family="Arial, sans-serif" font-size="16">HSQ</text>
+  <text x="320" y="242" font-family="Arial, sans-serif" font-size="15">40 nm | n ≈ 1.41</text>
+  
+  <!-- Layer 4: PSS -->
+  <rect x="140" y="255" width="100" height="30" fill="#ffebee" stroke="#333" stroke-width="1.5" />
+  <text x="15" y="275" font-family="Arial, sans-serif" font-size="16">PSS</text>
+  <text x="320" y="275" font-family="Arial, sans-serif" font-size="15">5 nm | n = 1.50 + 0.05i</text>
+  
+  <!-- Layer 5: SOC -->
+  <rect x="140" y="285" width="100" height="35" fill="#fff9c4" stroke="#333" stroke-width="1.5" />
+  <text x="15" y="307" font-family="Arial, sans-serif" font-size="16">SOC</text>
+  <text x="320" y="307" font-family="Arial, sans-serif" font-size="15">50 nm | n = 1.55 + 0.005/λ²</text>
+  
+  <!-- Layer 6: TiO2 -->
+  <rect x="140" y="320" width="100" height="30" fill="#f3e5f5" stroke="#333" stroke-width="1.5" />
+  <text x="15" y="340" font-family="Arial, sans-serif" font-size="16">TiO2</text>
+  <text x="320" y="340" font-family="Arial, sans-serif" font-size="15">20 nm | n = 2.4 + 0.02/λ²</text>
+  
+  <!-- Layer 7: Cu Substrate -->
+  <rect x="140" y="350" width="100" height="60" fill="#fb8c00" stroke="#333" stroke-width="1.5" />
+  <text x="15" y="385" font-family="Arial, sans-serif" font-size="16">Cu Substrate</text>
+  <text x="320" y="385" font-family="Arial, sans-serif" font-size="15">Semi-inf | n ≈ 1.1 + 2.5i</text>
+  
+  <!-- Footer -->
+  <line x1="20" y1="430" x2="580" y2="430" stroke="#999" stroke-width="1" />
+  <text x="300" y="455" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-style="italic" fill="#666">
+    λ is wavelength in μm (0.5 - 0.7 μm)
+  </text>
+  <text x="300" y="475" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-style="italic" fill="#666">
+    Note: Layer thicknesses are not to scale for visualization.
+  </text>
+</svg>

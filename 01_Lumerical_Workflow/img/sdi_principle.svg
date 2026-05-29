@@ -1,0 +1,83 @@
+<svg width="1600" height="800" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1600" height="800" fill="#ffffff" />
+  
+  <!-- 标题 -->
+  <text x="800" y="60" font-family="Microsoft YaHei, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#2c3e50">谱域干涉 (SDI) 技术逻辑原理</text>
+
+  <!-- 1. 波长域图像 -->
+  <g transform="translate(100, 140)">
+    <text x="175" y="-30" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle">1. 波长域光谱 I(λ)</text>
+    <rect width="350" height="220" fill="#f8f9fa" stroke="#bdc3c7" stroke-width="2" />
+    <path d="M 20 110 L 25 120 L 30 140 L 38 160 L 46 180 L 55 190 L 65 175 L 75 145 L 85 110 L 95 70 L 105 45 L 115 35 L 125 45 L 140 85 L 155 130 L 170 180 L 185 195 L 205 175 L 225 130 L 245 70 L 265 40 L 290 35 L 315 65 L 335 130 L 350 180" fill="none" stroke="#3498db" stroke-width="3" />
+    <text x="175" y="270" font-family="Microsoft YaHei, sans-serif" font-size="18" text-anchor="middle" fill="#7f8c8d">变频干涉条纹 (Chirp 效应)</text>
+    <text x="-45" y="110" font-family="Microsoft YaHei, sans-serif" font-size="18" font-style="italic" transform="rotate(-90 -45 110)">光强 (Intensity)</text>
+    <text x="330" y="210" font-family="serif" font-size="22" font-style="italic">λ</text>
+  </g>
+
+  <!-- 转换箭头 1 -->
+  <g transform="translate(480, 250)">
+    <path d="M 0 0 L 110 0" fill="none" stroke="#2c3e50" stroke-width="3" marker-end="url(#arrow)" />
+    <text x="55" y="-15" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#e74c3c">k = 2π / λ</text>
+  </g>
+
+  <!-- 2. 波数域图像 -->
+  <g transform="translate(625, 140)">
+    <text x="175" y="-30" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle">2. 波数域信号 I(k)</text>
+    <rect width="350" height="220" fill="#f8f9fa" stroke="#bdc3c7" stroke-width="2" />
+    <path d="M 10 110 Q 30 30, 50 110 T 90 110 T 130 110 T 170 110 T 210 110 T 250 110 T 290 110 T 330 110 T 350 110" fill="none" stroke="#27ae60" stroke-width="3" />
+    <text x="175" y="270" font-family="Microsoft YaHei, sans-serif" font-size="18" text-anchor="middle" fill="#7f8c8d">等频正弦波 (线性相位)</text>
+    <text x="330" y="210" font-family="serif" font-size="22" font-style="italic">k</text>
+  </g>
+
+  <!-- 转换箭头 2 -->
+  <g transform="translate(1005, 250)">
+    <path d="M 0 0 L 110 0" fill="none" stroke="#2c3e50" stroke-width="3" marker-end="url(#arrow)" />
+    <text x="55" y="-15" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#e74c3c">FFT</text>
+  </g>
+
+  <!-- 3. 空间域图像 -->
+  <g transform="translate(1150, 140)">
+    <text x="175" y="-30" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle">3. 空间域 (腔长解算)</text>
+    <rect width="350" height="220" fill="#f8f9fa" stroke="#bdc3c7" stroke-width="2" />
+    <path d="M 20 200 L 150 200 C 160 200, 165 40, 175 40 C 185 40, 190 200, 200 200 L 330 200" fill="none" stroke="#f39c12" stroke-width="4" />
+    <circle cx="175" cy="40" r="6" fill="#e74c3c" />
+    <text x="175" y="270" font-family="Microsoft YaHei, sans-serif" font-size="18" text-anchor="middle" fill="#7f8c8d">峰值位置: OPD = 2nd</text>
+    <text x="330" y="210" font-family="serif" font-size="22" font-style="italic">d</text>
+  </g>
+
+  <!-- 说明区域 -->
+  <rect x="50" y="460" width="1500" height="300" rx="20" ry="20" fill="#fdfefe" stroke="#ecf0f1" stroke-width="3" />
+  <text x="800" y="510" font-family="Microsoft YaHei, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#34495e">数学转换流程总结</text>
+
+  <!-- 使用 foreignObject 实现真正的自动换行 -->
+  <foreignObject x="100" y="540" width="400" height="200">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: 'Microsoft YaHei', sans-serif; font-size: 16px; color: #7f8c8d; line-height: 1.6;">
+      <b style="font-size: 22px; color: #2980b9;">1. 干涉模型：</b><br/>
+      <span style="font-family: serif; font-size: 22px; color: #2c3e50;">I(λ) = A + B cos( [2π/λ] · 2nd )</span><br/>
+      由于相位项与 λ 呈反比，光谱中的干涉条纹频率会随波长发生显著变化，这种现象被称为 Chirp 效应。
+    </div>
+  </foreignObject>
+
+  <foreignObject x="600" y="540" width="400" height="200">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: 'Microsoft YaHei', sans-serif; font-size: 16px; color: #7f8c8d; line-height: 1.6;">
+      <b style="font-size: 22px; color: #27ae60;">2. 线性化 (λ → k)：</b><br/>
+      <span style="font-family: serif; font-size: 22px; color: #2c3e50;">k = 2π / λ ⇒ I(k) = A + B cos( k · OPD )</span><br/>
+      通过将坐标轴从波长(λ)映射到等间距的波数(k)域，复杂的变频信号即被转换为固定频率的标准正弦波，为 FFT 处理扫清障碍。
+    </div>
+  </foreignObject>
+
+  <foreignObject x="1100" y="540" width="400" height="200">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: 'Microsoft YaHei', sans-serif; font-size: 16px; color: #7f8c8d; line-height: 1.6;">
+      <b style="font-size: 22px; color: #d35400;">3. 空间映射 (FFT)：</b><br/>
+      <span style="font-family: serif; font-size: 22px; color: #2c3e50;">Peak = OPD = 2nd ⇒ d = OPD / 2n</span><br/>
+      对 I(k) 执行快速傅里叶变换，提取出的主频直接对应干涉腔的双程光程差，进而通过折射率 n 换算得到真实的物理厚度 d。
+    </div>
+  </foreignObject>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2c3e50" />
+    </marker>
+  </defs>
+</svg>

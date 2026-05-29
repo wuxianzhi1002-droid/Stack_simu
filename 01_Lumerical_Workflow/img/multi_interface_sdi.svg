@@ -1,0 +1,90 @@
+<svg width="1600" height="800" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1600" height="800" fill="#ffffff" />
+  
+  <!-- 标题 -->
+  <text x="800" y="60" font-family="Microsoft YaHei, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#2c3e50">多界面干涉 SDI 原理图解</text>
+
+  <!-- 1. 物理模型 -->
+  <g transform="translate(100, 140)">
+    <text x="175" y="-30" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle">1. 物理多重反射模型</text>
+    <path d="M 80 0 L 80 60" stroke="#f1c40f" stroke-width="4" fill="none" marker-end="url(#arrow_gold)" />
+    <rect x="20" y="60" width="280" height="25" fill="#d0d0d0" stroke="#333" stroke-width="2" />
+    <rect x="20" y="85" width="280" height="80" fill="#ffffff" stroke="#333" stroke-width="2" stroke-dasharray="6,4" />
+    <rect x="20" y="165" width="280" height="25" fill="#e1f5fe" stroke="#333" stroke-width="2" />
+    <rect x="20" y="190" width="280" height="40" fill="#fb8c00" stroke="#333" stroke-width="2" />
+
+    <path d="M 90 60 L 90 10" stroke="#e74c3c" stroke-width="2" fill="none" marker-end="url(#arrow_red)" />
+    <text x="100" y="35" font-family="serif" font-size="20" fill="#e74c3c">r1</text>
+    <path d="M 120 165 L 120 10" stroke="#e74c3c" stroke-width="2" fill="none" marker-end="url(#arrow_red)" />
+    <text x="130" y="35" font-family="serif" font-size="20" fill="#e74c3c">r2</text>
+    <path d="M 150 190 L 150 10" stroke="#e74c3c" stroke-width="2" fill="none" marker-end="url(#arrow_red)" />
+    <text x="160" y="35" font-family="serif" font-size="20" fill="#e74c3c">r3</text>
+
+    <path d="M 320 85 L 320 165" stroke="#7f8c8d" stroke-width="2" marker-start="url(#dot)" marker-end="url(#dot)" />
+    <text x="335" y="130" font-family="Microsoft YaHei, sans-serif" font-size="16" fill="#7f8c8d">d1 (1mm 空气腔)</text>
+    <path d="M 320 165 L 320 190" stroke="#7f8c8d" stroke-width="2" marker-start="url(#dot)" marker-end="url(#dot)" />
+    <text x="335" y="185" font-family="Microsoft YaHei, sans-serif" font-size="16" fill="#7f8c8d">d2 (薄膜层)</text>
+  </g>
+
+  <!-- 2. 复合光谱 -->
+  <g transform="translate(625, 140)">
+    <text x="175" y="-30" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle">2. 复合干涉信号 I(k)</text>
+    <rect width="350" height="230" fill="#f8f9fa" stroke="#bdc3c7" stroke-width="2" />
+    <path d="M 10 115 Q 20 40, 30 115 T 50 115 T 70 115 T 90 115 T 110 115 T 130 115 T 150 115 T 170 115 T 190 115 T 210 115 T 230 115 T 250 115 T 270 115 T 290 115 T 310 115 T 330 115 T 350 115" fill="none" stroke="#2c3e50" stroke-width="1.5" opacity="0.3" />
+    <path d="M 10 115 C 30 20, 70 210, 95 115 C 120 20, 160 210, 185 115 C 210 20, 250 210, 275 115 C 300 20, 340 210, 350 115" fill="none" stroke="#2196F3" stroke-width="3" />
+    <text x="175" y="275" font-family="Microsoft YaHei, sans-serif" font-size="18" text-anchor="middle" fill="#7f8c8d">多种频率信号叠加 (Beat Pattern)</text>
+    <text x="335" y="220" font-family="serif" font-size="22" font-style="italic">k</text>
+  </g>
+
+  <!-- 3. FFT -->
+  <g transform="translate(1150, 140)">
+    <text x="175" y="-30" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle">3. FFT 空间域 (多峰解算)</text>
+    <rect width="350" height="230" fill="#f8f9fa" stroke="#bdc3c7" stroke-width="2" />
+    <path d="M 10 210 L 50 210 L 60 50 L 70 210 L 140 210 L 150 130 L 160 210 L 260 210 L 270 90 L 280 210 L 340 210" fill="none" stroke="#e67e22" stroke-width="3" />
+    <text x="60" y="40" font-family="Microsoft YaHei, sans-serif" font-size="16" text-anchor="middle" fill="#d35400">空气大腔</text>
+    <text x="150" y="120" font-family="Microsoft YaHei, sans-serif" font-size="16" text-anchor="middle" fill="#d35400">总厚度</text>
+    <text x="270" y="80" font-family="Microsoft YaHei, sans-serif" font-size="16" text-anchor="middle" fill="#d35400">高阶谐波</text>
+    <text x="175" y="275" font-family="Microsoft YaHei, sans-serif" font-size="18" text-anchor="middle" fill="#7f8c8d">解析不同层间的相对距离</text>
+    <text x="335" y="220" font-family="serif" font-size="22" font-style="italic">d</text>
+  </g>
+
+  <!-- 原理部分 -->
+  <rect x="50" y="460" width="1500" height="300" rx="20" ry="20" fill="#fdfefe" stroke="#ecf0f1" stroke-width="3" />
+  <text x="800" y="510" font-family="Microsoft YaHei, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#34495e">多界面 SDI 技术核心原理</text>
+
+  <foreignObject x="100" y="540" width="400" height="200">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: 'Microsoft YaHei', sans-serif; font-size: 16px; color: #7f8c8d; line-height: 1.6;">
+      <b style="font-size: 22px; color: #3498db;">总反射信号 (线性叠加)：</b><br/>
+      <span style="font-family: serif; font-size: 20px; color: #2c3e50;">I(k) = Σ r_i · r_j · cos[ k · 2(OPD_i - OPD_j) ]</span><br/>
+      光束在多个界面间发生多重反射，每一对反射界面都会产生一个具有独立频率的干涉条纹成分，最终叠加形成复杂的复合光谱。
+    </div>
+  </foreignObject>
+
+  <foreignObject x="600" y="540" width="400" height="200">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: 'Microsoft YaHei', sans-serif; font-size: 16px; color: #7f8c8d; line-height: 1.6;">
+      <b style="font-size: 22px; color: #27ae60;">通过 FFT 实现频率解耦：</b><br/>
+      <span style="font-family: serif; font-size: 20px; color: #2c3e50;">FFT{ I(k) } = Σ Peak_m · δ( d - d_m )</span><br/>
+      复杂的复合光谱本质上是不同频率的叠加。傅里叶变换可将其精准分解为空间坐标上的多个离散峰值，实现信号的分离。
+    </div>
+  </foreignObject>
+
+  <foreignObject x="1100" y="540" width="400" height="200">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: 'Microsoft YaHei', sans-serif; font-size: 16px; color: #7f8c8d; line-height: 1.6;">
+      <b style="font-size: 22px; color: #f39c12;">复杂多腔特征识别：</b><br/>
+      空间域中的峰值位置对应于系统中任意两个反射面之间的相对物理距离。主峰代表主要的 1mm 空气空腔，旁峰则代表薄膜层或多径反射成分。
+    </div>
+  </foreignObject>
+
+  <defs>
+    <marker id="arrow_gold" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f1c40f" />
+    </marker>
+    <marker id="arrow_red" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#e74c3c" />
+    </marker>
+    <marker id="dot" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+      <circle cx="3" cy="3" r="3" fill="#7f8c8d" />
+    </marker>
+  </defs>
+</svg>
