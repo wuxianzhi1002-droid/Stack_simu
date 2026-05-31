@@ -140,7 +140,7 @@ f_{max} = \frac{2 A f}{\lambda_{min}}
 
 ## 3. 优化与加速策略 (Optimization Strategies)
 
-针对以上痛点，想要构建实时处理 10\text{ kHz} 的系统，必须采用以下架构：
+针对以上痛点，想要构建实时处理 $10\text{ kHz}$ 的系统，必须采用以下架构：
 
 1. **预计算插值矩阵 (Matrix-based Resampling)**：
    不要在循环里使用 `np.interp` 或 `scipy.interpolate`。由于 \lambda \to k 的映射关系是固定的，可以预先计算一个**稀疏映射矩阵 (Mapping Matrix)**，之后每一帧数据只做一次极速的矩阵向量乘法 \mathbf{I}_k = \mathbf{M} \cdot \mathbf{I}_\lambda。
@@ -156,3 +156,64 @@ f_{max} = \frac{2 A f}{\lambda_{min}}
 
 5. **降采样与 ROI 截取**：
    在明确干涉腔长所在的物理区间后，可以截断 FFT 的不必要深度谱（只计算 Target Range 的离散傅里叶变换，即 Goertzel Algorithm 或 Chirp-Z Transform），极大降低复乘次数。对于可视化，每秒只渲染 30\sim60 帧，丢弃中间图像。
+
+# Chat2-Task：基于非线性最小二乘法提取干涉绝对腔长 L0
+
+## 1. 任务背景与目标
+我们目前拥有一个通过 Lumerical 仿真的动态干涉光谱数据集,该数据以 `.npz` 格式保存，放在'./01_Lumerical_Workflow/stackrt_result/'中。
+内部包含了一个带有已知高频调制的干涉光谱二维矩阵。
+* **核心目标：** 编写一个 Python 脚本（如 `demodulate_lsq.py`），读取 `.npz` 数据，并利用 `scipy.optimize` 中的非线性最小二乘法（Non-linear Least Squares Fitting），从光谱数据中反向拟合出系统的**初始绝对腔长 $L_0$**。
+
+## 2. 数据输入格式
+数据文件路径为 `stackrt_result/dynamic_spectra.npz`（请在代码中设为可配置变量）。
+文件包含以下 Key：
+* `t_axis`: 一维时间数组，形状 (Nt,)
+* `wavelengths`: 一维波长数组，形状 (Nλ,)，单位为米 (m)
+* `L_t`: 一维真实腔长数组，形状 (Nt,)，表示 Ground Truth，其中 $L(t) = L_0 + A\sin(2\pi f t)$
+* `spectra`: 二维光谱强度矩阵 $I(\lambda, t)$，形状 (Nt, Nλ)
+
+## 3. 理论模型与已知参数
+干涉光谱在任意给定时刻 $t_i$ 的理论模型可简化为：
+$$I(\lambda) = I_{bg} + I_{amp} \cos\left(\frac{4\pi}{\lambda} L_i \right)$$
+其中 $L_i$ 是当前时刻的总腔长。
+
+已知：
+* 调制频率 $f = 1000 \text{ Hz}$（请从 `t_axis` 或数据中提取，或设为已知常量）。
+* 调制振幅 $A$（可从 `L_t` 的峰谷值中提取作为已知先验）。
+* 动态位移项 $\Delta L(t_i) = A\sin(2\pi f t_i)$ 是**已知**的。
+
+因此，我们要拟合的最终方程为：
+$$I(\lambda, t_i) = I_{bg} + I_{amp} \cos\left(\frac{4\pi}{\lambda} (L_0 + \Delta L(t_i)) \right)$$
+
+## 4. 算法实现步骤要求
+请按以下步骤实现代码：
+
+1. **数据加载与预处理：**
+   * 读取 `.npz` 文件。
+   * 从 `L_t` 中提取出基础腔长 Ground Truth ($L_{0\_true}$) 和调制振幅 $A$，用于后续误差对比。
+
+2. **定义拟合函数：**
+   * 定义目标函数 `interference_model(wavelengths, I_bg, I_amp, L_0, delta_L)`。
+   * 为了提高稳定性，建议将待拟合参数限定为 3 个：直流背景 `I_bg`、干涉振幅 `I_amp` 和 核心目标 `L_0`。（`delta_L` 为已知的常数项传入）。
+
+3. **执行非线性拟合 (`scipy.optimize.curve_fit`)：**
+   * **策略 A（单次切片拟合）：** 取 $t=0$ 或任意单行光谱数据 `spectra[0, :]` 进行拟合。
+   * **参数初始化 (p0)：** 由于余弦函数极容易陷入局部最优解，请务必为 `L_0` 提供一个合理的初始猜测值（可以先利用 `scipy.signal.find_peaks` 或直接使用带有小偏差的真值作为 p0，并在代码注释中说明）。
+   * 设定合理的参数边界 (bounds) 以防止求解发散。
+
+4. **误差分析与验证：**
+   * 打印拟合出的 $L_0$ 结果，并与 `L_t` 中的真值 $L_{0\_true}$ 进行对比，计算绝对误差（纳米级别）。
+
+5. **可视化输出 (`matplotlib`)：**
+   * 绘制一张对比图：
+     * X轴：波长 $\lambda$
+     * Y轴：光谱强度
+     * 曲线 1：原始仿真数据点 `spectra[0, :]`（散点或实线）。
+     * 曲线 2：利用拟合出的参数生成的理论曲线（虚线，红色）。
+   * 在图注 (Legend) 或标题中显示提取出的 $L_0$ 数值和计算误差。
+   * 输出图片放在img文件夹，输出的文档和数据等输出到linear_fit文件夹
+
+## 5. 代码规范
+* 保持代码高模块化，包含 `if __name__ == "__main__":` 入口。
+* 对关键的数学推导和代码逻辑进行详细的中文注释。
+* 使用 `typing` 提供清晰的类型提示。
