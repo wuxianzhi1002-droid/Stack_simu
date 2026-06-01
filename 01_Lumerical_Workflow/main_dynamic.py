@@ -1,6 +1,7 @@
 import os
 import sys
 import time
+from datetime import datetime
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
@@ -20,6 +21,8 @@ try:
 except ImportError:
     print("错误: 未找到 lumapi。请检查 Lumerical 安装路径及 Python 环境。")
     lumapi = None
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
 
 # ==========================================
 # 2. 全局配置项 (Global Configuration)
@@ -36,9 +39,9 @@ CONFIG = {
     # 动态调制配置
     "MODULATION": {
         "f_Hz": 1000.0,       # 调制频率 f = 1 kHz
-        "A_nm": 100.0,        # 调制振幅 A = 100 nm
+        "A_nm": 100.0,        # 调制振幅 A = 1000 nm
         "T_s": 0.01,          # 总时长 T = 0.01 s (即 10 毫秒，包含 10 个周期)
-        "fs_Hz": 20000.0      # 时间采样率 = 20 kHz (满足 1kHz 振动的高次多普勒采频要求)
+        "fs_Hz": 40000.0      # 时间采样率 = 40 kHz (满足 1kHz 振动的高次多普勒采频要求)
     },
 
     # 模型 A: 简单多腔模型
@@ -187,7 +190,7 @@ class DynamicAnalyzer:
             os.makedirs(save_dir)
             
         # --------- 1. 数据保存为 Npz ---------
-        npz_path = os.path.join(save_dir, "dynamic_spectra.npz")
+        npz_path = os.path.join(save_dir, f"dynamic_spectra_{timestamp}.npz")
         np.savez_compressed(
             npz_path, 
             t_axis=data["t_axis"], 
@@ -245,52 +248,13 @@ class DynamicAnalyzer:
         axs[1, 1].grid(True)
 
         # 保存静态图表
-        png_path = os.path.join(save_dir, "dynamic_analysis_dashboard.png")
+        png_path = os.path.join(save_dir, f"dynamic_analysis_dashboard_{timestamp}.png")
         fig.savefig(png_path, dpi=200)
         print(f"📊 静态分析图表已生成: {png_path}")
         
         # 注意: 避免 Pycharm 执行时卡死，此处将阻塞设置为 False 并在保存动图后关闭
         # 如果需要交互，可以去除这段逻辑
         plt.close(fig)
-        
-        # --------- 3. 生成光谱动画 (GIF) ---------
-        print("🎞️ 正在渲染动态光谱动画 (请耐心等待...)")
-        fig_anim, ax_anim = plt.subplots(figsize=(8, 4))
-        ax_anim.set_xlim(w[0], w[-1])
-        ax_anim.set_ylim(np.min(S), np.max(S) + 0.1)
-        ax_anim.set_xlabel("Wavelength (nm)")
-        ax_anim.set_ylabel("Reflectance")
-        ax_anim.grid(True)
-        
-        line, = ax_anim.plot([], [], lw=1, color='blue')
-        time_text = ax_anim.text(0.02, 0.9, '', transform=ax_anim.transAxes)
-
-        def init():
-            line.set_data([], [])
-            time_text.set_text('')
-            return line, time_text
-
-        def animate(i):
-            line.set_data(w, S[i, :])
-            time_text.set_text(f"Time: {t[i]:.2f} ms")
-            return line, time_text
-
-        # 抽帧生成动画 (最多渲染 100 帧以防止体积过大)
-        step = max(1, len(t) // 100)
-        frames_idx = list(range(0, len(t), step))
-        
-        anim = animation.FuncAnimation(fig_anim, animate, init_func=init, frames=frames_idx, interval=50, blit=True)
-        gif_path = os.path.join(save_dir, "dynamic_spectrum_animation.gif")
-        
-        try:
-            # 使用 matplotlib 自带的 pillow writer 生成 GIF
-            writer = animation.PillowWriter(fps=15)
-            anim.save(gif_path, writer=writer)
-            print(f"🎬 动态光谱动画已保存: {gif_path}")
-        except Exception as e:
-            print(f"生成 GIF 失败，可能缺少相关库: {e}")
-            
-        plt.close(fig_anim)
 
 
 # ==========================================
@@ -310,7 +274,7 @@ def main():
         return
 
     # 将数据保存至结果目录
-    output_dir = r"01_Lumerical_Workflow\stackrt_result"
+    output_dir = r"stackrt_result"
     DynamicAnalyzer.save_and_plot(data, output_dir)
     print("\n✅ 所有任务流执行完毕！数据、图表和动画已生成。")
 
