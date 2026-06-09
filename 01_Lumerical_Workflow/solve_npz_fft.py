@@ -240,6 +240,8 @@ class BatchFFTSolver:
             "scan_axis_name": np.array(loaded["scan_axis_name"]),
             "scan_axis": scan_axis,
             "selected_spectrum_indices": np.asarray(selected_idx, dtype=int),
+            "selected_spectrum_count": np.array(len(selected_idx), dtype=int),
+            "is_single_spectrum": np.array(len(selected_idx) == 1, dtype=bool),
             "wavelengths": wavelengths,
             "distance_axis_um": distance_axis_um,
             "max_range_um": np.array(max_range_um),
@@ -268,23 +270,25 @@ class BatchFFTSolver:
 
 
 def main_direct():
-    """Edit these values directly; no command-line arguments are required."""
-    npz_path = r"./stackrt_result/cavity_spectra_20260609_121020.npz"
+    """直接在代码中指定输入参数，不使用命令行。"""
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    npz_path = os.path.join(script_dir, "stackrt_result", "cavity_spectra_20260609_121020.npz")
     output_path = None
 
-    # Choose which spectra to solve:
-    # "all"          -> solve every spectrum
-    # 0              -> solve only the first spectrum
-    # 200            -> solve only spectrum index 200
-    # [0, 100, 200]  -> solve specific spectra
-    # slice(0, 50)   -> solve spectra 0 through 49
-    spectrum_selection = "0"
+    # 选择要解算的光谱：
+    # "all"          -> 解算全部光谱
+    # 0              -> 只解算第 0 条光谱
+    # 200            -> 只解算第 200 条光谱
+    # [0, 100, 200]  -> 解算指定多条光谱
+    # slice(0, 50)   -> 解算第 0 到 49 条光谱
+    spectrum_selection = 0
 
     config = {
         "FFT_PEAK_HEIGHT_RATIO": 0.2,
         "FFT_IGNORE_DC_BINS": 50,
         "FFT_PEAK_DISTANCE_BINS": 100,
         "ZERO_PAD_FACTOR": 8,
+        # 单条光谱绘图会重新计算该条 FFT；只有需要保存所有 FFT 热图时才设为 True。
         "SAVE_FFT_MATRIX": True,
     }
 

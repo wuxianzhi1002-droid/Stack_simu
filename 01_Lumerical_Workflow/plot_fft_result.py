@@ -2,13 +2,25 @@ import json
 import os
 from datetime import datetime
 
-import matplotlib.pyplot as plt
+import matplotlib
 import numpy as np
 
 from solve_npz_fft import FFTSolver, NPZSpectrumLoader
 
 
-def _读取标量字符串(npz_data, key, default=""):
+# 优先使用可弹出窗口的 Matplotlib 后端。若本机没有对应 GUI 库，则保留默认后端。
+for backend in ("TkAgg", "QtAgg", "WxAgg"):
+    try:
+        matplotlib.use(backend, force=True)
+        break
+    except Exception:
+        pass
+
+import matplotlib.pyplot as plt
+
+
+def read_scalar_string(npz_data, key, default=""):
+    """从 npz 中读取标量字符串字段。"""
     if key not in npz_data.files:
         return default
 
@@ -18,7 +30,8 @@ def _读取标量字符串(npz_data, key, default=""):
     return str(value)
 
 
-def _扫描轴标签(scan_axis_name):
+def scan_axis_label(scan_axis_name):
+    """根据 solve_npz_fft.py 保存的扫描轴类型生成坐标轴标签。"""
     labels = {
         "angle_deg": "Incident angle (deg)",
         "cavity_um": "Cavity length (um)",
@@ -29,7 +42,8 @@ def _扫描轴标签(scan_axis_name):
     return labels.get(scan_axis_name, scan_axis_name)
 
 
-def _读取配置(npz_data):
+def read_config(npz_data):
+    """读取 FFT 解算配置，用于单条光谱时重新计算 FFT 幅值曲线。"""
     if "config_json" not in npz_data.files:
         return {
             "FFT_PEAK_HEIGHT_RATIO": 0.2,
@@ -42,7 +56,8 @@ def _读取配置(npz_data):
     return json.loads(str(npz_data["config_json"].item()))
 
 
-def 读取_fft_结果(npz_path):
+def load_fft_result(npz_path):
+    """读取 solve_npz_fft.py 输出的 npz 结果。"""
     data = np.load(npz_path, allow_pickle=True)
     required = {
         "scan_axis",
@@ -60,12 +75,12 @@ def 读取_fft_结果(npz_path):
     return data
 
 
-def 读取单条原始光谱(fft_data, selected_indices):
-    """仅在选择了一条光谱时，从 source_npz 中读取原始光谱。"""
+def load_selected_original_spectrum(fft_data, selected_indices):
+    """仅当 selected_spectrum_indices 数量为 1 时，读取对应原始光谱。"""
     if selected_indices.size != 1:
         return None
 
-    source_npz = _读取标量字符串(fft_data, "source_npz", "")
+    source_npz = read_scalar_string(fft_data, "source_npz", "")
     if not source_npz:
         return None
 
@@ -92,18 +107,18 @@ def plot_fft_result(
     max_scatter_peaks=None,
     show_interactive=True,
 ):
-    """绘制 solve_npz_fft.py 输出的 FFT 解算结果。
+    """绘制 FFT 解算结果。
 
-    当输入结果只包含一条光谱时，额外绘制：
-    1. 原始光谱：横坐标为 wavelength。
-    2. 单条光谱 FFT 幅值：横坐标为 main.py 中的距离轴 Distance。
-
-    当输入结果包含多条或全部光谱时，只绘制随扫描变量变化的解算结果。
+    规则：
+    1. selected_spectrum_indices 数量为 1 时，在同一个窗口中额外画原始光谱和该光谱的 FFT 幅值图。
+    2. selected_spectrum_indices 数量大于 1 时，只画扫描解算结果。
+    3. 解算结果图的横坐标由输入 npz 的扫描变量决定。
+    4. 原始光谱图横坐标为 wavelength；FFT 幅值图横坐标为 main.py 算法中的 Distance (um)。
     """
-    data = 读取_fft_结果(npz_path)
+    data = load_fft_result(npz_path)
 
     scan_axis = np.asarray(data["scan_axis"], dtype=float).reshape(-1)
-    scan_axis_name = _读取标量字符串(data, "scan_axis_name", "scan_axis")
+    scan_axis_name = read_scalar_string(data, "scan_axis_name", "scan_axis")
     selected_indices = (
         np.asarray(data["selected_spectrum_indices"], dtype=int).reshape(-1)
         if "selected_spectrum_indices" in data.files
@@ -116,10 +131,8 @@ def plot_fft_result(
     all_peak_distances_um = data["all_peak_distances_um"]
     all_peak_heights = data["all_peak_heights"]
 
-    single_spectrum = 读取单条原始光谱(data, selected_indices)
+    single_spectrum = load_selected_original_spectrum(data, selected_indices)
     has_single_detail = single_spectrum is not None
-
-    x_label = _扫描轴标签(scan_axis_name)
     has_fft_matrix = (
         not has_single_detail
         and "fft_matrix" in data.files
@@ -127,15 +140,65 @@ def plot_fft_result(
     )
 
     n_rows = 4 if has_single_detail else (3 if has_fft_matrix else 2)
-    fig, axs = plt.subplots(n_rows, 1, figsize=(12, 4.0 * n_rows), constrained_layout=True)
-    axs = np.asarray(axs).reshape(-1)
+    fig, axes = plt.subplots(n_rows, 1, figsize=(12, 4.0 * n_rows), constrained_layout=True)
+    axes = np.asarray(axes).reshape(-1)
 
-    ax_result = axs[0]
-    ax_count = axs[1]
+    x_label = scan_axis_label(scan_axis_name)
+    plot_solved_peak_distance(
+        axes[0],
+        fig,
+        scan_axis,
+        x_label,
+        first_peak_distance_um,
+        dominant_peak_distance_um,
+        all_peak_distances_um,
+        all_peak_heights,
+        max_scatter_peaks,
+    )
+    plot_peak_count(axes[1], scan_axis, x_label, peak_count)
 
-    # 图 1：FFT 解算出的距离结果，横坐标由扫描变量决定。
-    ax_result.plot(scan_axis, first_peak_distance_um, "o-", ms=3, lw=1, label="First peak")
-    ax_result.plot(scan_axis, dominant_peak_distance_um, "s-", ms=3, lw=1, label="Dominant peak")
+    if has_single_detail:
+        plot_single_spectrum_detail(axes[2], axes[3], single_spectrum, read_config(data))
+    elif has_fft_matrix:
+        plot_fft_heatmap(axes[2], fig, data, scan_axis, x_label)
+
+    source_npz = read_scalar_string(data, "source_npz", "")
+    fig.suptitle(
+        f"FFT Result: {os.path.basename(npz_path)}\n"
+        f"Source: {os.path.basename(source_npz)} | selected spectra: {selected_indices.size}",
+        fontsize=12,
+    )
+
+    if output_path is None:
+        output_path = default_output_path(npz_path)
+
+    fig.savefig(output_path, dpi=220)
+    print(f"Saved FFT result figure: {output_path}")
+    print(f"Matplotlib backend: {matplotlib.get_backend()}")
+
+    if show_interactive:
+        # 阻塞显示交互窗口，窗口关闭后脚本才会结束。
+        plt.show(block=True)
+    else:
+        plt.close(fig)
+
+    return output_path
+
+
+def plot_solved_peak_distance(
+    ax,
+    fig,
+    scan_axis,
+    x_label,
+    first_peak_distance_um,
+    dominant_peak_distance_um,
+    all_peak_distances_um,
+    all_peak_heights,
+    max_scatter_peaks,
+):
+    """绘制解算出的峰值距离，横坐标为扫描变量。"""
+    ax.plot(scan_axis, first_peak_distance_um, "o-", ms=3, lw=1, label="First peak")
+    ax.plot(scan_axis, dominant_peak_distance_um, "s-", ms=3, lw=1, label="Dominant peak")
 
     scatter_x = []
     scatter_y = []
@@ -151,7 +214,7 @@ def plot_fft_result(
         scatter_c.extend(heights.tolist())
 
     if scatter_x:
-        sc = ax_result.scatter(
+        sc = ax.scatter(
             scatter_x,
             scatter_y,
             c=scatter_c,
@@ -160,54 +223,26 @@ def plot_fft_result(
             alpha=0.6,
             label="All peaks",
         )
-        fig.colorbar(sc, ax=ax_result, label="Peak height")
+        fig.colorbar(sc, ax=ax, label="Peak height")
 
-    ax_result.set_title("FFT Solved Peak Distance")
-    ax_result.set_xlabel(x_label)
-    ax_result.set_ylabel("Distance (um)")
-    ax_result.grid(True)
-    ax_result.legend()
-
-    # 图 2：每条光谱检测到的峰数量，横坐标同样由扫描变量决定。
-    ax_count.bar(scan_axis, peak_count, width=_柱状图宽度(scan_axis), color="#4c78a8")
-    ax_count.set_title("Detected Peak Count")
-    ax_count.set_xlabel(x_label)
-    ax_count.set_ylabel("Count")
-    ax_count.grid(True, axis="y")
-
-    if has_single_detail:
-        _绘制单条光谱细节(
-            axs[2],
-            axs[3],
-            single_spectrum,
-            _读取配置(data),
-        )
-    elif has_fft_matrix:
-        _绘制_fft_热图(axs[2], data, scan_axis, x_label, fig)
-
-    source_npz = _读取标量字符串(data, "source_npz", "")
-    fig.suptitle(
-        f"FFT Result: {os.path.basename(npz_path)}\n"
-        f"Source: {os.path.basename(source_npz)} | spectra: {selected_indices.size}",
-        fontsize=12,
-    )
-
-    if output_path is None:
-        output_path = _默认输出路径(npz_path)
-
-    fig.savefig(output_path, dpi=220)
-    print(f"Saved FFT result figure: {output_path}")
-
-    if show_interactive:
-        # 阻塞显示交互窗口，便于缩放、平移和查看坐标。
-        plt.show(block=True)
-    else:
-        plt.close(fig)
-
-    return output_path
+    ax.set_title("FFT Solved Peak Distance")
+    ax.set_xlabel(x_label)
+    ax.set_ylabel("Distance (um)")
+    ax.grid(True)
+    ax.legend()
 
 
-def _绘制单条光谱细节(ax_spectrum, ax_fft, single_spectrum, config):
+def plot_peak_count(ax, scan_axis, x_label, peak_count):
+    """绘制每个扫描点检测到的峰数量。"""
+    ax.bar(scan_axis, peak_count, width=bar_width(scan_axis), color="#4c78a8")
+    ax.set_title("Detected Peak Count")
+    ax.set_xlabel(x_label)
+    ax.set_ylabel("Count")
+    ax.grid(True, axis="y")
+
+
+def plot_single_spectrum_detail(ax_spectrum, ax_fft, single_spectrum, config):
+    """绘制单条原始光谱和对应 FFT 幅值图。"""
     wavelengths_um = single_spectrum["wavelengths_um"]
     wavelengths_nm = wavelengths_um * 1000
     intensities = single_spectrum["intensities"]
@@ -220,7 +255,7 @@ def _绘制单条光谱细节(ax_spectrum, ax_fft, single_spectrum, config):
     ax_spectrum.set_ylabel("Reflectance")
     ax_spectrum.grid(True)
 
-    # FFT 幅值图：FFT 后的物理横坐标是距离轴，和 main.py 保持一致。
+    # FFT 后的横坐标为距离轴，和 main.py 的 FFTSolver.solve() 保持一致。
     fft_res = FFTSolver.solve(wavelengths_um, intensities, config)
     ax_fft.plot(fft_res["distance_axis_um"], fft_res["fft_data"], color="#222222", lw=0.8)
 
@@ -239,11 +274,12 @@ def _绘制单条光谱细节(ax_spectrum, ax_fft, single_spectrum, config):
     ax_fft.grid(True)
 
 
-def _绘制_fft_热图(ax_heat, data, scan_axis, x_label, fig):
+def plot_fft_heatmap(ax, fig, data, scan_axis, x_label):
+    """当保存了完整 fft_matrix 时，绘制多光谱 FFT 热图。"""
     fft_matrix = np.asarray(data["fft_matrix"], dtype=float)
     distance_axis_um = np.asarray(data["distance_axis_um"], dtype=float).reshape(-1)
     vmax = np.nanpercentile(fft_matrix, 99)
-    mesh = ax_heat.pcolormesh(
+    mesh = ax.pcolormesh(
         distance_axis_um,
         scan_axis,
         fft_matrix,
@@ -252,13 +288,14 @@ def _绘制_fft_热图(ax_heat, data, scan_axis, x_label, fig):
         vmin=0,
         vmax=vmax,
     )
-    ax_heat.set_title("FFT Amplitude Map")
-    ax_heat.set_xlabel("Distance (um)")
-    ax_heat.set_ylabel(x_label)
-    fig.colorbar(mesh, ax=ax_heat, label="FFT amplitude")
+    ax.set_title("FFT Amplitude Map")
+    ax.set_xlabel("Distance (um)")
+    ax.set_ylabel(x_label)
+    fig.colorbar(mesh, ax=ax, label="FFT amplitude")
 
 
-def _柱状图宽度(x):
+def bar_width(x):
+    """根据扫描轴间隔估计柱状图宽度。"""
     if len(x) < 2:
         return 0.8
     diffs = np.diff(np.sort(np.unique(x)))
@@ -267,7 +304,7 @@ def _柱状图宽度(x):
     return float(np.min(diffs) * 0.8)
 
 
-def _默认输出路径(npz_path):
+def default_output_path(npz_path):
     folder = os.path.dirname(os.path.abspath(npz_path))
     stem = os.path.splitext(os.path.basename(npz_path))[0]
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -276,7 +313,8 @@ def _默认输出路径(npz_path):
 
 def main_direct():
     """直接在代码中指定输入参数，不使用命令行。"""
-    fft_npz_path = r"./stackrt_result/cavity_spectra_20260609_121020_fft_solved_20260609_221904.npz"
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    fft_npz_path = r"./stackrt_result/cavity_spectra_20260609_121020_fft_solved_20260609_233306.npz"
     output_path = None
 
     # 数据很密时，可以设为 5 之类的小整数，只画每条光谱前几个峰的散点。
