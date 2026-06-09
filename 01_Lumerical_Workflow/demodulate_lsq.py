@@ -3,14 +3,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 from scipy.interpolate import interp1d
+from scipy.signal import find_peaks
 from typing import Tuple, List
 
 # ==========================================
 # 1. 路径与配置 (Path & Configuration)
 # ==========================================
-RESULT_DIR = r"./01_Lumerical_Workflow/stackrt_result"
-IMG_OUTPUT_DIR = r"./01_Lumerical_Workflow/img"
-DATA_OUTPUT_DIR = r"./01_Lumerical_Workflow/linear_fit"
+RESULT_DIR = r"./stackrt_result"
+IMG_OUTPUT_DIR = r"./img"
+DATA_OUTPUT_DIR = r"./linear_fit"
 
 os.makedirs(IMG_OUTPUT_DIR, exist_ok=True)
 os.makedirs(DATA_OUTPUT_DIR, exist_ok=True)
@@ -35,7 +36,7 @@ def get_latest_data():
 # 2. 算法核心：粗寻 + 精拟 (Coarse + Fine Demodulation)
 # ==========================================
 
-def coarse_estimate_length(wavelengths: np.ndarray, spectrum: np.ndarray) -> float:
+def coarse_estimate_length(wavelengths: np.ndarray, spectrum: np.ndarray, peak_ratio = 0.2) -> float:
     """
     使用 FFT (快速傅里叶变换) 估算绝对腔长 L。
     原理：干涉条纹在波数空间 (k=1/lambda) 是等间距的。
@@ -57,14 +58,22 @@ def coarse_estimate_length(wavelengths: np.ndarray, spectrum: np.ndarray) -> flo
     
     # 5. 频率轴对应到 2*L (光程差)
     # k 的采样间隔 dk
-    dk = k_uniform[1] - k_uniform[0]
+    dk = np.abs(k_uniform[1] - k_uniform[0])
     # FFT 频率轴对应的空间步长
-    l_axis = np.fft.rfftfreq(n_fft, d=dk)
+    max_range = np.pi / dk
+    distance_axis = np.linspace(0, max_range / 2, len(fft_res))
     
     # 6. 找峰值 (2*L = peak_pos)
-    peak_idx = np.argmax(fft_res)
-    l_coarse = l_axis[peak_idx] / 2.0  # 单位: um
+    ignore = 50
+    peaks, _ = find_peaks(
+        fft_res[ignore:],
+        height=np.max(fft_res[ignore:]) * peak_ratio,
+        distance=100
+    )
+    peaks = peaks + ignore
+    l_coarse = distance_axis[peaks] / 2.0  # 单位: um
     
+    # pyrefly: ignore [bad-return]
     return l_coarse * 1e-6 # 返回米
 
 def interference_model(wavelengths: np.ndarray, I_bg: float, I_amp: float, L_total: float) -> np.ndarray:

@@ -84,7 +84,7 @@ def run_demodulation():
     # I_amp: 取一个经验值
     # L_0: 按照任务要求，使用带有小偏差的真值作为 p0
     # 由于余弦函数的多峰性，初始猜测对收敛到正确条纹至关重要
-    p0 = [np.mean(y_data), 0.1, L0_true + 1e-6] # 偏差 0.5 um
+    p0 = [np.mean(y_data), 0.1, L0_true+0.1e-6] # 偏差 0.5 um
 
     # 设定边界 (bounds)
     # lower_bounds = [0.0, 0.0, L0_true * 0.95]

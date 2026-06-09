@@ -32,9 +32,9 @@ CONFIG = {
     "MODEL_TYPE": "PSS_TiO2",
 
     # 波长范围 (um)
-    "WAVELENGTH_START": 0.3,
-    "WAVELENGTH_STOP": 0.9,
-    "SPECTRAL_RESOLUTION_NM": 0.1,  # 适度调低分辨率以保障仿真速度 (共计约 6000 点)
+    "WAVELENGTH_START": 0.2,
+    "WAVELENGTH_STOP": 0.6,
+    "SPECTRAL_RESOLUTION_NM": 0.02,  # 适度调低分辨率以保障仿真速度 (共计约 6000 点)
 
     # 动态调制配置
     "MODULATION": {

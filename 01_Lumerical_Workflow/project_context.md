@@ -217,3 +217,241 @@ $$I(\lambda, t_i) = I_{bg} + I_{amp} \cos\left(\frac{4\pi}{\lambda} (L_0 + \Delt
 * 保持代码高模块化，包含 `if __name__ == "__main__":` 入口。
 * 对关键的数学推导和代码逻辑进行详细的中文注释。
 * 使用 `typing` 提供清晰的类型提示。
+
+---
+
+# Chat3-Task：基于 StackRT 的参数序列扫描与通用 FFT 解算流程
+
+## 1. 任务背景与总体目标
+
+在已有 `main_dynamic.py` 时间序列动态仿真流程的基础上，进一步将 Lumerical `stackrt` 解析仿真扩展为更通用的参数扫描框架。新的扫描变量不再局限于时间，而是可以针对入射角、空气腔长等物理参数生成二维光谱数据集，并为后续统一解算提供标准化输入。
+
+本阶段的核心目标包括：
+
+* **角度扫描仿真：** 在 PSS-TiO2 多层膜模型中固定腔长，改变入射角，得到不同入射角下的反射光谱。
+* **腔长扫描仿真：** 在 PSS-TiO2 多层膜模型中固定垂直入射角，改变 Air 层厚度，得到不同腔长下的反射光谱。
+* **通用 FFT 解算：** 编写可读取 `.npz` 光谱数据的通用 FFT 解算脚本，使其适用于时间序列、角度扫描、腔长扫描或单条光谱等不同数据格式。
+
+---
+
+## 2. StackRT 参数扫描仿真总体思路
+
+所有扫描脚本均沿用 `main_dynamic.py` 和 `main_angle.py` 的基本结构：
+
+1. 定义统一的 `CONFIG` 配置字典，包括模型类型、波长范围、光谱分辨率、扫描变量范围以及偏振通道。
+2. 使用 `_get_n_matrix()` 根据 `PSS_TIO2_MODEL` 生成 `stackrt` 所需的折射率矩阵 `n_matrix` 和厚度数组 `thicknesses`。
+3. 通过 Lumerical Python API 创建 `lumapi.FDTD(hide=True)` 会话。
+4. 在扫描变量循环中调用 `fdtd.stackrt(n_matrix, thicknesses, freqs, theta)`。
+5. 提取 `Rp` 或 `Rs` 作为反射光谱结果，并保存为二维矩阵 `spectra.shape = (N_scan, N_lambda)`。
+
+其中 `N_scan` 表示扫描变量的采样点数，`N_lambda` 表示波长采样点数，每一行 `spectra[i, :]` 表示某一个扫描条件下的一条完整光谱。
+
+---
+
+## 3. 角度扫描实现方式
+
+角度扫描脚本为 `01_Lumerical_Workflow/main_angle.py`。
+
+### 扫描参数
+
+* 扫描对象：`stackrt` 的入射角参数 `theta`
+* 角度范围：`-10 deg` 到 `+10 deg`
+* 角度步长：`0.05 deg`
+* 角度点数：`401`
+* 波长范围：`0.2 um` 到 `0.6 um`
+* 波长分辨率：`0.02 nm`
+
+### 实现要点
+
+角度扫描中，各层厚度保持不变，仅在循环中改变 `theta_deg`：
+
+```python
+res = fdtd.stackrt(n_matrix, thicknesses, freqs, float(theta_deg))
+spectra[i, :] = np.real(np.asarray(res["Rp"]).flatten())
+```
+
+输出文件保存至 `01_Lumerical_Workflow/stackrt_result/angle_dynamic_time.npz`。该文件保留 `main_dynamic.py` 的兼容字段，同时增加明确的角度轴字段：
+
+```text
+t_axis
+wavelengths
+L_t
+spectra
+angle_axis
+theta_axis
+```
+
+其中 `angle_axis` 和 `theta_axis` 均表示角度扫描轴，单位为 degree。
+
+---
+
+## 4. 腔长扫描实现方式
+
+腔长扫描脚本为 `01_Lumerical_Workflow/main_cavity.py`。
+
+### 扫描参数
+
+项目中层厚度配置的单位为 `um`。因此 Air 层腔长扫描按如下方式实现：
+
+* 扫描对象：`PSS_TIO2_MODEL` 中的 `Air` 层厚度
+* 腔长范围：`1000 um` 到 `1200 um`
+* 腔长步长：`0.2 um`，即 `200 nm`
+* 腔长点数：`1001`
+* 入射角：`0 deg`
+* 波长范围：`0.2 um` 到 `0.6 um`
+* 波长分辨率：`0.02 nm`
+
+### 实现要点
+
+脚本首先在 `_get_n_matrix()` 中记录 Air 层索引 `air_idx`，然后在扫描循环中复制基础厚度数组并替换 Air 层厚度：
+
+```python
+thicknesses = thicknesses_base.copy()
+thicknesses[air_idx] = cavity_um * 1e-6
+res = fdtd.stackrt(n_matrix, thicknesses, freqs, 0.0)
+spectra[i, :] = np.real(np.asarray(res["Rp"]).flatten())
+```
+
+输出文件保存至 `01_Lumerical_Workflow/stackrt_result/cavity_spectra_YYYYMMDD_HHMMSS.npz`。文件名中的时间戳由代码运行时自动读取系统时间生成：
+
+```python
+datetime.now().strftime("%Y%m%d_%H%M%S")
+```
+
+输出 `.npz` 只保存与腔长扫描有关的字段：
+
+```text
+cavity_axis_um
+cavity_axis_m
+wavelengths
+spectra
+```
+
+---
+
+## 5. 通用 FFT 解算脚本设计
+
+通用 FFT 解算脚本为 `01_Lumerical_Workflow/solve_npz_fft.py`。
+
+该脚本不再依赖固定的时间序列格式，而是自动识别 `.npz` 文件中的光谱矩阵和扫描轴，使同一个解算器可适配角度扫描、腔长扫描、时间序列扫描或单条光谱。
+
+### 输入数据自动识别
+
+脚本要求输入 `.npz` 至少包含：
+
+```text
+wavelengths
+spectra
+```
+
+同时兼容以下光谱字段名：
+
+```text
+spectra
+R
+Rp
+Rs
+intensities
+```
+
+扫描轴按优先级自动识别：
+
+```text
+angle_axis      -> angle_deg
+theta_axis      -> angle_deg
+cavity_axis_um  -> cavity_um
+cavity_axis_m   -> cavity_m
+L_t             -> cavity_um
+t_axis          -> time_or_scan_axis
+```
+
+如果未找到匹配的扫描轴，则使用光谱索引作为默认扫描轴 `spectrum_index`。
+
+---
+
+## 6. FFT 解算算法实现方式
+
+FFT 解算逻辑参考 `main.py` 中的 `FFTSolver.solve()`：
+
+1. 将波长轴转换为波数轴：`k_raw = 2 * np.pi / wavelengths_um`。
+2. 对光谱强度插值到等间隔 `k` 空间。
+3. 去除直流分量并加汉宁窗。
+4. 执行带 Zero-padding 的一维 FFT。
+5. 根据 `k` 空间间隔构建距离轴 `distance_axis_um`。
+6. 使用 `scipy.signal.find_peaks` 提取干涉峰。
+
+### 解算输出字段
+
+解算结果保存为 `原文件名_fft_solved_YYYYMMDD_HHMMSS.npz`，主要字段包括：
+
+```text
+source_npz
+source_keys
+spectra_key
+scan_axis_name
+scan_axis
+selected_spectrum_indices
+wavelengths
+distance_axis_um
+max_range_um
+peak_count
+first_peak_distance_um
+first_peak_height
+dominant_peak_distance_um
+dominant_peak_height
+all_peak_distances_um
+all_peak_heights
+config_json
+```
+
+其中 `first_peak_distance_um` 表示每条光谱检测到的第一个峰位置，`dominant_peak_distance_um` 表示每条光谱中峰高最大的主峰位置，`all_peak_distances_um` 保存每条光谱检测到的全部峰位置，`selected_spectrum_indices` 记录实际参与解算的原始光谱索引。
+
+---
+
+## 7. 光谱选择机制
+
+为了避免每次都对完整二维数据集执行 FFT，`solve_npz_fft.py` 支持选择只解算部分光谱。
+
+在 `main_direct()` 中配置：
+
+```python
+spectrum_selection = "all"
+```
+
+可选方式包括：
+
+```python
+spectrum_selection = "all"        # 解算全部光谱
+spectrum_selection = 0            # 只解算第 0 条光谱
+spectrum_selection = 200          # 只解算第 200 条光谱
+spectrum_selection = [0, 100, 200]
+spectrum_selection = slice(0, 50) # 解算第 0 到 49 条光谱
+```
+
+该机制通过 `normalize_spectrum_selection()` 将用户输入统一转换为整数索引数组，并在保存结果时记录实际索引，便于后续追踪来源。
+
+---
+
+## 8. 当前代码组织总结
+
+本阶段新增或扩展的主要文件如下：
+
+```text
+01_Lumerical_Workflow/main_angle.py
+01_Lumerical_Workflow/main_cavity.py
+01_Lumerical_Workflow/solve_npz_fft.py
+```
+
+整体数据流为：
+
+```text
+StackRT 参数扫描
+        ↓
+二维光谱 npz 数据
+        ↓
+通用 FFT 解算
+        ↓
+峰值距离与主峰随扫描变量变化的 npz 结果
+```
+
+该流程将仿真变量与解算流程解耦：仿真脚本只负责生成标准二维光谱矩阵，FFT 解算脚本只负责读取标准化 `.npz` 并对每条光谱执行统一的 k-space FFT 解算。这样后续无论扫描对象是时间、角度、腔长或其他物理参数，都可以复用同一套数据结构和解算逻辑。

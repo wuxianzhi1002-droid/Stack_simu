@@ -6,6 +6,7 @@ __pycache__/
 # Lumerical / Simulation
 *.log
 *.bak
+01_Lumerical_Workflow/stackrt_result/cavity_spectra_20260609_121020.npz
 
 # IDE
 .vscode/

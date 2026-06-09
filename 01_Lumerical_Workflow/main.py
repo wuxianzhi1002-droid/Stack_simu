@@ -29,8 +29,8 @@ CONFIG = {
 
     # 波长范围 (um)
     "WAVELENGTH_START": 0.2,
-    "WAVELENGTH_STOP": 0.6,
-    "SPECTRAL_RESOLUTION_NM": 0.01,  # 使用分辨率(nm)作为输入，自动计算点数
+    "WAVELENGTH_STOP": 0.8,
+    "SPECTRAL_RESOLUTION_NM": 0.02,  # 使用分辨率(nm)作为输入，自动计算点数
 
     # 统一模型格式: (材料名或固定折射率, 厚度_um)
     # 模型 A: 简单多腔模型 (10um + 1um)
@@ -48,17 +48,17 @@ CONFIG = {
         "LAYERS": [
             ("RefReflector", 0),  # 参考面 (n=5.8284)
             ("Air", 1000.0),  # 1mm 腔
-            ("HSQ", 0),  # 40nm
-            # ("HSQ", 0.040),  # 40nm
-            # ("PSS", 0.005),  # 5nm
-            # ("SOC", 0.050),  # 50nm
-            # ("TiO2", 0.020),  # 20nm
-            # ("Cu", 0)  # 衬底
+            # ("HSQ", 0),  # 40nm
+            ("HSQ", 0.050),  # 40nm
+            ("PSS", 0.005),  # 5nm
+            ("SOC", 0.050),  # 50nm
+            ("TiO2", 0.020),  # 20nm
+            ("Cu", 0)  # 衬底
         ]
     },
 
     # FFT 找峰参数
-    "FFT_PEAK_HEIGHT_RATIO": 0.05,
+    "FFT_PEAK_HEIGHT_RATIO": 0.2,
     "FFT_IGNORE_DC_BINS": 50
 }
 
