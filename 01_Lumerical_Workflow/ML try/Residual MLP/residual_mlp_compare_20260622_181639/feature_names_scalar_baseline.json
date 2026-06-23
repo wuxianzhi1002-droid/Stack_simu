@@ -1,0 +1,13 @@
+{
+  "method_name": "scalar_baseline",
+  "enabled": true,
+  "feature_count": 6,
+  "feature_names": [
+    "L_fft_um",
+    "H_peak",
+    "PSS_nominal_nm",
+    "HSQ_nominal_nm",
+    "SOC_nominal_nm",
+    "TiO2_nominal_nm"
+  ]
+}

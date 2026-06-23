@@ -1,0 +1,86 @@
+{
+  "output_root": "../ML try",
+  "model_type": "PSS_TiO2",
+  "wavelength_start_um": 0.2,
+  "wavelength_stop_um": 0.6,
+  "spectral_resolution_nm": 0.02,
+  "angle_deg": 0.0,
+  "polarization": "p",
+  "cavity_start_um": 1000.0,
+  "cavity_stop_um": 1000.03,
+  "cavity_step_um": 0.01,
+  "film_uncertainty_nm": 10.0,
+  "num_process_per_nominal": 2,
+  "random_seed": 20260613,
+  "train_ratio": 0.7,
+  "val_ratio": 0.15,
+  "test_ratio": 0.15,
+  "save_checkpoint_every_process": true,
+  "fft_peak_height_ratio": 0.2,
+  "fft_ignore_dc_bins": 50,
+  "fft_peak_distance_bins": 100,
+  "zero_pad_factor": 8,
+  "add_noise": false,
+  "noise_std": 0.0,
+  "film_layer_names": [
+    "HSQ",
+    "PSS",
+    "SOC",
+    "TiO2"
+  ],
+  "nominal_stacks_nm": [
+    {
+      "name": "model1",
+      "HSQ": 40.0,
+      "PSS": 5.0,
+      "SOC": 50.0,
+      "TiO2": 20.0
+    },
+    {
+      "name": "model3_soc60",
+      "HSQ": 40.0,
+      "PSS": 5.0,
+      "SOC": 60.0,
+      "TiO2": 20.0
+    }
+  ],
+  "full_nominal_stacks_nm": [
+    {
+      "name": "model1",
+      "HSQ": 40.0,
+      "PSS": 5.0,
+      "SOC": 50.0,
+      "TiO2": 20.0
+    },
+    {
+      "name": "model2_hsq20",
+      "HSQ": 20.0,
+      "PSS": 5.0,
+      "SOC": 50.0,
+      "TiO2": 20.0
+    },
+    {
+      "name": "model3_soc60",
+      "HSQ": 40.0,
+      "PSS": 5.0,
+      "SOC": 60.0,
+      "TiO2": 20.0
+    },
+    {
+      "name": "model4_hsq60",
+      "HSQ": 60.0,
+      "PSS": 5.0,
+      "SOC": 50.0,
+      "TiO2": 20.0
+    },
+    {
+      "name": "model5_soc80",
+      "HSQ": 40.0,
+      "PSS": 5.0,
+      "SOC": 80.0,
+      "TiO2": 20.0
+    }
+  ],
+  "lumerical_path": "D:\\Program Files\\Lumerical\\v241\\api\\python",
+  "lumerical_bin_path": "D:\\Program Files\\Lumerical\\v241\\bin"
+}

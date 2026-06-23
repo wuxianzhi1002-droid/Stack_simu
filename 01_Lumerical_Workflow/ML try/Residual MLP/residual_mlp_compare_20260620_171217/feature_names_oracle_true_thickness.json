@@ -1,0 +1,17 @@
+{
+  "method_name": "scalar_oracle_true_thickness",
+  "enabled": true,
+  "feature_count": 10,
+  "feature_names": [
+    "L_fft_um",
+    "H_peak",
+    "PSS_true_nm",
+    "HSQ_true_nm",
+    "SOC_true_nm",
+    "TiO2_true_nm",
+    "L_fft_um*PSS_true_nm",
+    "L_fft_um*HSQ_true_nm",
+    "L_fft_um*SOC_true_nm",
+    "L_fft_um*TiO2_true_nm"
+  ]
+}

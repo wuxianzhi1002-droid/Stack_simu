@@ -1,0 +1,30 @@
+{
+  "fft_linear": {
+    "mean_error_nm": -1.249047596214344,
+    "std_error_nm": 9.95321863846988,
+    "rmse_nm": 10.031285120202348,
+    "mae_nm": 7.49436982212804,
+    "max_abs_error_nm": 22.482435494907804,
+    "p95_abs_error_nm": 18.548082998961483
+  },
+  "fixed_film_lsq": {
+    "mean_error_nm": 7.359781562824234,
+    "std_error_nm": 10.064876484823488,
+    "rmse_nm": 12.46868570889652,
+    "mae_nm": 7.359871506863176,
+    "max_abs_error_nm": 21.63503306110215,
+    "p95_abs_error_nm": 21.62806288338288
+  },
+  "prior_joint_lsq": {
+    "mean_error_nm": 7.36002844162158,
+    "std_error_nm": 10.064937864811164,
+    "rmse_nm": 12.468880979622353,
+    "mae_nm": 7.36002844162158,
+    "max_abs_error_nm": 21.635466845054907,
+    "p95_abs_error_nm": 21.628409913137148
+  },
+  "linear_coefficients_by_process": {
+    "std_slope": 6.373455719120287e-05,
+    "std_intercept_um": 0.07771757190395805
+  }
+}

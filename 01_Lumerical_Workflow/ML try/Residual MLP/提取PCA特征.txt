@@ -1,0 +1,525 @@
+请继续改进 01_Lumerical_Workflow/ML try/Residual MLP 相关代码。
+
+当前已经生成了大数据集：
+
+"01_Lumerical_Workflow\ML try\Residual 1MLP\dataset\nn_cavity_spectral_features_20260620_233057.npz" 
+
+
+其中包含：
+
+    spectra_norm_ds                  shape=(800000, 2000)
+    wavelengths_spectra_saved_um
+    spectral_features_full
+    spectral_feature_names
+    sample_id
+    process_id
+    nominal_stack_id
+    split_id
+    valid_mask
+    L_fft_um
+    H_peak
+    peak_count
+    delta_L_nm
+    cavity_true_um
+    film_nominal_nm
+    film_delta_nm
+    film_true_nm
+    layer_names
+
+现在需要新增一个独立脚本：
+
+    extract_pca_features.py
+
+位置：
+
+    01_Lumerical_Workflow/ML try/Residual MLP/extract_pca_features.py
+
+目标是：
+
+    从大 NPZ 中读取 spectra_norm_ds，
+    只在 train split 上 fit PCA，
+    transform 全部样本，
+    保存轻量 PCA 特征 NPZ，
+    后续 MLP 训练直接读取这个 PCA 特征文件，而不是每次重新读取 5~7GB 的 spectra_norm_ds。
+
+============================================================
+一、核心原则
+============================================================
+
+1. PCA 只能在 train set 上 fit。
+2. val/test 只能 transform，不能参与 fit。
+3. 不能对全数据 fit PCA，否则数据泄漏。
+4. PCA 输入使用 spectra_norm_ds。
+5. PCA 输出保存为 pca_scores。
+6. 默认只 fit 一次 PCA(n_components=100)，后续训练时可以使用前 20/50/100 个分量。
+7. 不在 extract_pca_features.py 中训练 MLP。
+8. 原始大 NPZ 不修改，只生成新的 PCA 特征 NPZ。
+
+============================================================
+二、输入输出路径
+============================================================
+
+输入参数：
+
+    --dataset path/to/nn_cavity_spectral_features_*.npz
+    --output-dir path/to/output_dir
+    --n-components 100
+    --max-pca-fit-rows 100000
+    --random-seed 20260613
+    --batch-size 20000
+    --pca-method randomized
+    --overwrite false
+
+默认：
+
+    n_components = 100
+    max_pca_fit_rows = 100000
+    random_seed = 20260613
+    batch_size = 20000
+    pca_method = randomized
+
+如果 --output-dir 不指定，则默认在数据集同级目录下创建：
+
+    pca_features/
+
+输出文件名：
+
+    nn_cavity_pca_features_100_YYYYMMDD_HHMMSS.npz
+    pca_summary_YYYYMMDD_HHMMSS.json
+    pca_explained_variance_YYYYMMDD_HHMMSS.png
+
+============================================================
+三、split 规则
+============================================================
+
+优先使用数据集已有的 split_id：
+
+    split_id == 0 -> train
+    split_id == 1 -> val
+    split_id == 2 -> test
+
+并且 valid_mask 必须为 True。
+
+如果 split_id 不存在，则使用 train_process_ids / val_process_ids / test_process_ids 生成 split_id。
+
+要求输出检查：
+
+    train rows
+    val rows
+    test rows
+    train process count
+    val process count
+    test process count
+    process overlap between train/val/test
+
+process overlap 必须为 0。
+
+============================================================
+四、PCA fit 逻辑
+============================================================
+
+数据集中 spectra_norm_ds 很大：
+
+    shape = (800000, 2000)
+    dtype = float32
+
+不要一次性复制成 float64。
+
+读取后尽量保持 float32。
+
+fit PCA 时：
+
+1. 从 train_indices 中随机抽取最多 max_pca_fit_rows 行。
+2. 使用 sklearn.decomposition.PCA：
+   
+   PCA(
+       n_components=args.n_components,
+       svd_solver="randomized",
+       random_state=args.random_seed
+   )
+
+3. 只用抽样 train spectra fit PCA。
+4. fit 后分 batch transform 全部样本，避免内存峰值太高。
+5. transform 结果保存为 float32。
+
+如果 max_pca_fit_rows 为 None 或 <=0，则使用全部 train rows fit PCA。
+
+注意：
+PCA 本身会在 fit 内部计算 mean，因此不要手动用全数据计算 mean。
+也不要用 val/test 的光谱参与 PCA mean 或 components 的计算。
+
+============================================================
+五、输出 PCA NPZ 字段
+============================================================
+
+输出 PCA 特征 NPZ 必须包含：
+
+    pca_scores
+        shape = (num_samples, n_components)
+        dtype = float32
+
+    pca_components
+        shape = (n_components, num_spectral_points)
+        dtype = float32
+
+    pca_mean
+        shape = (num_spectral_points,)
+        dtype = float32
+
+    pca_explained_variance
+    pca_explained_variance_ratio
+    pca_singular_values
+
+    pca_n_components
+    pca_fit_sample_indices
+    pca_fit_policy = "fit_on_train_only"
+    pca_source = "spectra_norm_ds"
+    pca_method
+    max_pca_fit_rows
+    random_seed
+
+同时从原始数据集中复制以下轻量字段：
+
+    sample_id
+    process_id
+    nominal_stack_id
+    split_id
+    valid_mask
+
+    L_fft_um
+    H_peak
+    peak_count
+    delta_L_nm
+    cavity_true_um
+
+    film_nominal_nm
+    film_delta_nm
+    film_true_nm
+    layer_names
+
+    spectral_features_full
+    spectral_feature_names
+
+    wavelengths_spectra_saved_um
+    nominal_stack_name_by_id
+    nominal_stack_values_nm
+
+    train_process_ids
+    val_process_ids
+    test_process_ids
+
+    config_json
+    timestamp_source_dataset
+    source_dataset_path
+
+不要复制：
+
+    spectra_norm_ds
+    spectra
+    spectra_norm
+
+因为 PCA 特征文件应该是轻量文件。
+
+============================================================
+六、summary JSON 内容
+============================================================
+
+pca_summary_*.json 中保存：
+
+    source_dataset_path
+    output_npz_path
+    num_samples
+    num_spectral_points
+    n_components
+    pca_scores_shape
+    pca_scores_dtype
+
+    train_rows
+    val_rows
+    test_rows
+    train_process_count
+    val_process_count
+    test_process_count
+    process_overlap_train_val
+    process_overlap_train_test
+    process_overlap_val_test
+
+    max_pca_fit_rows
+    actual_pca_fit_rows
+    pca_fit_policy
+    pca_source
+    pca_method
+    random_seed
+
+    explained_variance_ratio_first_10
+    explained_variance_ratio_cumsum_20
+    explained_variance_ratio_cumsum_50
+    explained_variance_ratio_cumsum_100
+    total_explained_variance_ratio
+
+    elapsed_seconds_fit
+    elapsed_seconds_transform
+    elapsed_seconds_total
+
+    estimated_output_size_gb
+
+============================================================
+七、解释方差图
+============================================================
+
+生成图片：
+
+    pca_explained_variance_YYYYMMDD_HHMMSS.png
+
+图中包含两条曲线：
+
+1. individual explained variance ratio
+2. cumulative explained variance ratio
+
+横轴：
+
+    principal component index
+
+纵轴：
+
+    explained variance ratio
+
+不要使用 seaborn，只用 matplotlib。
+
+============================================================
+八、内存与速度要求
+============================================================
+
+1. spectra_norm_ds 不要整体 astype(float64)。
+2. PCA scores 用 np.memmap 或分 batch transform，避免一次性生成过大中间数组。
+3. transform 时按 batch_size 分块：
+
+       for start in range(0, num_samples, batch_size):
+           X_batch = spectra_norm_ds[start:end].astype(np.float32, copy=False)
+           scores[start:end] = pca.transform(X_batch).astype(np.float32)
+
+4. 如果输出目录中已有同名文件且 overwrite=false，则报错，不覆盖。
+5. 运行时打印进度：
+
+       Loading dataset...
+       Split check...
+       Fitting PCA...
+       Transforming batch 1/N...
+       Saving PCA NPZ...
+       Summary saved...
+       Done.
+
+============================================================
+九、训练脚本 train_residual_mlp.py 的最小改动
+============================================================
+
+同时请对 train_residual_mlp.py 做最小改动，使它可以读取 PCA 特征文件训练。
+
+新增命令行参数：
+
+    --pca-components 0
+
+默认 0 表示不使用 PCA。
+
+新增 feature group：
+
+    pca_scores
+
+用法：
+
+    --feature-groups l_fft_only nominal_thickness pca_scores
+    --pca-components 50
+
+新增 feature group：
+
+    l_fft_only
+
+只加入：
+
+    L_fft_um
+
+不要加入 H_peak。
+
+保留原来的：
+
+    fft_scalar
+
+但 fft_scalar 仍表示：
+
+    L_fft_um + H_peak
+
+新增推荐 robust spectral feature preset：
+
+    --spectral-feature-preset robust
+
+当使用：
+
+    --feature-groups spectral_features_full
+    --spectral-feature-preset robust
+
+时，自动选择以下特征：
+
+    spec_skew
+    spec_kurtosis
+    fft_peak_width_1
+    fft_num_peaks
+    fft_spectral_centroid_um
+    fft_snr_1
+    fringe_visibility_global
+    fringe_contrast_std
+
+不要选择强度敏感特征：
+
+    spec_mean
+    spec_std
+    spec_min
+    spec_max
+    spec_ptp
+    spec_q05
+    spec_q25
+    spec_q50
+    spec_q75
+    spec_q95
+    fft_peak_height_1
+    fft_peak_prominence_1
+    fft_noise_floor
+    fft_band_energy_low
+    fft_band_energy_mid
+    fft_band_energy_high
+
+并自动排除全 NaN 的 second peak 特征：
+
+    fft_peak_pos_2_um
+    fft_peak_height_2
+    fft_peak_width_2
+    fft_peak_prominence_2
+    fft_peak_height_ratio_21
+    fft_peak_distance_21_um
+
+============================================================
+十、PCA 训练命令示例
+============================================================
+
+请在文件顶部注释中加入 Windows CMD 示例。
+
+第一步，提取 PCA：
+
+    python "01_Lumerical_Workflow\ML try\Residual MLP\extract_pca_features.py" ^
+      --dataset "01_Lumerical_Workflow\ML try\nn_cavity_spectral_features_20260620_233057\nn_cavity_spectral_features_20260620_233057.npz" ^
+      --n-components 100 ^
+      --max-pca-fit-rows 100000 ^
+      --batch-size 20000
+
+第二步，用 PCA50 训练：
+
+    python "01_Lumerical_Workflow\ML try\Residual MLP\train_residual_mlp.py" ^
+      --dataset "01_Lumerical_Workflow\ML try\nn_cavity_spectral_features_20260620_233057\pca_features\nn_cavity_pca_features_100_YYYYMMDD_HHMMSS.npz" ^
+      --feature-groups l_fft_only nominal_thickness pca_scores ^
+      --pca-components 50 ^
+      --epochs 120
+
+第三步，用 PCA50 + robust spectral features 训练：
+
+    python "01_Lumerical_Workflow\ML try\Residual MLP\train_residual_mlp.py" ^
+      --dataset "01_Lumerical_Workflow\ML try\nn_cavity_spectral_features_20260620_233057\pca_features\nn_cavity_pca_features_100_YYYYMMDD_HHMMSS.npz" ^
+      --feature-groups l_fft_only nominal_thickness pca_scores spectral_features_full ^
+      --pca-components 50 ^
+      --spectral-feature-preset robust ^
+      --epochs 120
+
+============================================================
+十一、最终希望得到的模型对照
+============================================================
+
+后续应该可以比较：
+
+1. scalar_no_intensity
+
+    L_fft_um + film_nominal_nm
+
+2. pca20_no_intensity
+
+    L_fft_um + film_nominal_nm + PC1~PC20
+
+3. pca50_no_intensity
+
+    L_fft_um + film_nominal_nm + PC1~PC50
+
+4. pca100_no_intensity
+
+    L_fft_um + film_nominal_nm + PC1~PC100
+
+5. pca50_robust_features
+
+    L_fft_um + film_nominal_nm + PC1~PC50 + robust spectral features
+
+重点看 test set：
+
+    cavity_MAE_nm
+    cavity_RMSE_nm
+    cavity_MaxAbs_nm
+    delta_P95Abs_nm
+
+============================================================
+十二、报告要求
+============================================================
+
+训练 summary_report.md 中需要明确说明：
+
+1. PCA 是否只在 train set fit？
+2. PCA 使用了多少个 components？
+3. PCA 累计解释方差是多少？
+4. 主模型是否使用 H_peak 或其他绝对强度特征？
+5. 如果是 no_intensity 模型，需要写明：
+   
+   This model excludes intensity-sensitive features such as H_peak, spec_mean, and FFT peak height.
+
+6. 如果使用 robust spectral features，需要列出具体特征名。
+7. true film thickness / film_delta / cavity_true_um 不得作为主模型输入。
+
+重要补充：
+
+训练阶段不要同时读取原始大 NPZ 和 PCA 小 NPZ。extract_pca_features.py 生成的 PCA 特征 NPZ 必须是 self-contained training dataset。
+
+也就是说，PCA 小 NPZ 除了保存 pca_scores / pca_components / pca_mean / explained variance 之外，还必须从原始大 NPZ 中复制所有后续训练、评价、分组分析需要的轻量字段，包括：
+
+sample_id
+process_id
+nominal_stack_id
+split_id
+valid_mask
+train_process_ids
+val_process_ids
+test_process_ids
+
+L_fft_um
+H_peak
+peak_count
+delta_L_nm
+delta_L_um
+cavity_true_um
+L_true_um
+
+film_nominal_nm
+film_delta_nm
+film_true_nm
+layer_names
+
+spectral_features_full
+spectral_feature_names
+spectral_feature_source
+
+nominal_stack_values_nm
+nominal_stack_name_by_id
+process_nominal_stack_id
+process_film_delta_nm
+process_film_true_nm
+
+wavelengths_spectra_saved_um
+config_json
+timestamp_source_dataset
+source_dataset_path
+
+不要复制 spectra_norm_ds / spectra / spectra_norm。
+
+后续 train_residual_mlp.py 只需要读取 PCA 小 NPZ 一个文件即可完成训练，不应再要求用户同时提供原始大 NPZ。

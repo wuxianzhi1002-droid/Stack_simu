@@ -1,0 +1,17 @@
+{
+  "method_name": "scalar_selected_quadratic",
+  "enabled": true,
+  "feature_count": 10,
+  "feature_names": [
+    "L_fft_um",
+    "H_peak",
+    "PSS_nominal_nm",
+    "HSQ_nominal_nm",
+    "SOC_nominal_nm",
+    "TiO2_nominal_nm",
+    "L_fft_um*PSS_nominal_nm",
+    "L_fft_um*HSQ_nominal_nm",
+    "L_fft_um*SOC_nominal_nm",
+    "L_fft_um*TiO2_nominal_nm"
+  ]
+}

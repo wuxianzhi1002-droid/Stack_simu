@@ -1,0 +1,10 @@
+Saved linear fit figure: D:\激光干涉仪\simulation\Lumerical_simulation\STACK_simu\01_Lumerical_Workflow\stackrt_result\scan_cavity_length_result\model7-1nm\cavity_spectra_20260616_235630_fft_solved_20260617_110624_dominant_linear_fit_20260617_110804.png
+Linear fit peak type: dominant
+slope = 1.0006530816
+intercept = 0.305291404836
+R = 0.999818663245
+R^2 = 0.999637359373
+RMSE = 0.00550736378312 um
+MAE = 0.00474688385581 um
+Max |error| = 0.0106264458167 um
+num_fit_points = 1001

@@ -1,0 +1,3 @@
+metric,value
+status,stackrt_not_executed
+reason,'Failed to put variable'

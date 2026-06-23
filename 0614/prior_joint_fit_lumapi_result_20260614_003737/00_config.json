@@ -1,0 +1,62 @@
+{
+  "project_root": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu",
+  "lumerical_file_path": null,
+  "model_name": "PSS_TIO2_MODEL",
+  "output_root": "0614",
+  "wavelength_key": "wavelengths",
+  "spectra_key": "spectra",
+  "wavelength_start_um": 0.2,
+  "wavelength_stop_um": 0.6,
+  "spectral_resolution_nm": 0.02,
+  "angle_axis_deg": [
+    0.0
+  ],
+  "polarization": "p",
+  "cavity_layer_name": "Air",
+  "cavity_thickness_param_name": "stackrt_thicknesses[Air]",
+  "cavity_unit": "um",
+  "cavity_min_um": 1000.0,
+  "cavity_max_um": 1200.0,
+  "num_cavity_points": 5,
+  "film_layers": [
+    {
+      "name": "HSQ",
+      "thickness_param": "stackrt_thicknesses[HSQ]",
+      "nominal_nm": 40.0,
+      "uncertainty_nm": 10.0
+    },
+    {
+      "name": "PSS",
+      "thickness_param": "stackrt_thicknesses[PSS]",
+      "nominal_nm": 5.0,
+      "uncertainty_nm": 10.0
+    },
+    {
+      "name": "SOC",
+      "thickness_param": "stackrt_thicknesses[SOC]",
+      "nominal_nm": 50.0,
+      "uncertainty_nm": 10.0
+    },
+    {
+      "name": "TiO2",
+      "thickness_param": "stackrt_thicknesses[TiO2]",
+      "nominal_nm": 20.0,
+      "uncertainty_nm": 10.0
+    }
+  ],
+  "num_processes": 3,
+  "film_uncertainty_nm": 10.0,
+  "film_sigma_nm": 3.3333333333333335,
+  "random_seed": 20260613,
+  "prior_weight": 3.0,
+  "fit_l_window_um": 0.5,
+  "max_nfev_fixed": 20,
+  "max_nfev_prior": 30,
+  "zero_pad_factor": 8,
+  "fft_ignore_dc_bins": 50,
+  "fft_peak_height_ratio": 0.2,
+  "fft_peak_distance_bins": 100,
+  "fft_peak_type": "dominant",
+  "cache_round_digits": 6,
+  "use_interpolated_forward_model": false
+}

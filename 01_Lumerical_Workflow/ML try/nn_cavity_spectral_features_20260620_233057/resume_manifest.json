@@ -1,0 +1,10 @@
+{
+  "status": "completed_checkpoints",
+  "last_completed_process_id": 1999,
+  "next_process_id": 2000,
+  "completed_checkpoint_count": 2000,
+  "remaining_process_count": 0,
+  "failed_simulation_this_session": 0,
+  "failed_fft_this_session": 0,
+  "updated_at": "2026-06-21 15:54:01"
+}

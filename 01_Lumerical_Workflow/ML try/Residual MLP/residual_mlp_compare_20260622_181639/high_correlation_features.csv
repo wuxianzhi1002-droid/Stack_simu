@@ -1,0 +1,5 @@
+﻿feature_a,feature_b,corr,abs_corr
+PSS_nominal_nm,L_fft_um*PSS_nominal_nm,0.9999999376987186,0.9999999376987186
+HSQ_nominal_nm,L_fft_um*HSQ_nominal_nm,0.9999999224523083,0.9999999224523083
+SOC_nominal_nm,L_fft_um*SOC_nominal_nm,0.9999997228651184,0.9999997228651184
+TiO2_nominal_nm,L_fft_um*TiO2_nominal_nm,0.9999999164252348,0.9999999164252348

@@ -1,0 +1,813 @@
+{
+  "output_mode": "scalar_plus_optional_spectra_and_full_features",
+  "model_type": "PSS_TiO2",
+  "run_timestamp": "20260620_233057",
+  "wavelength_start_um": 0.2,
+  "wavelength_stop_um": 0.6,
+  "spectral_resolution_nm": 0.02,
+  "angle_deg": 0.0,
+  "polarization": "p",
+  "cavity_start_um": 1000.0,
+  "cavity_step_um": 0.001,
+  "num_cavity_points": 400,
+  "num_nominal_models": 100,
+  "num_process_per_nominal": 20,
+  "film_uncertainty_nm": 5.0,
+  "min_true_film_thickness_nm": 0.1,
+  "random_seed": 20260620,
+  "train_ratio": 0.7,
+  "val_ratio": 0.15,
+  "test_ratio": 0.15,
+  "save_checkpoint_every_process": true,
+  "save_csv_index": true,
+  "save_check_plots": true,
+  "compress_npz": true,
+  "save_spectra": true,
+  "spectra_save_mode": "norm_downsampled",
+  "spectra_dtype": "float32",
+  "spectra_downsample_factor": 10,
+  "spectra_downsample_method": "mean",
+  "spectrum_normalization": "per_spectrum_zscore",
+  "spectrum_normalization_eps": 1e-12,
+  "extract_full_spectral_features": true,
+  "fft_peak_height_ratio": 0.2,
+  "fft_ignore_dc_bins": 50,
+  "fft_peak_distance_bins": 100,
+  "zero_pad_factor": 8,
+  "add_noise": false,
+  "noise_std": 0.0,
+  "film_layer_names": [
+    "HSQ",
+    "PSS",
+    "SOC",
+    "TiO2"
+  ],
+  "allowed_nominal_values_nm": {
+    "PSS": [
+      10.0,
+      20.0,
+      30.0,
+      40.0
+    ],
+    "HSQ": [
+      20.0,
+      30.0,
+      40.0,
+      50.0,
+      60.0
+    ],
+    "SOC": [
+      40.0,
+      50.0,
+      60.0,
+      70.0,
+      80.0
+    ],
+    "TiO2": [
+      30.0,
+      40.0,
+      50.0,
+      60.0,
+      70.0,
+      80.0
+    ]
+  },
+  "nominal_stacks_nm": [
+    {
+      "name": "model_000_hsq20_pss10_soc40_tio230",
+      "HSQ": 20.0,
+      "PSS": 10.0,
+      "SOC": 40.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_001_hsq20_pss10_soc40_tio280",
+      "HSQ": 20.0,
+      "PSS": 10.0,
+      "SOC": 40.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_002_hsq20_pss10_soc80_tio230",
+      "HSQ": 20.0,
+      "PSS": 10.0,
+      "SOC": 80.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_003_hsq20_pss10_soc80_tio280",
+      "HSQ": 20.0,
+      "PSS": 10.0,
+      "SOC": 80.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_004_hsq20_pss40_soc40_tio230",
+      "HSQ": 20.0,
+      "PSS": 40.0,
+      "SOC": 40.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_005_hsq20_pss40_soc40_tio280",
+      "HSQ": 20.0,
+      "PSS": 40.0,
+      "SOC": 40.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_006_hsq20_pss40_soc80_tio230",
+      "HSQ": 20.0,
+      "PSS": 40.0,
+      "SOC": 80.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_007_hsq20_pss40_soc80_tio280",
+      "HSQ": 20.0,
+      "PSS": 40.0,
+      "SOC": 80.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_008_hsq60_pss10_soc40_tio230",
+      "HSQ": 60.0,
+      "PSS": 10.0,
+      "SOC": 40.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_009_hsq60_pss10_soc40_tio280",
+      "HSQ": 60.0,
+      "PSS": 10.0,
+      "SOC": 40.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_010_hsq60_pss10_soc80_tio230",
+      "HSQ": 60.0,
+      "PSS": 10.0,
+      "SOC": 80.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_011_hsq60_pss10_soc80_tio280",
+      "HSQ": 60.0,
+      "PSS": 10.0,
+      "SOC": 80.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_012_hsq60_pss40_soc40_tio230",
+      "HSQ": 60.0,
+      "PSS": 40.0,
+      "SOC": 40.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_013_hsq60_pss40_soc40_tio280",
+      "HSQ": 60.0,
+      "PSS": 40.0,
+      "SOC": 40.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_014_hsq60_pss40_soc80_tio230",
+      "HSQ": 60.0,
+      "PSS": 40.0,
+      "SOC": 80.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_015_hsq60_pss40_soc80_tio280",
+      "HSQ": 60.0,
+      "PSS": 40.0,
+      "SOC": 80.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_016_hsq30_pss30_soc70_tio280",
+      "HSQ": 30.0,
+      "PSS": 30.0,
+      "SOC": 70.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_017_hsq40_pss10_soc50_tio270",
+      "HSQ": 40.0,
+      "PSS": 10.0,
+      "SOC": 50.0,
+      "TiO2": 70.0
+    },
+    {
+      "name": "model_018_hsq50_pss30_soc80_tio260",
+      "HSQ": 50.0,
+      "PSS": 30.0,
+      "SOC": 80.0,
+      "TiO2": 60.0
+    },
+    {
+      "name": "model_019_hsq60_pss10_soc60_tio250",
+      "HSQ": 60.0,
+      "PSS": 10.0,
+      "SOC": 60.0,
+      "TiO2": 50.0
+    },
+    {
+      "name": "model_020_hsq20_pss30_soc40_tio240",
+      "HSQ": 20.0,
+      "PSS": 30.0,
+      "SOC": 40.0,
+      "TiO2": 40.0
+    },
+    {
+      "name": "model_021_hsq30_pss10_soc70_tio230",
+      "HSQ": 30.0,
+      "PSS": 10.0,
+      "SOC": 70.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_022_hsq40_pss30_soc50_tio280",
+      "HSQ": 40.0,
+      "PSS": 30.0,
+      "SOC": 50.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_023_hsq50_pss10_soc80_tio270",
+      "HSQ": 50.0,
+      "PSS": 10.0,
+      "SOC": 80.0,
+      "TiO2": 70.0
+    },
+    {
+      "name": "model_024_hsq60_pss30_soc60_tio260",
+      "HSQ": 60.0,
+      "PSS": 30.0,
+      "SOC": 60.0,
+      "TiO2": 60.0
+    },
+    {
+      "name": "model_025_hsq20_pss10_soc40_tio250",
+      "HSQ": 20.0,
+      "PSS": 10.0,
+      "SOC": 40.0,
+      "TiO2": 50.0
+    },
+    {
+      "name": "model_026_hsq30_pss30_soc70_tio240",
+      "HSQ": 30.0,
+      "PSS": 30.0,
+      "SOC": 70.0,
+      "TiO2": 40.0
+    },
+    {
+      "name": "model_027_hsq20_pss40_soc50_tio250",
+      "HSQ": 20.0,
+      "PSS": 40.0,
+      "SOC": 50.0,
+      "TiO2": 50.0
+    },
+    {
+      "name": "model_028_hsq50_pss10_soc40_tio270",
+      "HSQ": 50.0,
+      "PSS": 10.0,
+      "SOC": 40.0,
+      "TiO2": 70.0
+    },
+    {
+      "name": "model_029_hsq60_pss10_soc40_tio250",
+      "HSQ": 60.0,
+      "PSS": 10.0,
+      "SOC": 40.0,
+      "TiO2": 50.0
+    },
+    {
+      "name": "model_030_hsq20_pss40_soc80_tio250",
+      "HSQ": 20.0,
+      "PSS": 40.0,
+      "SOC": 80.0,
+      "TiO2": 50.0
+    },
+    {
+      "name": "model_031_hsq20_pss10_soc50_tio280",
+      "HSQ": 20.0,
+      "PSS": 10.0,
+      "SOC": 50.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_032_hsq20_pss30_soc70_tio230",
+      "HSQ": 20.0,
+      "PSS": 30.0,
+      "SOC": 70.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_033_hsq50_pss20_soc70_tio280",
+      "HSQ": 50.0,
+      "PSS": 20.0,
+      "SOC": 70.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_034_hsq20_pss40_soc80_tio270",
+      "HSQ": 20.0,
+      "PSS": 40.0,
+      "SOC": 80.0,
+      "TiO2": 70.0
+    },
+    {
+      "name": "model_035_hsq60_pss10_soc60_tio280",
+      "HSQ": 60.0,
+      "PSS": 10.0,
+      "SOC": 60.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_036_hsq30_pss30_soc50_tio260",
+      "HSQ": 30.0,
+      "PSS": 30.0,
+      "SOC": 50.0,
+      "TiO2": 60.0
+    },
+    {
+      "name": "model_037_hsq40_pss20_soc80_tio230",
+      "HSQ": 40.0,
+      "PSS": 20.0,
+      "SOC": 80.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_038_hsq30_pss20_soc80_tio230",
+      "HSQ": 30.0,
+      "PSS": 20.0,
+      "SOC": 80.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_039_hsq30_pss30_soc60_tio260",
+      "HSQ": 30.0,
+      "PSS": 30.0,
+      "SOC": 60.0,
+      "TiO2": 60.0
+    },
+    {
+      "name": "model_040_hsq40_pss20_soc60_tio270",
+      "HSQ": 40.0,
+      "PSS": 20.0,
+      "SOC": 60.0,
+      "TiO2": 70.0
+    },
+    {
+      "name": "model_041_hsq60_pss20_soc70_tio260",
+      "HSQ": 60.0,
+      "PSS": 20.0,
+      "SOC": 70.0,
+      "TiO2": 60.0
+    },
+    {
+      "name": "model_042_hsq30_pss10_soc80_tio240",
+      "HSQ": 30.0,
+      "PSS": 10.0,
+      "SOC": 80.0,
+      "TiO2": 40.0
+    },
+    {
+      "name": "model_043_hsq40_pss20_soc80_tio250",
+      "HSQ": 40.0,
+      "PSS": 20.0,
+      "SOC": 80.0,
+      "TiO2": 50.0
+    },
+    {
+      "name": "model_044_hsq50_pss10_soc80_tio260",
+      "HSQ": 50.0,
+      "PSS": 10.0,
+      "SOC": 80.0,
+      "TiO2": 60.0
+    },
+    {
+      "name": "model_045_hsq60_pss20_soc60_tio280",
+      "HSQ": 60.0,
+      "PSS": 20.0,
+      "SOC": 60.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_046_hsq50_pss40_soc50_tio240",
+      "HSQ": 50.0,
+      "PSS": 40.0,
+      "SOC": 50.0,
+      "TiO2": 40.0
+    },
+    {
+      "name": "model_047_hsq20_pss10_soc60_tio240",
+      "HSQ": 20.0,
+      "PSS": 10.0,
+      "SOC": 60.0,
+      "TiO2": 40.0
+    },
+    {
+      "name": "model_048_hsq20_pss40_soc50_tio280",
+      "HSQ": 20.0,
+      "PSS": 40.0,
+      "SOC": 50.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_049_hsq50_pss40_soc60_tio280",
+      "HSQ": 50.0,
+      "PSS": 40.0,
+      "SOC": 60.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_050_hsq40_pss20_soc40_tio270",
+      "HSQ": 40.0,
+      "PSS": 20.0,
+      "SOC": 40.0,
+      "TiO2": 70.0
+    },
+    {
+      "name": "model_051_hsq20_pss20_soc50_tio270",
+      "HSQ": 20.0,
+      "PSS": 20.0,
+      "SOC": 50.0,
+      "TiO2": 70.0
+    },
+    {
+      "name": "model_052_hsq50_pss20_soc70_tio250",
+      "HSQ": 50.0,
+      "PSS": 20.0,
+      "SOC": 70.0,
+      "TiO2": 50.0
+    },
+    {
+      "name": "model_053_hsq30_pss20_soc60_tio280",
+      "HSQ": 30.0,
+      "PSS": 20.0,
+      "SOC": 60.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_054_hsq20_pss10_soc80_tio250",
+      "HSQ": 20.0,
+      "PSS": 10.0,
+      "SOC": 80.0,
+      "TiO2": 50.0
+    },
+    {
+      "name": "model_055_hsq60_pss30_soc80_tio270",
+      "HSQ": 60.0,
+      "PSS": 30.0,
+      "SOC": 80.0,
+      "TiO2": 70.0
+    },
+    {
+      "name": "model_056_hsq60_pss20_soc40_tio230",
+      "HSQ": 60.0,
+      "PSS": 20.0,
+      "SOC": 40.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_057_hsq40_pss40_soc60_tio280",
+      "HSQ": 40.0,
+      "PSS": 40.0,
+      "SOC": 60.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_058_hsq30_pss40_soc60_tio230",
+      "HSQ": 30.0,
+      "PSS": 40.0,
+      "SOC": 60.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_059_hsq60_pss40_soc60_tio260",
+      "HSQ": 60.0,
+      "PSS": 40.0,
+      "SOC": 60.0,
+      "TiO2": 60.0
+    },
+    {
+      "name": "model_060_hsq30_pss30_soc80_tio270",
+      "HSQ": 30.0,
+      "PSS": 30.0,
+      "SOC": 80.0,
+      "TiO2": 70.0
+    },
+    {
+      "name": "model_061_hsq50_pss20_soc50_tio230",
+      "HSQ": 50.0,
+      "PSS": 20.0,
+      "SOC": 50.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_062_hsq40_pss20_soc40_tio230",
+      "HSQ": 40.0,
+      "PSS": 20.0,
+      "SOC": 40.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_063_hsq60_pss10_soc50_tio260",
+      "HSQ": 60.0,
+      "PSS": 10.0,
+      "SOC": 50.0,
+      "TiO2": 60.0
+    },
+    {
+      "name": "model_064_hsq60_pss30_soc40_tio280",
+      "HSQ": 60.0,
+      "PSS": 30.0,
+      "SOC": 40.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_065_hsq30_pss10_soc40_tio230",
+      "HSQ": 30.0,
+      "PSS": 10.0,
+      "SOC": 40.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_066_hsq20_pss30_soc80_tio230",
+      "HSQ": 20.0,
+      "PSS": 30.0,
+      "SOC": 80.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_067_hsq50_pss30_soc70_tio230",
+      "HSQ": 50.0,
+      "PSS": 30.0,
+      "SOC": 70.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_068_hsq40_pss30_soc80_tio280",
+      "HSQ": 40.0,
+      "PSS": 30.0,
+      "SOC": 80.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_069_hsq40_pss20_soc70_tio280",
+      "HSQ": 40.0,
+      "PSS": 20.0,
+      "SOC": 70.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_070_hsq40_pss40_soc70_tio230",
+      "HSQ": 40.0,
+      "PSS": 40.0,
+      "SOC": 70.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_071_hsq50_pss20_soc80_tio260",
+      "HSQ": 50.0,
+      "PSS": 20.0,
+      "SOC": 80.0,
+      "TiO2": 60.0
+    },
+    {
+      "name": "model_072_hsq30_pss40_soc60_tio240",
+      "HSQ": 30.0,
+      "PSS": 40.0,
+      "SOC": 60.0,
+      "TiO2": 40.0
+    },
+    {
+      "name": "model_073_hsq50_pss20_soc70_tio270",
+      "HSQ": 50.0,
+      "PSS": 20.0,
+      "SOC": 70.0,
+      "TiO2": 70.0
+    },
+    {
+      "name": "model_074_hsq50_pss30_soc70_tio270",
+      "HSQ": 50.0,
+      "PSS": 30.0,
+      "SOC": 70.0,
+      "TiO2": 70.0
+    },
+    {
+      "name": "model_075_hsq30_pss10_soc70_tio280",
+      "HSQ": 30.0,
+      "PSS": 10.0,
+      "SOC": 70.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_076_hsq30_pss10_soc70_tio250",
+      "HSQ": 30.0,
+      "PSS": 10.0,
+      "SOC": 70.0,
+      "TiO2": 50.0
+    },
+    {
+      "name": "model_077_hsq60_pss30_soc50_tio280",
+      "HSQ": 60.0,
+      "PSS": 30.0,
+      "SOC": 50.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_078_hsq40_pss40_soc70_tio270",
+      "HSQ": 40.0,
+      "PSS": 40.0,
+      "SOC": 70.0,
+      "TiO2": 70.0
+    },
+    {
+      "name": "model_079_hsq60_pss20_soc80_tio250",
+      "HSQ": 60.0,
+      "PSS": 20.0,
+      "SOC": 80.0,
+      "TiO2": 50.0
+    },
+    {
+      "name": "model_080_hsq20_pss20_soc60_tio270",
+      "HSQ": 20.0,
+      "PSS": 20.0,
+      "SOC": 60.0,
+      "TiO2": 70.0
+    },
+    {
+      "name": "model_081_hsq40_pss20_soc50_tio250",
+      "HSQ": 40.0,
+      "PSS": 20.0,
+      "SOC": 50.0,
+      "TiO2": 50.0
+    },
+    {
+      "name": "model_082_hsq30_pss40_soc50_tio280",
+      "HSQ": 30.0,
+      "PSS": 40.0,
+      "SOC": 50.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_083_hsq60_pss20_soc80_tio260",
+      "HSQ": 60.0,
+      "PSS": 20.0,
+      "SOC": 80.0,
+      "TiO2": 60.0
+    },
+    {
+      "name": "model_084_hsq60_pss10_soc60_tio270",
+      "HSQ": 60.0,
+      "PSS": 10.0,
+      "SOC": 60.0,
+      "TiO2": 70.0
+    },
+    {
+      "name": "model_085_hsq40_pss40_soc40_tio230",
+      "HSQ": 40.0,
+      "PSS": 40.0,
+      "SOC": 40.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_086_hsq30_pss30_soc40_tio230",
+      "HSQ": 30.0,
+      "PSS": 30.0,
+      "SOC": 40.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_087_hsq50_pss10_soc60_tio260",
+      "HSQ": 50.0,
+      "PSS": 10.0,
+      "SOC": 60.0,
+      "TiO2": 60.0
+    },
+    {
+      "name": "model_088_hsq20_pss40_soc60_tio240",
+      "HSQ": 20.0,
+      "PSS": 40.0,
+      "SOC": 60.0,
+      "TiO2": 40.0
+    },
+    {
+      "name": "model_089_hsq40_pss40_soc70_tio280",
+      "HSQ": 40.0,
+      "PSS": 40.0,
+      "SOC": 70.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_090_hsq60_pss40_soc60_tio250",
+      "HSQ": 60.0,
+      "PSS": 40.0,
+      "SOC": 60.0,
+      "TiO2": 50.0
+    },
+    {
+      "name": "model_091_hsq20_pss20_soc70_tio280",
+      "HSQ": 20.0,
+      "PSS": 20.0,
+      "SOC": 70.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_092_hsq20_pss10_soc70_tio280",
+      "HSQ": 20.0,
+      "PSS": 10.0,
+      "SOC": 70.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_093_hsq20_pss20_soc60_tio250",
+      "HSQ": 20.0,
+      "PSS": 20.0,
+      "SOC": 60.0,
+      "TiO2": 50.0
+    },
+    {
+      "name": "model_094_hsq30_pss30_soc70_tio250",
+      "HSQ": 30.0,
+      "PSS": 30.0,
+      "SOC": 70.0,
+      "TiO2": 50.0
+    },
+    {
+      "name": "model_095_hsq50_pss10_soc50_tio280",
+      "HSQ": 50.0,
+      "PSS": 10.0,
+      "SOC": 50.0,
+      "TiO2": 80.0
+    },
+    {
+      "name": "model_096_hsq30_pss30_soc50_tio230",
+      "HSQ": 30.0,
+      "PSS": 30.0,
+      "SOC": 50.0,
+      "TiO2": 30.0
+    },
+    {
+      "name": "model_097_hsq30_pss30_soc60_tio250",
+      "HSQ": 30.0,
+      "PSS": 30.0,
+      "SOC": 60.0,
+      "TiO2": 50.0
+    },
+    {
+      "name": "model_098_hsq20_pss40_soc60_tio250",
+      "HSQ": 20.0,
+      "PSS": 40.0,
+      "SOC": 60.0,
+      "TiO2": 50.0
+    },
+    {
+      "name": "model_099_hsq50_pss40_soc80_tio260",
+      "HSQ": 50.0,
+      "PSS": 40.0,
+      "SOC": 80.0,
+      "TiO2": 60.0
+    }
+  ],
+  "spectral_feature_names": [
+    "spec_mean",
+    "spec_std",
+    "spec_min",
+    "spec_max",
+    "spec_ptp",
+    "spec_skew",
+    "spec_kurtosis",
+    "spec_q05",
+    "spec_q25",
+    "spec_q50",
+    "spec_q75",
+    "spec_q95",
+    "fft_peak_pos_1_um",
+    "fft_peak_height_1",
+    "fft_peak_width_1",
+    "fft_peak_prominence_1",
+    "fft_peak_pos_2_um",
+    "fft_peak_height_2",
+    "fft_peak_width_2",
+    "fft_peak_prominence_2",
+    "fft_peak_height_ratio_21",
+    "fft_peak_distance_21_um",
+    "fft_num_peaks",
+    "fft_noise_floor",
+    "fft_snr_1",
+    "fft_spectral_centroid_um",
+    "fft_band_energy_low",
+    "fft_band_energy_mid",
+    "fft_band_energy_high",
+    "fringe_visibility_global",
+    "fringe_contrast_std"
+  ],
+  "spectral_feature_source": "full_spectrum_before_downsampling",
+  "lumerical_path": "D:\\Program Files\\Lumerical\\v241\\api\\python",
+  "lumerical_bin_path": "D:\\Program Files\\Lumerical\\v241\\bin"
+}

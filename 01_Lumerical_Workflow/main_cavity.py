@@ -36,8 +36,8 @@ CONFIG = {
     # Cavity sweep in um. Step 0.2 um equals 200 nm.
     # The existing layer convention in this project stores layer thicknesses in um.
     "CAVITY_START_UM": 1000.0,
-    "CAVITY_STOP_UM": 1200.0,
-    "CAVITY_STEP_UM": 0.2,
+    "CAVITY_STOP_UM": 1001.0,
+    "CAVITY_STEP_UM": 0.001,
 
     # Normal incidence, p-polarized reflectance channel, consistent with main_dynamic.py.
     "ANGLE_DEG": 0.0,
@@ -47,9 +47,9 @@ CONFIG = {
         "LAYERS": [
             ("RefReflector", 0),
             ("Air", 1000.0),
-            ("HSQ", 0.040),
+            ("HSQ", 0.040), # 40nm为model1， 改为20nm为model2，改为60nm为model4
             ("PSS", 0.005),
-            ("SOC", 0.050),
+            ("SOC", 0.050),# 50nm为model1，改为60nm为model3，改为80nm为model5
             ("TiO2", 0.020),
             ("Cu", 0),
         ]

@@ -1,0 +1,102 @@
+{
+  "created_at": "2026-06-19 00:30:43",
+  "elapsed_seconds": 62.689,
+  "source_run_dir": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\nn_cavity_scalar_results_20260617_085429",
+  "checkpoint_count": 2000,
+  "process_start": 0,
+  "process_stop_inclusive": 1999,
+  "rows_per_process": 1000,
+  "rows": 2000000,
+  "valid_rows": 2000000,
+  "invalid_rows": 0,
+  "split_counts": {
+    "train": 1400000,
+    "val": 300000,
+    "test": 300000
+  },
+  "layer_order": [
+    "PSS",
+    "HSQ",
+    "SOC",
+    "TiO2"
+  ],
+  "source_layer_orders": {
+    "HSQ,PSS,SOC,TiO2": 2000
+  },
+  "npz_path": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\nn_cavity_scalar_dataset_all_2000.npz",
+  "npz_size_bytes": 19776171,
+  "csv_shard_dir": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\csv_shards",
+  "csv_shards": [
+    {
+      "path": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\csv_shards\\scalar_results_process_0000_0199.csv",
+      "process_start": 0,
+      "process_stop_inclusive": 199,
+      "rows": 200000,
+      "size_bytes": 36603745
+    },
+    {
+      "path": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\csv_shards\\scalar_results_process_0200_0399.csv",
+      "process_start": 200,
+      "process_stop_inclusive": 399,
+      "rows": 200000,
+      "size_bytes": 37238656
+    },
+    {
+      "path": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\csv_shards\\scalar_results_process_0400_0599.csv",
+      "process_start": 400,
+      "process_stop_inclusive": 599,
+      "rows": 200000,
+      "size_bytes": 37195604
+    },
+    {
+      "path": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\csv_shards\\scalar_results_process_0600_0799.csv",
+      "process_start": 600,
+      "process_stop_inclusive": 799,
+      "rows": 200000,
+      "size_bytes": 37248977
+    },
+    {
+      "path": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\csv_shards\\scalar_results_process_0800_0999.csv",
+      "process_start": 800,
+      "process_stop_inclusive": 999,
+      "rows": 200000,
+      "size_bytes": 37264891
+    },
+    {
+      "path": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\csv_shards\\scalar_results_process_1000_1199.csv",
+      "process_start": 1000,
+      "process_stop_inclusive": 1199,
+      "rows": 200000,
+      "size_bytes": 37813503
+    },
+    {
+      "path": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\csv_shards\\scalar_results_process_1200_1399.csv",
+      "process_start": 1200,
+      "process_stop_inclusive": 1399,
+      "rows": 200000,
+      "size_bytes": 37840818
+    },
+    {
+      "path": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\csv_shards\\scalar_results_process_1400_1599.csv",
+      "process_start": 1400,
+      "process_stop_inclusive": 1599,
+      "rows": 200000,
+      "size_bytes": 37842038
+    },
+    {
+      "path": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\csv_shards\\scalar_results_process_1600_1799.csv",
+      "process_start": 1600,
+      "process_stop_inclusive": 1799,
+      "rows": 200000,
+      "size_bytes": 37879530
+    },
+    {
+      "path": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\csv_shards\\scalar_results_process_1800_1999.csv",
+      "process_start": 1800,
+      "process_stop_inclusive": 1999,
+      "rows": 200000,
+      "size_bytes": 37942641
+    }
+  ],
+  "spectra_saved": false
+}

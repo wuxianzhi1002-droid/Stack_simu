@@ -1,0 +1,14 @@
+{
+  "status": "completed_checkpoints",
+  "run_dir": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\nn_cavity_scalar_results_20260617_085429",
+  "last_completed_process_id": 1999,
+  "next_process_id": 2000,
+  "completed_checkpoint_count": 2000,
+  "completed_sample_count_estimate": 2000000,
+  "valid_sample_count_resume_session": 1987000,
+  "failed_simulation_resume_session": 0,
+  "failed_fft_resume_session": 0,
+  "remaining_process_count": 0,
+  "resume_log": "resume_failed_cases_20260617_101358.json",
+  "updated_at": "2026-06-18 19:28:09"
+}

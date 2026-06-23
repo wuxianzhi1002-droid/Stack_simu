@@ -1,0 +1,7 @@
+{
+  "output_mode": "scalar_plus_optional_spectra_and_full_features",
+  "num_samples_total": 800000,
+  "num_samples_valid": 800000,
+  "num_failed_simulation": 0,
+  "num_failed_fft": 0
+}

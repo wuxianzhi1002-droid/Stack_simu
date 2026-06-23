@@ -1,0 +1,30 @@
+{
+  "num_samples_total": 16,
+  "num_samples_valid": 16,
+  "num_failed_simulation": 0,
+  "num_failed_fft": 0,
+  "num_nominal_stacks": 2,
+  "num_processes": 4,
+  "num_train_processes": 2,
+  "num_val_processes": 1,
+  "num_test_processes": 1,
+  "wavelength_start_um": 0.2,
+  "wavelength_stop_um": 0.6,
+  "num_wavelengths": 20001,
+  "cavity_start_um": 1000.0,
+  "cavity_stop_um": 1000.03,
+  "cavity_step_um": 0.01,
+  "num_cavity_points": 4,
+  "film_layer_names": [
+    "HSQ",
+    "PSS",
+    "SOC",
+    "TiO2"
+  ],
+  "film_uncertainty_nm": 10.0,
+  "L_fft_nan_count": 0,
+  "delta_L_nm_mean": -966.9821509546423,
+  "delta_L_nm_std": 9.022880176795617,
+  "delta_L_nm_min": -983.7003150464625,
+  "delta_L_nm_max": -954.9512524995407
+}

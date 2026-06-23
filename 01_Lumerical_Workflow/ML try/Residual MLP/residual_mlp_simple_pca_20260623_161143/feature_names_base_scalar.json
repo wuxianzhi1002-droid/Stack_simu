@@ -1,0 +1,12 @@
+{
+  "method_name": "base_scalar",
+  "enabled": true,
+  "feature_count": 5,
+  "feature_names": [
+    "L_fft_um",
+    "PSS_nominal_nm",
+    "HSQ_nominal_nm",
+    "SOC_nominal_nm",
+    "TiO2_nominal_nm"
+  ]
+}
