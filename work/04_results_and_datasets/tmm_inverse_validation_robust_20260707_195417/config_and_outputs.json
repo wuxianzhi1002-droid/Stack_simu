@@ -1,0 +1,37 @@
+{
+  "config": {
+    "wavelength_start_um": 0.2,
+    "wavelength_stop_um": 0.6,
+    "spectral_resolution_nm": 0.2,
+    "random_seed": 20260707,
+    "noise_sigmas_reflectance": [
+      0.0,
+      0.005
+    ],
+    "mc_trials_per_noise": 2,
+    "truth_samples_per_case": 2,
+    "multistarts": 6,
+    "max_nfev": 80,
+    "fit_affine_intensity": true,
+    "wavelength_offset_sigma_nm": 0.03,
+    "wavelength_scale_sigma_ppm": 80.0,
+    "material_real_sigma_fraction": 0.003,
+    "material_imag_sigma_fraction": 0.05,
+    "fixed_layer_sigma_nm": 0.5,
+    "near_solution_cost_rel_tol": 0.001,
+    "near_solution_cost_abs_tol": 1e-10,
+    "source_scale_sigma": 0.02,
+    "source_offset_sigma": 0.002
+  },
+  "fit_results_csv": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_robust_20260707_195417\\fit_results.csv",
+  "metrics_summary_csv": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_robust_20260707_195417\\metrics_summary.csv",
+  "plot_paths": {
+    "error_vs_noise_mae": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_robust_20260707_195417\\robust_error_vs_noise_mae.png",
+    "examples": {
+      "tmm_robust_A0_cavity_air": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_robust_20260707_195417\\example_fit_A0_cavity_air_tmm_robust.png",
+      "tmm_robust_B1_film_tio2": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_robust_20260707_195417\\example_fit_B1_film_tio2_tmm_robust.png",
+      "tmm_robust_B2_film_soc_tio2": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_robust_20260707_195417\\example_fit_B2_film_soc_tio2_tmm_robust.png",
+      "tmm_robust_B3_film_all": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_robust_20260707_195417\\example_fit_B3_film_all_tmm_robust.png"
+    }
+  }
+}

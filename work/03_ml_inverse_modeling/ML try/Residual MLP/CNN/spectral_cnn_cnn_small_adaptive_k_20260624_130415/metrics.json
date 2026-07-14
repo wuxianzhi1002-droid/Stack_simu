@@ -1,0 +1,79 @@
+{
+  "test": {
+    "cnn_small_adaptive_k": {
+      "delta_MAE_nm": 5.873451983642578,
+      "delta_RMSE_nm": 7.195692077419329,
+      "delta_MaxAbs_nm": 28.22662353515625,
+      "delta_P95Abs_nm": 13.660336303710924,
+      "delta_P99Abs_nm": 17.246588134765624,
+      "delta_Bias_nm": -0.00969116719563802,
+      "R2_delta": 0.9941665331668263,
+      "cavity_MAE_nm": 5.873474692789842,
+      "cavity_RMSE_nm": 7.195715175109358,
+      "cavity_MaxAbs_nm": 28.23327636713202
+    },
+    "fft_only": {
+      "delta_MAE_nm": 1064.0219802683512,
+      "delta_RMSE_nm": 1068.1848141917992,
+      "delta_MaxAbs_nm": 1267.16845703125,
+      "delta_P95Abs_nm": 1213.1798767089842,
+      "delta_P99Abs_nm": 1240.936279296875,
+      "delta_Bias_nm": 1064.0219802683512,
+      "R2_delta": -127.55068380207786,
+      "cavity_MAE_nm": 1064.0221440633138,
+      "cavity_RMSE_nm": 1068.1849628149848,
+      "cavity_MaxAbs_nm": 1267.1645507812173
+    },
+    "scalar_ridge": {
+      "delta_MAE_nm": 25.36185498606364,
+      "delta_RMSE_nm": 31.026076456753092,
+      "delta_MaxAbs_nm": 100.666748046875,
+      "delta_P95Abs_nm": 58.958398437499994,
+      "delta_P99Abs_nm": 72.83576904296874,
+      "delta_Bias_nm": -0.8981758143107096,
+      "R2_delta": 0.891548563515807,
+      "cavity_MAE_nm": 25.362005232239213,
+      "cavity_RMSE_nm": 31.02629815478524,
+      "cavity_MaxAbs_nm": 100.66217041014625
+    }
+  },
+  "best_epoch": {
+    "epoch": 1,
+    "train_loss": 0.003461934164698635,
+    "val_loss": 0.0028383163994799058,
+    "val_RMSE_nm": 7.036980152130127,
+    "learning_rate": 0.001,
+    "seconds": 923.7751863002777
+  },
+  "load_summary": {
+    "dataset_path": "D:\\\u6fc0\u5149\u5e72\u6d89\u4eea\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\Residual MLP\\CNN\\cnn_dataset",
+    "spectra_points": 2000,
+    "spectra_dtype": "float32",
+    "total_rows": 800000,
+    "total_valid_rows": 800000,
+    "selected_rows": {
+      "train": 560000,
+      "val": 120000,
+      "test": 120000
+    },
+    "unique_processes": {
+      "train": 1400,
+      "val": 300,
+      "test": 300
+    },
+    "split_by_process": true,
+    "conflicting_process_ids": [],
+    "source_type": "checkpoint_directory",
+    "use_hpeak": false,
+    "scalar_feature_names": [
+      "L_fft_um",
+      "film_nominal_nm[0]",
+      "film_nominal_nm[1]",
+      "film_nominal_nm[2]",
+      "film_nominal_nm[3]"
+    ],
+    "notes": []
+  },
+  "effective_model": "cnn_small_adaptive_k",
+  "effective_pooling": "adaptive_k"
+}

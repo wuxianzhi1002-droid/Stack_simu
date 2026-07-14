@@ -1,0 +1,3 @@
+﻿artifact_name,label_uncertainty_nm,scenario,method_name,test_MAE_nm,test_RMSE_nm,test_MaxAbs_nm,test_P95Abs_nm,within_label_uncertainty_fraction,excess_MAE_after_uncertainty_nm,excess_RMSE_after_uncertainty_nm,train_noise_RMSE_nm,epochs_trained,best_clean_val_rmse_nm
+u10nm__gaussian_sigma_nm__more_feature,10,gaussian_sigma_nm,more_feature,3.17745497,4.0732,24.9363113,8.03827517,0.981516667,0.0396490582,0.420708034,9.99771025,113,4.06929738
+u10nm__random_uniform_nm__more_feature,10,random_uniform_nm,more_feature,2.3740534,3.06290465,30.4075406,5.99965631,0.995558333,0.0102507641,0.247355618,5.7734259,120,3.01974402

@@ -1,0 +1,15 @@
+{
+  "id": "conv-1783070975421-vm9g92vfs",
+  "providerId": "codex",
+  "title": "a",
+  "titleGenerationStatus": "failed",
+  "createdAt": 1783070975421,
+  "updatedAt": 1783071203271,
+  "lastResponseAt": 1783071199998,
+  "sessionId": "019f2753-006e-7302-84a7-5862ac4fcf5a",
+  "providerState": {
+    "threadId": "019f2753-006e-7302-84a7-5862ac4fcf5a",
+    "sessionFilePath": "C:\\Users\\wuxianzhi\\.codex\\sessions\\2026\\07\\03\\rollout-2026-07-03T17-33-03-019f2753-006e-7302-84a7-5862ac4fcf5a.jsonl",
+    "transcriptRootPath": "C:\\Users\\wuxianzhi\\.codex\\sessions"
+  }
+}

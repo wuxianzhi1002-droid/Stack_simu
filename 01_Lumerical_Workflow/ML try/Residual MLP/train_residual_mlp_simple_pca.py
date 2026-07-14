@@ -58,7 +58,7 @@ MORE_FEATURE_NAMES = [
 
 # PCA is appended only to the more_feature model.
 USE_PCA_FEATURES = True
-PCA_COMPONENTS = 100
+PCA_COMPONENTS = 50
 
 FORBIDDEN_INPUT_NAMES = {
     "delta_L_nm",

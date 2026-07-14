@@ -1,0 +1,2 @@
+﻿scenario,case,noise_sigma_reflectance,param,n,success_rate,bias_nm,MAE_nm,RMSE_nm,P95Abs_nm,MaxAbs_nm,mean_near_solution_count,max_equivalent_spread_nm,mean_abs_wavelength_offset_nm,mean_abs_wavelength_scale_ppm
+tmm_robust,B1_film_tio2,0.005,TiO2,1,1,0.6673322504,0.6673322504,0.6673322504,0.6673322504,0.6673322504,2,2.316858527e-07,0.01958180631,177.2753235

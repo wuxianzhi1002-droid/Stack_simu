@@ -1,0 +1,3 @@
+﻿scenario,case,case_label,truth_id,trial,noise_sigma_reflectance,param,true_value,pred_value,error_nm,success,cost,nfev,rmse_reflectance,affine_scale,affine_offset,near_solution_count,equivalent_spread_nm,wavelength_offset_nm,wavelength_scale_ppm,source_scale,source_offset
+tmm_generator_nominal,B1_film_tio2,film only: fit TiO2 only,0,0,0.005,TiO2,20,20.0620354,0.06203540362,True,0.0008537866407,7,0.004591421525,1.0019234,-0.0004388230689,2,3.759289768e-09,-0.01958180631,-177.2753235,1.001916397,-0.0004701218864
+stackrt_generator_tmm_fallback,B1_film_tio2,film only: fit TiO2 only,0,0,0.005,TiO2,20,20.0273909,0.02739090295,True,0.0008124491431,6,0.004478891902,0.9702891519,0.00337061076,1,0,-0.01958180631,-177.2753235,0.9778089594,-0.0005278418702

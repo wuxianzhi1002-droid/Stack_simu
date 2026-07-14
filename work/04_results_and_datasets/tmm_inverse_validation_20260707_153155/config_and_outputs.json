@@ -1,0 +1,131 @@
+{
+  "config": {
+    "wavelength_start_um": 0.2,
+    "wavelength_stop_um": 0.6,
+    "spectral_resolution_nm": 0.02,
+    "random_seed": 20260707,
+    "noise_sigmas_reflectance": [
+      0.0,
+      0.005
+    ],
+    "mc_trials_per_noise": 1,
+    "truth_samples_per_case": 2,
+    "max_nfev": 30,
+    "fit_affine_intensity": true,
+    "objective": "reflectance_with_optional_affine_scale_offset",
+    "source_model": "main_cavity.py simplified material model"
+  },
+  "fit_results_csv": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_20260707_153155\\fit_results.csv",
+  "metrics_summary_csv": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_20260707_153155\\metrics_summary.csv",
+  "diagnostics": {
+    "A0_cavity_air": {
+      "params": [
+        "Air"
+      ],
+      "condition_number": 1.0,
+      "singular_values": [
+        2102.013733230369
+      ],
+      "correlation": [
+        [
+          1.0
+        ]
+      ]
+    },
+    "B1_film_tio2": {
+      "params": [
+        "TiO2"
+      ],
+      "condition_number": 1.0,
+      "singular_values": [
+        1.5634596692293117
+      ],
+      "correlation": [
+        [
+          1.0
+        ]
+      ]
+    },
+    "B2_film_soc_tio2": {
+      "params": [
+        "SOC",
+        "TiO2"
+      ],
+      "condition_number": 2.9809792889378297,
+      "singular_values": [
+        1.5756479492164852,
+        0.5285672245572406
+      ],
+      "correlation": [
+        [
+          0.9999999999999999,
+          0.4442894728567208
+        ],
+        [
+          0.4442894728567208,
+          1.0
+        ]
+      ]
+    },
+    "B3_film_all": {
+      "params": [
+        "HSQ",
+        "PSS",
+        "SOC",
+        "TiO2"
+      ],
+      "condition_number": 18.783834583492215,
+      "singular_values": [
+        1.6396035784487866,
+        0.9919476396713724,
+        0.2579357328911325,
+        0.08728801199568262
+      ],
+      "correlation": [
+        [
+          1.0,
+          0.9460137761930618,
+          0.965629122390919,
+          0.5599223192745837
+        ],
+        [
+          0.9460137761930618,
+          0.9999999999999998,
+          0.9683361632714432,
+          0.621254696307458
+        ],
+        [
+          0.9656291223909189,
+          0.9683361632714433,
+          0.9999999999999999,
+          0.4442894728567208
+        ],
+        [
+          0.5599223192745837,
+          0.6212546963074581,
+          0.4442894728567208,
+          1.0
+        ]
+      ]
+    }
+  },
+  "plot_paths": {
+    "error_vs_noise_mae": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_20260707_153155\\error_vs_noise_mae.png",
+    "correlations": {
+      "A0_cavity_air": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_20260707_153155\\correlation_A0_cavity_air.png",
+      "B1_film_tio2": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_20260707_153155\\correlation_B1_film_tio2.png",
+      "B2_film_soc_tio2": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_20260707_153155\\correlation_B2_film_soc_tio2.png",
+      "B3_film_all": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_20260707_153155\\correlation_B3_film_all.png"
+    },
+    "examples": {
+      "A0_cavity_air_noise_0": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_20260707_153155\\example_fit_A0_cavity_air_noise_0.png",
+      "A0_cavity_air_noise_0.005": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_20260707_153155\\example_fit_A0_cavity_air_noise_0.005.png",
+      "B1_film_tio2_noise_0": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_20260707_153155\\example_fit_B1_film_tio2_noise_0.png",
+      "B1_film_tio2_noise_0.005": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_20260707_153155\\example_fit_B1_film_tio2_noise_0.005.png",
+      "B2_film_soc_tio2_noise_0": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_20260707_153155\\example_fit_B2_film_soc_tio2_noise_0.png",
+      "B2_film_soc_tio2_noise_0.005": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_20260707_153155\\example_fit_B2_film_soc_tio2_noise_0.005.png",
+      "B3_film_all_noise_0": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_20260707_153155\\example_fit_B3_film_all_noise_0.png",
+      "B3_film_all_noise_0.005": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_inverse_validation_20260707_153155\\example_fit_B3_film_all_noise_0.005.png"
+    }
+  }
+}

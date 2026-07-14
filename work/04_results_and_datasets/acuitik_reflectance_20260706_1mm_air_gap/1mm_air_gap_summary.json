@@ -1,0 +1,44 @@
+{
+  "date": "2026-07-06",
+  "purpose": "Add a 1 mm air gap to inspect spectral oscillation behavior after Acuitik API high-resolution calls timed out.",
+  "material_basis": "Uses Acuitik page visible constants for film layers: SiO2 n=1.46, Acrylic n=1.49, Al2O3 n=1.76. Si substrate is approximated as n=3.88+0.02i for qualitative high-resolution fringe visualization.",
+  "physical_note": "A 1 mm air layer alone, placed between incident air and the stack, does not change intensity reflectance because no upper reference interface is added. Adding a weak SiO2 reference layer creates a real cavity and dense fringes. This SiO2 reference layer is a web-material proxy, not an ideal 50% reflector.",
+  "sampling_note": "At 600 nm, the 1 mm air cavity fringe spacing is about lambda^2/(2L)=0.18 nm. A 500-point sweep over 400-800 nm has about 0.8 nm spacing and under-samples the fringes.",
+  "highres_sampling_nm": 0.01999999999998181,
+  "csv_highres": "work/04_results_and_datasets/acuitik_reflectance_20260706_1mm_air_gap/local_tmm_1mm_air_gap_highres_0p02nm.csv",
+  "csv_500pts": "work/04_results_and_datasets/acuitik_reflectance_20260706_1mm_air_gap/local_tmm_1mm_air_gap_500pts_aliasing.csv",
+  "results": {
+    "no_gap": {
+      "min_R_percent": 6.681827557896355,
+      "min_wavelength_nm": 572.54,
+      "max_R_percent": 18.645239167070088,
+      "max_wavelength_nm": 400.0,
+      "avg_R_percent": 9.913212256440783
+    },
+    "air_gap_only": {
+      "min_R_percent": 6.6818275578963515,
+      "min_wavelength_nm": 572.54,
+      "max_R_percent": 18.64523916707008,
+      "max_wavelength_nm": 400.0,
+      "avg_R_percent": 9.913212256440783
+    },
+    "sio2_reference_1mm_air_gap": {
+      "min_R_percent": 0.0003046114096998656,
+      "min_wavelength_nm": 755.36,
+      "max_R_percent": 40.19001833745916,
+      "max_wavelength_nm": 401.56,
+      "avg_R_percent": 19.786625782716023
+    },
+    "sio2_reference_1mm_air_gap_500pts": {
+      "min_R_percent": 0.09532461094197121,
+      "min_wavelength_nm": 717.4348697394789,
+      "max_R_percent": 40.02714475650034,
+      "max_wavelength_nm": 404.80961923847696,
+      "avg_R_percent": 19.155678554664416
+    }
+  },
+  "plots": {
+    "fullband": "work/04_results_and_datasets/acuitik_reflectance_20260706_1mm_air_gap/local_tmm_1mm_air_gap_fullband.png",
+    "zoom_590_605nm": "work/04_results_and_datasets/acuitik_reflectance_20260706_1mm_air_gap/local_tmm_1mm_air_gap_zoom_590_605nm.png"
+  }
+}

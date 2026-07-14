@@ -1,0 +1,72 @@
+{
+  "dataset": "D:\\\u6fc0\u5149\u5e72\u6d89\u4eea\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\Residual MLP\\CNN\\cnn_dataset",
+  "output_root": "D:\\\u6fc0\u5149\u5e72\u6d89\u4eea\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\Residual MLP\\CNN",
+  "model": "cnn_small",
+  "pooling": "adaptive_k",
+  "pooling_k": 16,
+  "use_hpeak": false,
+  "epochs": 100,
+  "batch_size": 256,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "loss": "smooth_l1",
+  "huber_beta": 1.0,
+  "num_workers": 0,
+  "use_amp": true,
+  "random_seed": 20260613,
+  "max_train_rows": null,
+  "max_val_rows": null,
+  "max_test_rows": null,
+  "early_stopping_patience": 15,
+  "lr_patience": 4,
+  "run_name": null,
+  "effective_model": "cnn_small_adaptive_k",
+  "effective_pooling": "adaptive_k",
+  "spectral_position_partitions_retained": true,
+  "device": "cpu",
+  "torch_version": "2.12.1+cpu",
+  "target_mean_train_nm": -1064.9781494140625,
+  "target_std_train_nm": 93.39871978759766,
+  "load_summary": {
+    "dataset_path": "D:\\\u6fc0\u5149\u5e72\u6d89\u4eea\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\Residual MLP\\CNN\\cnn_dataset",
+    "spectra_points": 2000,
+    "spectra_dtype": "float32",
+    "total_rows": 800000,
+    "total_valid_rows": 800000,
+    "selected_rows": {
+      "train": 560000,
+      "val": 120000,
+      "test": 120000
+    },
+    "unique_processes": {
+      "train": 1400,
+      "val": 300,
+      "test": 300
+    },
+    "split_by_process": true,
+    "conflicting_process_ids": [],
+    "source_type": "checkpoint_directory",
+    "use_hpeak": false,
+    "scalar_feature_names": [
+      "L_fft_um",
+      "film_nominal_nm[0]",
+      "film_nominal_nm[1]",
+      "film_nominal_nm[2]",
+      "film_nominal_nm[3]"
+    ],
+    "notes": []
+  },
+  "feature_policy": {
+    "spectra": "spectra_norm.npy",
+    "scalar_inputs": [
+      "L_fft_um",
+      "film_nominal_nm[0]",
+      "film_nominal_nm[1]",
+      "film_nominal_nm[2]",
+      "film_nominal_nm[3]"
+    ],
+    "target": "delta_L_nm",
+    "use_hpeak": false,
+    "scalers_fit_on": "train_only"
+  }
+}

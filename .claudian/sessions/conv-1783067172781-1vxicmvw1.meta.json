@@ -1,0 +1,25 @@
+{
+  "id": "conv-1783067172781-1vxicmvw1",
+  "providerId": "codex",
+  "title": "hello",
+  "titleGenerationStatus": "failed",
+  "createdAt": 1783067172786,
+  "updatedAt": 1783360677682,
+  "lastResponseAt": 1783360677682,
+  "sessionId": "019f2753-7977-7141-9a68-d8b63d966c9f",
+  "providerState": {
+    "threadId": "019f2753-7977-7141-9a68-d8b63d966c9f",
+    "sessionFilePath": "C:\\Users\\wuxianzhi\\.codex\\sessions\\2026\\07\\03\\rollout-2026-07-03T17-33-34-019f2753-7977-7141-9a68-d8b63d966c9f.jsonl",
+    "transcriptRootPath": "C:\\Users\\wuxianzhi\\.codex\\sessions"
+  },
+  "usage": {
+    "inputTokens": 40635,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 22912,
+    "contextWindow": 258400,
+    "contextWindowIsAuthoritative": true,
+    "contextTokens": 40635,
+    "percentage": 16,
+    "model": "gpt-5.5"
+  }
+}

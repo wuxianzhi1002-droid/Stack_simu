@@ -1,0 +1,69 @@
+{
+  "date": "2026-07-06",
+  "calculator_url": "https://www.acuitik.com/reflectanceCalculator.html",
+  "api_endpoint": "https://www.acuitik.com:5010/api/reflectance",
+  "incident_angle_deg": 0,
+  "wavelength_range_nm": [
+    400,
+    800
+  ],
+  "point_count": 500,
+  "rule": "Use Acuitik built-in material files when possible; if original material is missing, substitute with the closest available built-in material.",
+  "native_materials_visible_in_page": [
+    "MgF2",
+    "SiO2",
+    "Al2O3",
+    "Acrylic"
+  ],
+  "native_substrates_visible_in_page": [
+    "BK7 Glass",
+    "Si",
+    "GaAs",
+    "PET"
+  ],
+  "substitution_table": [
+    {
+      "original": "HSQ",
+      "substitute": "SiO2.mtr",
+      "reason": "HSQ/cured silica-like material; SiO2 is the closest chemically appropriate built-in oxide."
+    },
+    {
+      "original": "PSS",
+      "substitute": "Acrylic.mtr",
+      "reason": "PSS is polymer-like with n about 1.50; Acrylic is built-in with n about 1.49."
+    },
+    {
+      "original": "SOC",
+      "substitute": "Acrylic.mtr",
+      "reason": "No carbon/SOC material is built in; Acrylic is the closest low-index organic substitute, though it lacks SOC absorption."
+    },
+    {
+      "original": "TiO2",
+      "substitute": "Al2O3.mtr",
+      "reason": "No TiO2 is built in; Al2O3 is the highest-index built-in oxide, but underestimates TiO2 n."
+    },
+    {
+      "original": "HfO2",
+      "substitute": "Al2O3.mtr",
+      "reason": "No HfO2 is built in; Al2O3 is the closest built-in high-index oxide."
+    },
+    {
+      "original": "Cu/SiN substrate",
+      "substitute": "Si.mtr",
+      "reason": "No Cu or SiN substrate is built in; Si is a high-index semiconductor substrate available in the page."
+    }
+  ],
+  "result": {
+    "csv": "work/04_results_and_datasets/acuitik_reflectance_20260706_builtin_substitutes/builtin_substitute_stack.csv",
+    "plot": "work/04_results_and_datasets/acuitik_reflectance_20260706_builtin_substitutes/builtin_substitute_reflectance.png",
+    "min_R_percent": 7.1268449646561205,
+    "min_wavelength_nm": 598.7975951903808,
+    "max_R_percent": 33.05001150675386,
+    "max_wavelength_nm": 400,
+    "avg_R_percent": 11.688015050974018
+  },
+  "limitations": [
+    "TiO2 and HfO2 both map to Al2O3 under the built-in-material-only rule, so this calculation cannot compare TiO2 vs HfO2.",
+    "Acrylic does not include SOC/PSS absorption; metal layers such as Cr and Cu are unavailable in the page material list."
+  ]
+}

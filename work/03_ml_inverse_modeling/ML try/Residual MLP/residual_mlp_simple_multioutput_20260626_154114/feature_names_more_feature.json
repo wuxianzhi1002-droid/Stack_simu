@@ -1,0 +1,15 @@
+{
+  "method_name": "more_feature",
+  "enabled": true,
+  "feature_count": 8,
+  "feature_names": [
+    "L_fft_um",
+    "PSS_nominal_nm",
+    "HSQ_nominal_nm",
+    "SOC_nominal_nm",
+    "TiO2_nominal_nm",
+    "fft_spectral_centroid_um",
+    "fringe_visibility_global",
+    "fringe_contrast_std"
+  ]
+}

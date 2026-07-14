@@ -1,0 +1,41 @@
+{
+  "config": {
+    "wavelength_start_um": 0.2,
+    "wavelength_stop_um": 0.6,
+    "spectral_resolution_nm": 0.02,
+    "random_seed": 20260707,
+    "noise_sigmas_reflectance": [
+      0.0,
+      0.005
+    ],
+    "mc_trials_per_noise": 2,
+    "truth_samples_per_case": 50,
+    "multistarts": 8,
+    "max_nfev": 100,
+    "fit_affine_intensity": true,
+    "wavelength_offset_sigma_nm": 0.03,
+    "wavelength_scale_sigma_ppm": 80.0,
+    "material_real_sigma_fraction": 0.0,
+    "material_imag_sigma_fraction": 0.0,
+    "fixed_layer_sigma_nm": 0.0,
+    "near_solution_cost_rel_tol": 0.001,
+    "near_solution_cost_abs_tol": 1e-10,
+    "source_scale_sigma": 0.02,
+    "source_offset_sigma": 0.002
+  },
+  "cases": [
+    "B1_film_tio2",
+    "B2_film_soc_tio2",
+    "B3_film_all"
+  ],
+  "nominal_nm": {
+    "HSQ": 40.0,
+    "PSS": 5.0,
+    "SOC": 50.0,
+    "TiO2": 20.0
+  },
+  "fit_results_csv": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\stackrt_vs_tmm_inverse_validation_20260707_221053\\fit_results.csv",
+  "metrics_summary_csv": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\stackrt_vs_tmm_inverse_validation_20260707_221053\\metrics_summary.csv",
+  "plot_path": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\stackrt_vs_tmm_inverse_validation_20260707_221053\\stackrt_vs_tmm_mae.png",
+  "stackrt_mode": "stackrt_generator"
+}

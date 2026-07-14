@@ -1,0 +1,288 @@
+{
+  "main": {
+    "id": "b2e29c407803480b",
+    "type": "split",
+    "children": [
+      {
+        "id": "26004486ac09c278",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8a912d2c27885b78",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "wiki/02_Literature/悉识科技资料/悉识膜厚仪细节沟通.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "悉识膜厚仪细节沟通"
+            }
+          },
+          {
+            "id": "fc58976863adf234",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "wiki/06_Issues/每周组会讨论.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "每周组会讨论"
+            }
+          },
+          {
+            "id": "0312ca2dfbe23657",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "wiki/02_Literature/悉识科技资料/Acuitik_Products_v2.6_Chinese.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "Acuitik_Products_v2.6_Chinese"
+            }
+          },
+          {
+            "id": "de69be49e164d656",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "wiki/04_Experiments/Simulation_Reports/Dynamic_StackRT_TMM_Single_Spectrum_20260713.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Dynamic_StackRT_TMM_Single_Spectrum_20260713"
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "2d0cbab9d89bbd04",
+    "type": "split",
+    "children": [
+      {
+        "id": "803342c8fdd9ad32",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7dbe8bd67b97d95f",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "e0803dac647261c1",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "e9e37790722bdcf6",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 463.5
+  },
+  "right": {
+    "id": "fdfbd62229900548",
+    "type": "split",
+    "children": [
+      {
+        "id": "4513fd873bb159f3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "50e21fad7f54a042",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "wiki/06_Issues/每周组会讨论.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "每周组会讨论 的反向链接列表"
+            }
+          },
+          {
+            "id": "327665b7b28d42e6",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "wiki/06_Issues/每周组会讨论.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "每周组会讨论 的出链列表"
+            }
+          },
+          {
+            "id": "3c075aac7dc340b7",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "e61d74eb37c480ca",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "90abfa624bfb09d8",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "wiki/06_Issues/每周组会讨论.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "每周组会讨论 的大纲"
+            }
+          },
+          {
+            "id": "b03e8bad70e12782",
+            "type": "leaf",
+            "state": {
+              "type": "claudian-view",
+              "state": {},
+              "icon": "bot",
+              "title": "Claudian"
+            }
+          }
+        ],
+        "currentTab": 5
+      }
+    ],
+    "direction": "horizontal",
+    "width": 308.5,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false,
+      "realclaudian:Open Claudian": false
+    }
+  },
+  "active": "de69be49e164d656",
+  "lastOpenFiles": [
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_152135/summary_report.md",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_152135/fit_summary.json",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_152135/jacobian_singular_values.png",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_152135/joint_residual.png",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_152135/best_fit_dIdL.png",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_152135/best_fit_spectrum.png",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_152135/multistart_results.csv",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_152135/fit_results.csv",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_152135",
+    "work/02_analysis_code/tmm_joint_inversion_lockin_v2.py",
+    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm/README.md",
+    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm/random_cavity_sweep_summary.json",
+    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm/random_cavity_sweep_worst_case.png",
+    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm/random_cavity_sweep_residual_heatmap.png",
+    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm/random_cavity_sweep_matching_metrics.png",
+    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm/random_cavity_sweep_spectra.npz",
+    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm/random_cavity_sweep_metrics.csv",
+    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm_npz/README.md",
+    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm_npz/random_cavity_sweep_summary.json",
+    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm_npz/random_cavity_sweep_worst_case.png",
+    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm_npz/random_cavity_sweep_residual_heatmap.png",
+    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm_npz/random_cavity_sweep_matching_metrics.png",
+    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm_npz/random_cavity_sweep_spectra.npz",
+    "wiki/log.md",
+    "wiki/06_Issues/每周组会讨论.md",
+    "wiki/02_Literature/悉识科技资料/悉识膜厚仪细节沟通.md",
+    "wiki/04_Experiments/Simulation_Reports/Dynamic_StackRT_TMM_Single_Spectrum_20260713.md",
+    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/README.md",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_20260713_180219/summary_report.md",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_20260713_173238/summary_report.md",
+    "wiki/05_CodeNotes/Agent_Prompts/CLI_Multiline_Input_Workaround.md",
+    "wiki/04_Experiments/ML_Runs/residual_mlp_simple_pca_label_uncertainty_v3_20260706_160929.md",
+    "wiki/03_Methods/Acuitik_NanoSense_measurement_assessment.md",
+    "wiki/03_Methods/multilayer_white_light_interferometry_theory.md",
+    "wiki/02_Literature/悉识科技资料/回复清华大学的问询.md",
+    "wiki/03_Methods/Signal_Processing/height_modulated_lockin_observability.md",
+    "wiki/04_Experiments/ML_Runs/residual_mlp_simple_pca_label_uncertainty_v4_20260707_011244.md",
+    "wiki/04_Experiments/Simulation_Reports/TMM_StackRT_Inverse_Validation_20260707_20260708.md",
+    "wiki/01_Projects/研究方向困难与下一步计划.md",
+    "wiki/01_Projects/先验约束与调制增强研究方案.md",
+    "2026-07-08.md",
+    "work/04_results_and_datasets/stackrt_vs_tmm_inverse_validation_v2_20260708_021808/summary_report.md",
+    "work/04_results_and_datasets/stackrt_vs_tmm_inverse_validation_v2_20260708_021309/summary_report.md",
+    "work/04_results_and_datasets/stackrt_vs_tmm_inverse_validation_20260707_204445/summary_report.md",
+    "work/04_results_and_datasets/tmm_inverse_validation_robust_20260707_203937/summary_report.md",
+    "work/04_results_and_datasets/stackrt_vs_tmm_inverse_validation_20260707_221053/summary_report.md"
+  ]
+}

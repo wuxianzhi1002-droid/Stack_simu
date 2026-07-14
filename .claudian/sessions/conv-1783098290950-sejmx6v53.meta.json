@@ -1,0 +1,24 @@
+{
+  "id": "conv-1783098290950-sejmx6v53",
+  "providerId": "claude",
+  "title": "这个里面引用的图片应该跟md文件在同一目录或者同一个大目录下",
+  "titleGenerationStatus": "failed",
+  "createdAt": 1783098290950,
+  "updatedAt": 1783098384651,
+  "lastResponseAt": 1783098292272,
+  "sessionId": "72b18cb7-f230-4c45-b924-1e433904879e",
+  "providerState": {
+    "providerSessionId": "72b18cb7-f230-4c45-b924-1e433904879e"
+  },
+  "currentNote": "wiki/06_Issues/每周组会讨论.md",
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 0,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 0,
+    "contextWindow": 200000,
+    "contextTokens": 0,
+    "percentage": 0,
+    "contextWindowIsAuthoritative": false
+  }
+}

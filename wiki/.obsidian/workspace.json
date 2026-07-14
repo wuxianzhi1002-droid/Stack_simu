@@ -1,0 +1,235 @@
+{
+  "main": {
+    "id": "b91c6aa31b384b57",
+    "type": "split",
+    "children": [
+      {
+        "id": "3d4512bd93d4ccc1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "66b430662e532d86",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01_Lumerical_Workflow/chat0614.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "chat0614"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "0d9da2c7bc6a653f",
+    "type": "split",
+    "children": [
+      {
+        "id": "7ca47310e4083497",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2bd12efa5b837f02",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "31ce947e74958217",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "f488bce308533d37",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "bf0289bdcacb2940",
+    "type": "split",
+    "children": [
+      {
+        "id": "8b2f6feb37ba32e8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7a95e46a3f9af08e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "01_Lumerical_Workflow/chat0614.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "chat0614 的反向链接列表"
+            }
+          },
+          {
+            "id": "10a10584d80bbdd2",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "01_Lumerical_Workflow/chat0614.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "chat0614 的出链列表"
+            }
+          },
+          {
+            "id": "b437ab5f35c9344d",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "41d6dc4c2ada7bd1",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "86bc4955b6ee7e43",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "01_Lumerical_Workflow/chat0614.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "chat0614 的大纲"
+            }
+          },
+          {
+            "id": "e99707b24bd293d9",
+            "type": "leaf",
+            "state": {
+              "type": "claudian-view",
+              "state": {},
+              "icon": "bot",
+              "title": "Claudian"
+            }
+          }
+        ],
+        "currentTab": 5
+      }
+    ],
+    "direction": "horizontal",
+    "width": 354.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false,
+      "obsidian-importer:Open Importer": false,
+      "realclaudian:Open Claudian": false
+    }
+  },
+  "active": "66b430662e532d86",
+  "lastOpenFiles": [
+    "wiki/06_Issues",
+    "wiki/05_CodeNotes",
+    "wiki/03_Methods",
+    "wiki/04_Experiments",
+    "wiki/01_Projects",
+    "wiki/02_Literature",
+    "wiki",
+    "work/papers_raw",
+    "work/outputs",
+    "work/data",
+    "work/code",
+    "未命名.canvas",
+    "01_Lumerical_Workflow/chat0614.md",
+    "01_Lumerical_Workflow/project_context.md",
+    "01_Lumerical_Workflow/Material_References.md",
+    "03_Common_Docs/Simulation_Parameters_Guide.md",
+    "03_Common_Docs/README.md",
+    "03_Common_Docs/Material_References.md",
+    "03_Common_Docs/Material_Properties_Table.svg",
+    "03_Common_Docs/GEMINI.md",
+    "03_MATLAB_Validation/17-6um_cavity.png",
+    "03_MATLAB_Validation/2um_cavity_plus_998um.png",
+    "03_MATLAB_Validation/0-1um_cavity.png",
+    "0614/prior_joint_fit_lumapi_result_20260614_003737/08_prior_recovered_film_error.png",
+    "0614/prior_joint_fit_lumapi_result_20260614_003737/07_linear_coefficients_by_process_intercept.png",
+    "0614/prior_joint_fit_lumapi_result_20260614_003737/07_linear_coefficients_by_process.png",
+    "0614/prior_joint_fit_lumapi_result_20260614_003737/06_example_spectrum_fit_residual.png",
+    "0614/prior_joint_fit_lumapi_result_20260614_003737/06_example_spectrum_fit.png",
+    "0614/prior_joint_fit_lumapi_result_20260614_003737/04_error_vs_cavity.png",
+    "0614/仿真结果与代码总结.md",
+    "AGENTS.md",
+    "Lumerical_Automation_Summary.md",
+    "01_Lumerical_Workflow/results/Simulation_Report.md",
+    "Clippings/‌﻿﻿​⁢‬﻿‬⁤​​⁡‌⁡⁡⁣‌‍﻿⁢⁢​​​‬⁢‬⁢﻿⁢​‍​​​﻿​﻿⁡​⁣‬﻿‍⁤⁢‬​⁤⁢【教程】用Codex+Obsidian搭建卡帕西同款自生长知识库 - 飞书云文档.md"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "method_name": "more_feature_true_thickness",
+  "enabled": true,
+  "feature_count": 8,
+  "feature_names": [
+    "L_fft_um",
+    "PSS_true_nm",
+    "HSQ_true_nm",
+    "SOC_true_nm",
+    "TiO2_true_nm",
+    "fft_spectral_centroid_um",
+    "fringe_visibility_global",
+    "fringe_contrast_std"
+  ]
+}

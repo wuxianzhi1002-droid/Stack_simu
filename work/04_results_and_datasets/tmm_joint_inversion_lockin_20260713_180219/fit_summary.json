@@ -1,0 +1,99 @@
+{
+  "config": {
+    "input_npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v2\\dynamic_spectra_20260708_112955.npz",
+    "amplitude_nm": 1.0,
+    "wavelength_min_nm": 220.0,
+    "wavelength_max_nm": 580.0,
+    "stride": 10,
+    "derivative_step_um": 0.001,
+    "multistarts": 8,
+    "max_nfev": 160,
+    "random_seed": 20260713,
+    "use_prior": true,
+    "loss": "soft_l1"
+  },
+  "input_npz_resolved": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v2\\dynamic_spectra_20260708_112955.npz",
+  "params": [
+    "Air",
+    "HSQ",
+    "PSS",
+    "SOC",
+    "TiO2"
+  ],
+  "nominal_fit_units": {
+    "Air": 1000.0,
+    "HSQ": 40.0,
+    "PSS": 5.0,
+    "SOC": 50.0,
+    "TiO2": 20.0
+  },
+  "bounds_fit_units": {
+    "Air": [
+      995.0,
+      1005.0
+    ],
+    "HSQ": [
+      20.0,
+      60.0
+    ],
+    "PSS": [
+      1.0,
+      20.0
+    ],
+    "SOC": [
+      30.0,
+      80.0
+    ],
+    "TiO2": [
+      5.0,
+      60.0
+    ]
+  },
+  "prior_sigma_fit_units": {
+    "Air": 2.0,
+    "HSQ": 10.0,
+    "PSS": 5.0,
+    "SOC": 10.0,
+    "TiO2": 10.0
+  },
+  "fit_results_csv": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_joint_inversion_lockin_20260713_180219\\fit_results.csv",
+  "multistart_results_csv": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_joint_inversion_lockin_20260713_180219\\multistart_results.csv",
+  "plot_paths": {
+    "best_fit_spectrum": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_joint_inversion_lockin_20260713_180219\\best_fit_spectrum.png",
+    "best_fit_dIdL": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_joint_inversion_lockin_20260713_180219\\best_fit_dIdL.png",
+    "joint_residual": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_joint_inversion_lockin_20260713_180219\\joint_residual.png",
+    "jacobian_singular_values": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_joint_inversion_lockin_20260713_180219\\jacobian_singular_values.png"
+  },
+  "diagnostics": {
+    "I": {
+      "singular_values": [
+        2693.784475946461,
+        3.9987000360279428,
+        2.1406447907200477,
+        0.31121475080159045,
+        0.24508853158061383
+      ],
+      "condition_number": 10991.067018002957
+    },
+    "D": {
+      "singular_values": [
+        5223.630717735741,
+        14.208982165205873,
+        0.9336127671029205,
+        0.5077382824998494,
+        0.20678138502427834
+      ],
+      "condition_number": 25261.610067668476
+    },
+    "joint": {
+      "singular_values": [
+        5194.565345071553,
+        12.69572683509374,
+        4.143332432015476,
+        0.6096831198462059,
+        0.3870144879983556
+      ],
+      "condition_number": 13422.14698973653
+    }
+  }
+}

@@ -7,7 +7,33 @@ __pycache__/
 *.log
 *.bak
 *.npz
+*.npy
+*.joblib
+*.mat
+*.fsp
+
+# Research outputs / generated datasets
+work/data/
+work/outputs/
+# Keep results directory visible to @/workspace indexers; ignore heavy artifacts by type instead.
+work/04_results_and_datasets/**/*.npz
+work/04_results_and_datasets/**/*.npy
+work/04_results_and_datasets/**/*.joblib
+work/04_results_and_datasets/**/*.mat
+work/04_results_and_datasets/**/*.fsp
+work/04_results_and_datasets/**/*.pt
+work/04_results_and_datasets/**/*.pkl
+**/.merge_tmp_v2/
+**/cnn_dataset/
+*.pt
+*.pkl
+
+# OS metadata
+.DS_Store
+._*
 
 # IDE
 .vscode/
 .idea/
+*.npz
+**/nn_cavity_spectral_features_index_*.csv

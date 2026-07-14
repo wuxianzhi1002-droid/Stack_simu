@@ -1,0 +1,26 @@
+{
+  "folders": [
+    {
+      "name": "work",
+      "path": "work"
+    },
+    {
+      "name": "wiki",
+      "path": "wiki"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/__pycache__": true,
+      "**/.ipynb_checkpoints": true
+    },
+    "search.exclude": {
+      "**/.git": true,
+      "**/__pycache__": true,
+      "**/*.npz": true,
+      "**/*.npy": true,
+      "**/*.joblib": true,
+      "**/*.fsp": true
+    }
+  }
+}

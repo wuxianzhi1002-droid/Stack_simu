@@ -1,0 +1,6 @@
+﻿artifact_name,label_uncertainty_nm,scenario,method_name,test_MAE_nm,test_RMSE_nm,test_MaxAbs_nm,test_P95Abs_nm,within_label_uncertainty_fraction,excess_MAE_after_uncertainty_nm,excess_RMSE_after_uncertainty_nm,train_noise_RMSE_nm,epochs_trained,best_clean_val_rmse_nm
+u1nm__uniform_pm_1nm__more_feature,1,uniform_pm_1nm,more_feature,1.44608221,1.90847955,20.8208162,3.78354143,0.445275,0.675444688,1.26309037,0.577789572,119,1.93190348
+u1p5nm__uniform_pm_1nm__more_feature,1.5,uniform_pm_1nm,more_feature,1.44065055,1.9036622,24.8299714,3.7314928,0.616491667,0.437781674,1.01993941,0.865910134,119,1.91386226
+u2nm__uniform_pm_1nm__more_feature,2,uniform_pm_1nm,more_feature,1.49643602,1.97888276,20.2634976,3.89950591,0.73175,0.314551266,0.888283748,1.15460866,120,1.95470423
+u2p5nm__uniform_pm_1nm__more_feature,2.5,uniform_pm_1nm,more_feature,1.56162492,2.04905151,23.7295011,4.02832538,0.806491667,0.227053232,0.760937137,1.44307632,120,2.06966033
+u3nm__uniform_pm_1nm__more_feature,3,uniform_pm_1nm,more_feature,1.54596621,2.03667056,21.2055142,3.99207402,0.87945,0.146305201,0.636120719,1.73009173,119,2.02312225

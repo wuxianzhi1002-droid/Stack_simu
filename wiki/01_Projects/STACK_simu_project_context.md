@@ -1,0 +1,457 @@
+﻿# Chat1-Needs: 时间序列动态光谱仿真
+
+## 1. 项目概述与目标
+
+本子模块旨在基准 Lumerical/解析计算工作流（`work/01_simulation_models/01_Lumerical_Workflow/main.py`）的基础上，将其从静态光谱计算扩展为**“时间序列动态仿真”**。
+
+其核心目标是通过向法布里-珀罗（FP）腔的空气层厚度 $L$ 引入随时间变化的周期性调制，来模拟真实系统中的时变干涉过程（如振动测量、动态位移）。
+
+* **最终解调目标：** 信号处理管线的核心任务是从调制后的二维光谱数据集中，准确解调并恢复出静态/基准腔长 $X$ 以及动态位移参数。
+
+---
+
+## 2. 理论模型与调制要求
+
+空气层厚度 $L$ 不再是固定值，而是建模为随时间变化的函数：
+
+$$L(t) = L_0 + A \cdot \sin(2\pi f t)$$
+
+### 默认参数配置
+
+* **初始腔长 ($L_0$):** 在基准工作流中定义（通常为标准空气间隙）。
+* **调制频率 ($f$):** 默认为 `1 kHz`（参数化设计，须易于后续修改）。
+* **调制振幅 ($A$):** 代表动态位移的配置参数。
+* **仿真总时长 ($T$):** 默认为 `1.0 s`。
+
+---
+
+## 3. 时间采样与信号处理要求
+
+为了能够正确解析 $1 \text{ kHz}$ 的调制信号并防止频谱混叠，时间采样率 $f_s$ 必须严格满足奈奎斯特采样定理。
+
+### 代码中的参数定义
+
+* **时间轴 (`time_axis`):** 从 $0$ 到 $T$ 生成的显式时间数组。
+* **采样点数 (`Nt`):** 总时间步数。
+* **时间分辨率 (`dt`):** 时间步长（$dt = 1/f_s$）。
+
+### 时间采样率 $f_s$ 的核心影响分析：
+
+1. **时域恢复：** $f_s$ 必须足够高，确保在每个调制周期（$T_m = 1/f$）内有足够的离散采样点，从而平滑地重建正弦波形。
+2. **相位变化：** $L(t)$ 的快速动态变化会导致干涉光谱的相位发生剧烈移动。如果 $f_s$ 过低，会导致相位包裹（Phase Wrapping）错误，破坏相位解包裹算法。
+3. **FFT 频谱分析：** 频率分辨率为 $\Delta f = 1/T$，可检测的最大频率为 $f_s / 2$。$f_s$ 直接决定了可用的分析带宽，用以避免频谱泄露和混叠。
+
+---
+
+## 4. 数据结构与输出要求
+
+仿真必须为每一个时间点 $t_i$ 输出一条完整的干涉光谱 $I(\lambda, t_i)$。
+
+* **数据结构：** 二维 NumPy 矩阵（Matrix）
+  * **行（轴 0）：** 时间序列（$N_t$）
+  * **列（轴 1）：** 波长采样（$N_\lambda$）
+  * **矩阵形状（Shape）：** `spectra.shape = (Nt, Nλ)`
+* **数据保存路径：** `work/01_simulation_models/01_Lumerical_Workflow/stackrt_result/`（采用高效可读的格式保存，如 `.npy` 或 `.h5`）。
+
+---
+
+## 5. 可视化要求
+
+脚本需利用 `matplotlib` 生成以下全面的可视化结果：
+
+1. **二维热力图（Spectrogram）：** 横轴为波长（$\lambda$），纵轴为时间（$t$），颜色代表光谱强度 $I(\lambda, t)$。
+2. **时域切片曲线：** 某一固定波长 $\lambda_{\text{fixed}}$ 处的光谱强度随时间 $t$ 的变化曲线。
+3. **频域切片曲线：** 某一固定时间步 $t_{\text{fixed}}$ 处的完整干涉光谱曲线。
+4. **FFT 频谱分析：** 对时间维信号进行 FFT，验证频谱主峰是否能够精准定位在 $1 \text{ kHz}$ 调制频率处。
+5. **动态动画：** 利用 `matplotlib.animation.FuncAnimation` 生成光谱随时间动态变化的实时动画。
+
+---
+
+## 6. 代码架构与开发要求
+
+* **运行环境：** PyCharm（支持自动化/直接脚本运行）。
+* **核心依赖库：** `numpy`, `matplotlib`, `scipy`。
+* **编码风格：** 高度模块化、参数定义清晰、支持类型提示（Type Hinting）与详细的中文注释，便于后续扩展至 OCT 动态成像、相位调制等高级应用。
+
+---
+
+## 7. 性能瓶颈与优化方向（深入分析）
+
+在实现与扩展此仿真平台时，必须重点评估并优化以下潜在的计算性能瓶颈：
+
+### 1. 数据量增长
+
+* 从一维光谱向量（$1 \times N_\lambda$）扩展为二维时序矩阵（$N_t \times N_\lambda$），内存占用（RAM）将随时间步数呈线性暴增，需监控内存分配。
+
+### 2. FFT 运算复杂度
+
+* 评估在时间维进行 1D FFT、在波长维（k 空间）进行 1D FFT，或执行完整 2D FFT
+
+# Chat1-Answers
+
+## 1. 采样理论与奈奎斯特定理分析
+
+在物理干涉中，光谱强度响应为：
+I(\lambda, t) \propto \cos\left( \frac{4\pi L(t)}{\lambda} \right)
+
+当空气层 L(t) = L_0 + A \sin(2\pi f t) 时，干涉信号并非单一的 f 频率。由于余弦内部存在正弦相位调制，这构成了**非线性相位调制**，其瞬时频率为：
+f_{inst}(t) = \frac{1}{2\pi} \frac{d\Phi}{dt} = \frac{2 A f}{\lambda} \cos(2\pi f t)
+
+**最大瞬时频率（多普勒频移峰值）**为：
+f_{max} = \frac{2 A f}{\lambda_{min}}
+
+**采样率要求 (f_s)**：
+为防止相位解卷绕错误和频谱混叠，采样率不能仅仅满足机械调制频率的奈奎斯特条件（f_s > 2f）。必须满足物理干涉干涉条纹变化的最快速度，即 f_s > 2 f_{max}。对于 1\text{ kHz} 的振动，如果振幅较大或波长较短，所需的采样率可能远高于 2\text{ kHz}（推荐 10\text{ kHz} 以上）。
+
+- **对时域恢复的影响**：采样率不足会导致无法跟踪高频条纹移动，造成“相位模糊”。
+- **对相位变化的影响**：欠采样会导致解算出的位移发生“跳频”与反向，无法还原真实的 1\text{ kHz} 正弦波。
+- **对 FFT 频谱的影响**：不足的采样率会导致高阶贝塞尔边带（Bessel sidebands）混叠进基带信号，导致频域无法直接观察出干净的 1\text{ kHz} 峰值。
+
+---
+
+## 2. 处理速度与瓶颈分析
+
+### 2.1 数据量增长
+
+- **单次采样**：假定光谱仪拥有 2048 个像素（双字节存储），则每条光谱 \approx 4\text{ KB}。
+- **动态序列**：在 10\text{ kHz} 的连续采样下，数据生成率为 40\text{ MB/s}。
+- **内存占用**：如果一次性读取 1 秒的数据（10000 \times 2048），二维矩阵占用约为 160\text{ MB} 的浮点内存（Float64）。这对现代计算机并非难事，但对于嵌入式系统或长时间的连续监测（例如录制 1 小时即达到 140\text{ GB}），数据增长是指数级的。
+
+### 2.2 FFT 运算复杂度
+
+- **波长维 FFT (k-space -> z-space)**：对每一行的波长求 FFT 以解算瞬时腔长 L(t_i)。运算量为 O(N_t \cdot N_k \log N_k)。
+- **时间维 FFT (t-space -> f-space)**：追踪特定波长或深度随时间的变化以求取振动频率。运算量为 O(N_k \cdot N_t \log N_t)。
+- **二维 FFT**：若进行全息干涉图分析，复杂度为 O(N_t N_k \log(N_t N_k))。当 N_t=10000, N_k=2048 时，全矩阵 FFT 需要极高算力。
+
+### 2.3 实时系统瓶颈
+
+1. **Camera / USB 数据传输**：大多数工业光谱仪（如 OceanInsight, Wasatch）在最高分辨率下 USB 2.0 只能达到 1\sim2\text{ kHz}。要达到真正的 10\text{ kHz} 以上需要使用 Camera Link、USB 3.0 或 PCIe 接口的高速线阵 CCD/CMOS（如 Basler, Teledyne e2v）。
+2. **重采样与插值 (k-space Resampling)**：干涉光谱在 \lambda 域是等间隔的，在解调前需要重采样到 k 域等间隔。在 CPU 上逐行做一维样条插值（Spline/Linear）极为耗时，是导致处理速度大幅下降的首要原因。
+3. **实时解调压力（CPU/GPU）**：传统的循环架构（For-loop FFT）无法满足实时性，如果帧率突破 5\text{ kHz}，CPU 会立即爆满并导致丢帧。
+
+### 2.4 最耗时部分排行
+
+1. **k-space 重采样 (Resampling / Interpolation)**
+2. **多线程/多进程间的内存拷贝与通信 (Data IPC)**
+3. **FFT 运算 (尤其是加窗和大倍数 Zero-padding)**
+4. **动态可视化 (Matplotlib 更新极慢，根本无法匹配实时高速流)**
+
+---
+
+## 3. 优化与加速策略 (Optimization Strategies)
+
+针对以上痛点，想要构建实时处理 $10\text{ kHz}$ 的系统，必须采用以下架构：
+
+1. **预计算插值矩阵 (Matrix-based Resampling)**：
+   不要在循环里使用 `np.interp` 或 `scipy.interpolate`。由于 \lambda \to k 的映射关系是固定的，可以预先计算一个**稀疏映射矩阵 (Mapping Matrix)**，之后每一帧数据只做一次极速的矩阵向量乘法 \mathbf{I}_k = \mathbf{M} \cdot \mathbf{I}_\lambda。
+
+2. **GPU 加速 (CUDA / CuPy)**：
+   将数据整块（Batch, 例如每 100 帧）打包送入显存。利用 CuPy 进行批量矩阵乘法和批量 FFT（`cupy.fft.rfft`），可将解调速度提升 10\sim50 倍以上。
+
+3. **FFT 与 Zero-padding 长度选择**：
+   过长的 Zero-padding（如 8 倍或 16 倍）会大幅拖慢计算。在实时追踪中，推荐减少 Zero-padding 的倍数，利用 **相频解调 (Phase Demodulation / Hilbert Transform)** 代替高密度的包络寻峰。提取基频的相位（Phase angle）精度远超直接的 FFT 寻峰，从而实现皮米(pm)级动态位移的高速测量。
+
+4. **流水线流式处理 (Pipeline / Ring Buffer)**：
+   分离“采集线程”、“处理线程”与“显示线程”。使用无锁环形缓冲区 (Lock-free Ring Buffer) 进行数据交接，防止 UI 渲染拖死采集回调。
+
+5. **降采样与 ROI 截取**：
+   在明确干涉腔长所在的物理区间后，可以截断 FFT 的不必要深度谱（只计算 Target Range 的离散傅里叶变换，即 Goertzel Algorithm 或 Chirp-Z Transform），极大降低复乘次数。对于可视化，每秒只渲染 30\sim60 帧，丢弃中间图像。
+
+# Chat2-Task：基于非线性最小二乘法提取干涉绝对腔长 L0
+
+## 1. 任务背景与目标
+我们目前拥有一个通过 Lumerical 仿真的动态干涉光谱数据集,该数据以 `.npz` 格式保存，放在'work/01_simulation_models/01_Lumerical_Workflow/stackrt_result/'中。
+内部包含了一个带有已知高频调制的干涉光谱二维矩阵。
+* **核心目标：** 编写一个 Python 脚本（如 `demodulate_lsq.py`），读取 `.npz` 数据，并利用 `scipy.optimize` 中的非线性最小二乘法（Non-linear Least Squares Fitting），从光谱数据中反向拟合出系统的**初始绝对腔长 $L_0$**。
+
+## 2. 数据输入格式
+数据文件路径为 `stackrt_result/dynamic_spectra.npz`（请在代码中设为可配置变量）。
+文件包含以下 Key：
+* `t_axis`: 一维时间数组，形状 (Nt,)
+* `wavelengths`: 一维波长数组，形状 (Nλ,)，单位为米 (m)
+* `L_t`: 一维真实腔长数组，形状 (Nt,)，表示 Ground Truth，其中 $L(t) = L_0 + A\sin(2\pi f t)$
+* `spectra`: 二维光谱强度矩阵 $I(\lambda, t)$，形状 (Nt, Nλ)
+
+## 3. 理论模型与已知参数
+干涉光谱在任意给定时刻 $t_i$ 的理论模型可简化为：
+$$I(\lambda) = I_{bg} + I_{amp} \cos\left(\frac{4\pi}{\lambda} L_i \right)$$
+其中 $L_i$ 是当前时刻的总腔长。
+
+已知：
+* 调制频率 $f = 1000 \text{ Hz}$（请从 `t_axis` 或数据中提取，或设为已知常量）。
+* 调制振幅 $A$（可从 `L_t` 的峰谷值中提取作为已知先验）。
+* 动态位移项 $\Delta L(t_i) = A\sin(2\pi f t_i)$ 是**已知**的。
+
+因此，我们要拟合的最终方程为：
+$$I(\lambda, t_i) = I_{bg} + I_{amp} \cos\left(\frac{4\pi}{\lambda} (L_0 + \Delta L(t_i)) \right)$$
+
+## 4. 算法实现步骤要求
+请按以下步骤实现代码：
+
+1. **数据加载与预处理：**
+   * 读取 `.npz` 文件。
+   * 从 `L_t` 中提取出基础腔长 Ground Truth ($L_{0\_true}$) 和调制振幅 $A$，用于后续误差对比。
+
+2. **定义拟合函数：**
+   * 定义目标函数 `interference_model(wavelengths, I_bg, I_amp, L_0, delta_L)`。
+   * 为了提高稳定性，建议将待拟合参数限定为 3 个：直流背景 `I_bg`、干涉振幅 `I_amp` 和 核心目标 `L_0`。（`delta_L` 为已知的常数项传入）。
+
+3. **执行非线性拟合 (`scipy.optimize.curve_fit`)：**
+   * **策略 A（单次切片拟合）：** 取 $t=0$ 或任意单行光谱数据 `spectra[0, :]` 进行拟合。
+   * **参数初始化 (p0)：** 由于余弦函数极容易陷入局部最优解，请务必为 `L_0` 提供一个合理的初始猜测值（可以先利用 `scipy.signal.find_peaks` 或直接使用带有小偏差的真值作为 p0，并在代码注释中说明）。
+   * 设定合理的参数边界 (bounds) 以防止求解发散。
+
+4. **误差分析与验证：**
+   * 打印拟合出的 $L_0$ 结果，并与 `L_t` 中的真值 $L_{0\_true}$ 进行对比，计算绝对误差（纳米级别）。
+
+5. **可视化输出 (`matplotlib`)：**
+   * 绘制一张对比图：
+     * X轴：波长 $\lambda$
+     * Y轴：光谱强度
+     * 曲线 1：原始仿真数据点 `spectra[0, :]`（散点或实线）。
+     * 曲线 2：利用拟合出的参数生成的理论曲线（虚线，红色）。
+   * 在图注 (Legend) 或标题中显示提取出的 $L_0$ 数值和计算误差。
+   * 输出图片放在img文件夹，输出的文档和数据等输出到linear_fit文件夹
+
+## 5. 代码规范
+* 保持代码高模块化，包含 `if __name__ == "__main__":` 入口。
+* 对关键的数学推导和代码逻辑进行详细的中文注释。
+* 使用 `typing` 提供清晰的类型提示。
+
+---
+
+# Chat3-Task：基于 StackRT 的参数序列扫描与通用 FFT 解算流程
+
+## 1. 任务背景与总体目标
+
+在已有 `main_dynamic.py` 时间序列动态仿真流程的基础上，进一步将 Lumerical `stackrt` 解析仿真扩展为更通用的参数扫描框架。新的扫描变量不再局限于时间，而是可以针对入射角、空气腔长等物理参数生成二维光谱数据集，并为后续统一解算提供标准化输入。
+
+本阶段的核心目标包括：
+
+* **角度扫描仿真：** 在 PSS-TiO2 多层膜模型中固定腔长，改变入射角，得到不同入射角下的反射光谱。
+* **腔长扫描仿真：** 在 PSS-TiO2 多层膜模型中固定垂直入射角，改变 Air 层厚度，得到不同腔长下的反射光谱。
+* **通用 FFT 解算：** 编写可读取 `.npz` 光谱数据的通用 FFT 解算脚本，使其适用于时间序列、角度扫描、腔长扫描或单条光谱等不同数据格式。
+
+---
+
+## 2. StackRT 参数扫描仿真总体思路
+
+所有扫描脚本均沿用 `main_dynamic.py` 和 `main_angle.py` 的基本结构：
+
+1. 定义统一的 `CONFIG` 配置字典，包括模型类型、波长范围、光谱分辨率、扫描变量范围以及偏振通道。
+2. 使用 `_get_n_matrix()` 根据 `PSS_TIO2_MODEL` 生成 `stackrt` 所需的折射率矩阵 `n_matrix` 和厚度数组 `thicknesses`。
+3. 通过 Lumerical Python API 创建 `lumapi.FDTD(hide=True)` 会话。
+4. 在扫描变量循环中调用 `fdtd.stackrt(n_matrix, thicknesses, freqs, theta)`。
+5. 提取 `Rp` 或 `Rs` 作为反射光谱结果，并保存为二维矩阵 `spectra.shape = (N_scan, N_lambda)`。
+
+其中 `N_scan` 表示扫描变量的采样点数，`N_lambda` 表示波长采样点数，每一行 `spectra[i, :]` 表示某一个扫描条件下的一条完整光谱。
+
+---
+
+## 3. 角度扫描实现方式
+
+角度扫描脚本为 `work/01_simulation_models/01_Lumerical_Workflow/main_angle.py`。
+
+### 扫描参数
+
+* 扫描对象：`stackrt` 的入射角参数 `theta`
+* 角度范围：`-10 deg` 到 `+10 deg`
+* 角度步长：`0.05 deg`
+* 角度点数：`401`
+* 波长范围：`0.2 um` 到 `0.6 um`
+* 波长分辨率：`0.02 nm`
+
+### 实现要点
+
+角度扫描中，各层厚度保持不变，仅在循环中改变 `theta_deg`：
+
+```python
+res = fdtd.stackrt(n_matrix, thicknesses, freqs, float(theta_deg))
+spectra[i, :] = np.real(np.asarray(res["Rp"]).flatten())
+```
+
+输出文件保存至 `../../work/01_simulation_models/01_Lumerical_Workflow/stackrt_result/angle_dynamic_time.npz`。该文件保留 `main_dynamic.py` 的兼容字段，同时增加明确的角度轴字段：
+
+```text
+t_axis
+wavelengths
+L_t
+spectra
+angle_axis
+theta_axis
+```
+
+其中 `angle_axis` 和 `theta_axis` 均表示角度扫描轴，单位为 degree。
+
+---
+
+## 4. 腔长扫描实现方式
+
+腔长扫描脚本为 `work/01_simulation_models/01_Lumerical_Workflow/main_cavity.py`。
+
+### 扫描参数
+
+项目中层厚度配置的单位为 `um`。因此 Air 层腔长扫描按如下方式实现：
+
+* 扫描对象：`PSS_TIO2_MODEL` 中的 `Air` 层厚度
+* 腔长范围：`1000 um` 到 `1200 um`
+* 腔长步长：`0.2 um`，即 `200 nm`
+* 腔长点数：`1001`
+* 入射角：`0 deg`
+* 波长范围：`0.2 um` 到 `0.6 um`
+* 波长分辨率：`0.02 nm`
+
+### 实现要点
+
+脚本首先在 `_get_n_matrix()` 中记录 Air 层索引 `air_idx`，然后在扫描循环中复制基础厚度数组并替换 Air 层厚度：
+
+```python
+thicknesses = thicknesses_base.copy()
+thicknesses[air_idx] = cavity_um * 1e-6
+res = fdtd.stackrt(n_matrix, thicknesses, freqs, 0.0)
+spectra[i, :] = np.real(np.asarray(res["Rp"]).flatten())
+```
+
+输出文件保存至 `../../work/01_simulation_models/01_Lumerical_Workflow/stackrt_result/cavity_spectra_YYYYMMDD_HHMMSS.npz`。文件名中的时间戳由代码运行时自动读取系统时间生成：
+
+```python
+datetime.now().strftime("%Y%m%d_%H%M%S")
+```
+
+输出 `.npz` 只保存与腔长扫描有关的字段：
+
+```text
+cavity_axis_um
+cavity_axis_m
+wavelengths
+spectra
+```
+
+---
+
+## 5. 通用 FFT 解算脚本设计
+
+通用 FFT 解算脚本为 `work/01_simulation_models/01_Lumerical_Workflow/solve_npz_fft.py`。
+
+该脚本不再依赖固定的时间序列格式，而是自动识别 `.npz` 文件中的光谱矩阵和扫描轴，使同一个解算器可适配角度扫描、腔长扫描、时间序列扫描或单条光谱。
+
+### 输入数据自动识别
+
+脚本要求输入 `.npz` 至少包含：
+
+```text
+wavelengths
+spectra
+```
+
+同时兼容以下光谱字段名：
+
+```text
+spectra
+R
+Rp
+Rs
+intensities
+```
+
+扫描轴按优先级自动识别：
+
+```text
+angle_axis      -> angle_deg
+theta_axis      -> angle_deg
+cavity_axis_um  -> cavity_um
+cavity_axis_m   -> cavity_m
+L_t             -> cavity_um
+t_axis          -> time_or_scan_axis
+```
+
+如果未找到匹配的扫描轴，则使用光谱索引作为默认扫描轴 `spectrum_index`。
+
+---
+
+## 6. FFT 解算算法实现方式
+
+FFT 解算逻辑参考 `main.py` 中的 `FFTSolver.solve()`：
+
+1. 将波长轴转换为波数轴：`k_raw = 2 * np.pi / wavelengths_um`。
+2. 对光谱强度插值到等间隔 `k` 空间。
+3. 去除直流分量并加汉宁窗。
+4. 执行带 Zero-padding 的一维 FFT。
+5. 根据 `k` 空间间隔构建距离轴 `distance_axis_um`。
+6. 使用 `scipy.signal.find_peaks` 提取干涉峰。
+
+### 解算输出字段
+
+解算结果保存为 `原文件名_fft_solved_YYYYMMDD_HHMMSS.npz`，主要字段包括：
+
+```text
+source_npz
+source_keys
+spectra_key
+scan_axis_name
+scan_axis
+selected_spectrum_indices
+wavelengths
+distance_axis_um
+max_range_um
+peak_count
+first_peak_distance_um
+first_peak_height
+dominant_peak_distance_um
+dominant_peak_height
+all_peak_distances_um
+all_peak_heights
+config_json
+```
+
+其中 `first_peak_distance_um` 表示每条光谱检测到的第一个峰位置，`dominant_peak_distance_um` 表示每条光谱中峰高最大的主峰位置，`all_peak_distances_um` 保存每条光谱检测到的全部峰位置，`selected_spectrum_indices` 记录实际参与解算的原始光谱索引。
+
+---
+
+## 7. 光谱选择机制
+
+为了避免每次都对完整二维数据集执行 FFT，`solve_npz_fft.py` 支持选择只解算部分光谱。
+
+在 `main_direct()` 中配置：
+
+```python
+spectrum_selection = "all"
+```
+
+可选方式包括：
+
+```python
+spectrum_selection = "all"        # 解算全部光谱
+spectrum_selection = 0            # 只解算第 0 条光谱
+spectrum_selection = 200          # 只解算第 200 条光谱
+spectrum_selection = [0, 100, 200]
+spectrum_selection = slice(0, 50) # 解算第 0 到 49 条光谱
+```
+
+该机制通过 `normalize_spectrum_selection()` 将用户输入统一转换为整数索引数组，并在保存结果时记录实际索引，便于后续追踪来源。
+
+---
+
+## 8. 当前代码组织总结
+
+本阶段新增或扩展的主要文件如下：
+
+```text
+work/01_simulation_models/01_Lumerical_Workflow/main_angle.py
+work/01_simulation_models/01_Lumerical_Workflow/main_cavity.py
+work/01_simulation_models/01_Lumerical_Workflow/solve_npz_fft.py
+```
+
+整体数据流为：
+
+```text
+StackRT 参数扫描
+        ↓
+二维光谱 npz 数据
+        ↓
+通用 FFT 解算
+        ↓
+峰值距离与主峰随扫描变量变化的 npz 结果
+```
+
+该流程将仿真变量与解算流程解耦：仿真脚本只负责生成标准二维光谱矩阵，FFT 解算脚本只负责读取标准化 `.npz` 并对每条光谱执行统一的 k-space FFT 解算。这样后续无论扫描对象是时间、角度、腔长或其他物理参数，都可以复用同一套数据结构和解算逻辑。

@@ -1,0 +1,89 @@
+{
+  "date": "2026-07-06",
+  "calculator_url": "https://www.acuitik.com/reflectanceCalculator.html",
+  "api_endpoint": "https://www.acuitik.com:5010/api/reflectance",
+  "incident_angle_deg": 0,
+  "wavelength_range_nm": [
+    400,
+    800
+  ],
+  "point_count": 500,
+  "substrate_substitution": "Cu/SiN is not available in the web calculator; Si.mtr was used as the closest built-in high-index substrate substitute.",
+  "tool_limitations": [
+    "Custom layers accept real refractive index n only; extinction coefficient k is ignored.",
+    "Substrate choices are limited to BK7 Glass, Si, GaAs, and PET in the web page."
+  ],
+  "summary": [
+    {
+      "case_id": "PSS_TiO2_on_Si_substitute",
+      "csv": "work/04_results_and_datasets/acuitik_reflectance_20260706/PSS_TiO2_on_Si_substitute.csv",
+      "layers": [
+        {
+          "name": "HSQ",
+          "thickness_nm": 30.0,
+          "n": 1.41,
+          "source": "Material_References.md typical value"
+        },
+        {
+          "name": "PSS",
+          "thickness_nm": 5.0,
+          "n": 1.5,
+          "source": "Material_References.md typical real n; k ignored by Acuitik API"
+        },
+        {
+          "name": "SOC",
+          "thickness_nm": 45.0,
+          "n": 1.57,
+          "source": "Cauchy n=1.55+0.005/lambda^2 at lambda about 0.5 um"
+        },
+        {
+          "name": "TiO2",
+          "thickness_nm": 20.0,
+          "n": 2.45,
+          "source": "Cauchy n=2.4+0.02/lambda^2 at lambda about 0.63 um"
+        }
+      ],
+      "min_R_percent": 4.047980828251199,
+      "min_wavelength_nm": 549.8997995991983,
+      "max_R_percent": 20.19759510970144,
+      "max_wavelength_nm": 400,
+      "avg_R_percent": 7.901419765087246
+    },
+    {
+      "case_id": "PSS_HfO2_on_Si_substitute",
+      "csv": "work/04_results_and_datasets/acuitik_reflectance_20260706/PSS_HfO2_on_Si_substitute.csv",
+      "layers": [
+        {
+          "name": "HSQ",
+          "thickness_nm": 30.0,
+          "n": 1.41,
+          "source": "Material_References.md typical value"
+        },
+        {
+          "name": "PSS",
+          "thickness_nm": 5.0,
+          "n": 1.5,
+          "source": "Material_References.md typical real n; k ignored by Acuitik API"
+        },
+        {
+          "name": "SOC",
+          "thickness_nm": 45.0,
+          "n": 1.57,
+          "source": "Cauchy n=1.55+0.005/lambda^2 at lambda about 0.5 um"
+        },
+        {
+          "name": "HfO2",
+          "thickness_nm": 20.0,
+          "n": 2.04,
+          "source": "Cauchy n=2.0+0.015/lambda^2 at lambda about 0.62 um"
+        }
+      ],
+      "min_R_percent": 5.081430890698754,
+      "min_wavelength_nm": 573.9478957915832,
+      "max_R_percent": 26.161670640418507,
+      "max_wavelength_nm": 400,
+      "avg_R_percent": 9.138530858854525
+    }
+  ],
+  "plot": "work/04_results_and_datasets/acuitik_reflectance_20260706/acuitik_reflectance_comparison.png"
+}

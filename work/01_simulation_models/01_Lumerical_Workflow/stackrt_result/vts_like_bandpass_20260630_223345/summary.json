@@ -1,0 +1,18 @@
+{
+  "input_csv": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\stackrt_result\\stackrt_reflectance_20260630_195814.csv",
+  "output_dir": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\stackrt_result\\vts_like_bandpass_20260630_223345",
+  "csv_wavelength_col": "wavelength_um",
+  "csv_reflectance_col": "reflectance_Rp",
+  "n_samples": 1,
+  "n_lambda": 20000,
+  "filtered_spectra_npy_path": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\stackrt_result\\vts_like_bandpass_20260630_223345\\spectra_bandpass_filtered.npy",
+  "filtered_csv_path": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\stackrt_result\\vts_like_bandpass_20260630_223345\\reflectance_bandpass_filtered.csv",
+  "metadata_npz_path": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\stackrt_result\\vts_like_bandpass_20260630_223345\\dataset_vts_like_bandpass.npz",
+  "opd_positive_max_um": 2999.550014998286,
+  "opd_resolution_um": 0.2999849999998286,
+  "mode": "bandpass",
+  "failed_count": 0,
+  "diagnostic_indices": [
+    0
+  ]
+}

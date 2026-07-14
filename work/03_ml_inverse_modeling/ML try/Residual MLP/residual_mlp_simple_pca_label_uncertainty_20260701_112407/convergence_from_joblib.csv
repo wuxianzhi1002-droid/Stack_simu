@@ -1,0 +1,5 @@
+﻿model,epoch,metric,value
+clean__more_feature,1,train_loss_scaled,0.6280692805697556
+clean__more_feature,2,train_loss_scaled,0.4856781926804799
+uniform_pm_1nm__more_feature,1,train_loss_scaled,0.6278281576476952
+uniform_pm_1nm__more_feature,2,train_loss_scaled,0.48557334453808876

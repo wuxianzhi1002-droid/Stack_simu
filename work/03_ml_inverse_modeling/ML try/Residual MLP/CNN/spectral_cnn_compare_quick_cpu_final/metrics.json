@@ -1,0 +1,68 @@
+{
+  "test": {
+    "cnn_small": {
+      "delta_MAE_nm": 12.844466323852538,
+      "delta_RMSE_nm": 15.108914657326142,
+      "delta_MaxAbs_nm": 29.73980712890625,
+      "delta_P95Abs_nm": 26.463388061523435,
+      "delta_P99Abs_nm": 28.66576416015625,
+      "delta_Bias_nm": -12.570054397583007,
+      "R2_delta": -3.2319791900362,
+      "cavity_MAE_nm": 12.84384071349834,
+      "cavity_RMSE_nm": 15.108406705384812,
+      "cavity_MaxAbs_nm": 29.717346191432625
+    },
+    "fft_only": {
+      "delta_MAE_nm": 918.201928100586,
+      "delta_RMSE_nm": 918.2313010711628,
+      "delta_MaxAbs_nm": 933.44189453125,
+      "delta_P95Abs_nm": 930.6854919433594,
+      "delta_P99Abs_nm": 932.4554467773437,
+      "delta_Bias_nm": 918.201928100586,
+      "R2_delta": -15629.798822164881,
+      "cavity_MAE_nm": 918.20263671875,
+      "cavity_RMSE_nm": 918.2320078908893,
+      "cavity_MaxAbs_nm": 933.4389648437309
+    },
+    "scalar_ridge": {
+      "delta_MAE_nm": 11.628700103759765,
+      "delta_RMSE_nm": 13.524940310691788,
+      "delta_MaxAbs_nm": 27.5723876953125,
+      "delta_P95Abs_nm": 23.650964355468748,
+      "delta_P99Abs_nm": 25.648801269531248,
+      "delta_Bias_nm": -11.366846160888672,
+      "R2_delta": -2.3911554757983002,
+      "cavity_MAE_nm": 11.627845458980206,
+      "cavity_RMSE_nm": 13.524163886978661,
+      "cavity_MaxAbs_nm": 27.549926757842513
+    }
+  },
+  "best_epoch": {
+    "epoch": 2,
+    "train_loss": 0.41677952408790586,
+    "val_loss": 0.4757303321361542,
+    "val_RMSE_nm": 6.433154582977295,
+    "learning_rate": 0.001,
+    "seconds": 3.4631452560424805
+  },
+  "load_summary": {
+    "dataset_path": "D:\\\u6fc0\u5149\u5e72\u6d89\u4eea\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\nn_cavity_spectral_features_20260620_233057",
+    "checkpoint_files_scanned": 12,
+    "checkpoint_files_used": 8,
+    "spectra_points": 2000,
+    "spectra_dtype": "float32",
+    "selected_rows": {
+      "train": 1600,
+      "val": 800,
+      "test": 800
+    },
+    "unique_processes": {
+      "train": 4,
+      "val": 2,
+      "test": 2
+    },
+    "notes": [
+      "Dataset provides spectra_norm_ds with 2000 points; plan text mentions 20000 points."
+    ]
+  }
+}

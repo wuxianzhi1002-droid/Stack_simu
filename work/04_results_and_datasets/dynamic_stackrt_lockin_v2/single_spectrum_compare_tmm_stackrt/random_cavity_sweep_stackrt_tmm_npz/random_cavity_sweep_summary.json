@@ -1,0 +1,29 @@
+{
+  "generator": "npz",
+  "source_npz_files": [
+    "dynamic_spectra_20260708_112655.npz",
+    "dynamic_spectra_20260708_112955.npz"
+  ],
+  "samples": 30,
+  "random_seed": 20260714,
+  "cavity_min_um": 999.0,
+  "cavity_max_um": 1001.0,
+  "actual_min_cavity_um": 999.9950615582972,
+  "actual_max_cavity_um": 1000.005,
+  "wavelength_start_um": 0.2,
+  "wavelength_stop_um": 0.6,
+  "spectral_resolution_nm": 0.02,
+  "wavelength_points": 20000,
+  "mae_mean": 7.780093369756772e-13,
+  "mae_max": 1.0982247920259854e-12,
+  "rmse_mean": 1.546652761864398e-12,
+  "rmse_max": 2.0094816924125394e-12,
+  "max_abs_error_overall": 1.8735263340730057e-11,
+  "pearson_correlation_min": 0.9999999999999993,
+  "worst_mae_sample_index": 19,
+  "worst_mae_cavity_um": 1000.0007071067811,
+  "elapsed_seconds": 6.2210915088653564,
+  "frequency_axis_definition": "f = 3e8 / nominal_wavelength",
+  "tmm_phase_wavelength_definition": "lambda_phase = 299792458 / f",
+  "complex_index_convention": "n + i*k with -i characteristic-matrix off-diagonal terms"
+}

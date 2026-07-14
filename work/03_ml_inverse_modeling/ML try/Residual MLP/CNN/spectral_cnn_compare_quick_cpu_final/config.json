@@ -1,0 +1,64 @@
+{
+  "dataset": "D:\\\u6fc0\u5149\u5e72\u6d89\u4eea\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\nn_cavity_spectral_features_20260620_233057",
+  "output_root": "D:\\\u6fc0\u5149\u5e72\u6d89\u4eea\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\Residual MLP\\CNN",
+  "model": "cnn_small",
+  "epochs": 2,
+  "batch_size": 64,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "loss": "smooth_l1",
+  "huber_beta": 1.0,
+  "num_workers": 0,
+  "use_amp": false,
+  "random_seed": 20260613,
+  "max_train_rows": 1600,
+  "max_val_rows": 800,
+  "max_test_rows": 800,
+  "early_stopping_patience": 10,
+  "lr_patience": 3,
+  "run_name": "spectral_cnn_compare_quick_cpu_final",
+  "device": "cpu",
+  "torch_version": "2.6.0+cpu",
+  "target_mean_train_nm": -929.6036987304688,
+  "target_std_train_nm": 6.115306377410889,
+  "load_summary": {
+    "dataset_path": "D:\\\u6fc0\u5149\u5e72\u6d89\u4eea\\simulation\\Lumerical_simulation\\STACK_simu\\01_Lumerical_Workflow\\ML try\\nn_cavity_spectral_features_20260620_233057",
+    "checkpoint_files_scanned": 12,
+    "checkpoint_files_used": 8,
+    "spectra_points": 2000,
+    "spectra_dtype": "float32",
+    "selected_rows": {
+      "train": 1600,
+      "val": 800,
+      "test": 800
+    },
+    "unique_processes": {
+      "train": 4,
+      "val": 2,
+      "test": 2
+    },
+    "notes": [
+      "Dataset provides spectra_norm_ds with 2000 points; plan text mentions 20000 points."
+    ]
+  },
+  "feature_policy": {
+    "spectra": "spectra_norm_ds",
+    "scalar_inputs": [
+      "L_fft_um",
+      "film_nominal_nm[0]",
+      "film_nominal_nm[1]",
+      "film_nominal_nm[2]",
+      "film_nominal_nm[3]"
+    ],
+    "target": "delta_L_nm",
+    "excluded_main_inputs": [
+      "cavity_true_um",
+      "L_true_um",
+      "film_true_nm",
+      "film_delta_nm",
+      "process_film_true_nm",
+      "process_film_delta_nm",
+      "H_peak"
+    ]
+  }
+}

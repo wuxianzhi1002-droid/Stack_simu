@@ -1,6 +1,14 @@
 {
     "python-envs.defaultEnvManager": "ms-python.python:conda",
     "python-envs.defaultPackageManager": "ms-python.python:conda",
+    "terminal.integrated.env.windows": {
+        "PYTHONUTF8": "1",
+        "PYTHONIOENCODING": "utf-8"
+    },
+    "code-runner.executorMap": {
+        "python": "python -X utf8 -u"
+    },
+    "code-runner.runInTerminal": false,
     "[markdown]": {
         "editor.unicodeHighlight.ambiguousCharacters": false,
         "editor.unicodeHighlight.invisibleCharacters": false,
@@ -17,5 +25,7 @@
     "markdown.preview.fontSize": 16,
     "markdown.preview.lineHeight": 1.6,
     "markdown.preview.scrollEditorWithPreview": true,
-    "markdown.preview.scrollPreviewWithEditor": true
+    "markdown.preview.scrollPreviewWithEditor": true,
+    "code-runner.respectShebang": false,
+    "terminal.integrated.ignoreBracketedPasteMode": false
 }

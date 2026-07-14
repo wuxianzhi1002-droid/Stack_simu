@@ -1,0 +1,49 @@
+{"kind":"deck","id":"pr/fbzfzf","name":"Deck"}
+{"kind":"layout","layoutId":"496794a3-419e-4461-8a13-7c10b0b76d4b","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"b072f384-6ebe-47a4-a21f-a88e786c0ab3","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/3itcgr","slide":1,"title":"多层膜白光反射测厚的核心是用 TMM 拟合整条谱形","textShapes":17}
+{"kind":"textbox","id":"sh/6tovahoz","slide":1,"text":"多层膜白光反射测厚的核心是用 TMM 拟合整条谱形","textPreview":"多层膜白光反射测厚的核心是用 TMM 拟合整条谱形","textChars":25,"textLines":1,"bbox":[48,36,1030,72]}
+{"kind":"textbox","id":"sh/dg7adsji","slide":1,"text":"模型原理","textPreview":"模型原理","textChars":4,"textLines":1,"bbox":[1090,48,135,30]}
+{"kind":"shape","id":"sh/ovahoza1","slide":1,"bbox":[48,116,1184,4]}
+{"kind":"textbox","id":"sh/z25kb6xk","slide":1,"text":"Air","textPreview":"Air","textChars":3,"textLines":1,"bbox":[60,246,345,48]}
+{"kind":"textbox","id":"sh/6hcrmhk3","slide":1,"text":"HSQ 40 nm","textPreview":"HSQ 40 nm","textChars":9,"textLines":1,"bbox":[60,294,345,44]}
+{"kind":"textbox","id":"sh/d8v6psfi","slide":1,"text":"PSS 5 nm","textPreview":"PSS 5 nm","textChars":8,"textLines":1,"bbox":[60,338,345,30]}
+{"kind":"textbox","id":"sh/onyd0z61","slide":1,"text":"SOC 50 nm","textPreview":"SOC 50 nm","textChars":9,"textLines":1,"bbox":[60,368,345,52]}
+{"kind":"textbox","id":"sh/vy90je9c","slide":1,"text":"TiO2 20 nm","textPreview":"TiO2 20 nm","textChars":10,"textLines":1,"bbox":[60,420,345,38]}
+{"kind":"textbox","id":"sh/6dcbulwv","slide":1,"text":"Cu substrate","textPreview":"Cu substrate","textChars":12,"textLines":1,"bbox":[60,458,345,58]}
+{"kind":"textbox","id":"sh/4zidonyd","slide":1,"text":"film-only branch removes the 1 mm air cavity","textPreview":"film-only branch removes the 1 mm air cavity","textChars":44,"textLines":1,"bbox":[60,534,345,48]}
+{"kind":"textbox","id":"sh/xkf6dcbu","slide":1,"text":"TMM 正向模型","textPreview":"TMM 正向模型","textChars":8,"textLines":1,"bbox":[472,158,310,34]}
+{"kind":"shape","id":"sh/mtwra5gb","slide":1,"bbox":[472,205,340,162]}
+{"kind":"textbox","id":"sh/fepkzupw","slide":1,"text":"Y = (C + Dq_s) / (A + Bq_s)\nr(λ) = (q_0 − Y) / (q_0 + Y)\nR(λ; p) = |r(λ; p)|²","textPreview":"Y = (C + Dq_s) / (A + Bq_s) | r(λ) = (q_0 − Y) / (q_0 + Y) | R(λ; p) = |r(λ; p)|²","textChars":77,"textLines":3,"bbox":[494,230,300,112]}
+{"kind":"textbox","id":"sh/4r65wjud","slide":1,"text":"真实仪器观测","textPreview":"真实仪器观测","textChars":6,"textLines":1,"bbox":[858,158,320,34]}
+{"kind":"shape","id":"sh/xc3ylc7u","slide":1,"bbox":[858,205,360,162]}
+{"kind":"textbox","id":"sh/mlkjm1cf","slide":1,"text":"I_meas(λ) = S(λ)E(λ)R(λ;p) + I_dark(λ) + ε(λ)\n\nR̂(λ) = [(I_sample − I_dark) / (I_ref − I_dark)] R_ref(λ)","textPreview":"I_meas(λ) = S(λ)E(λ)R(λ;p) + I_dark(λ) + ε(λ) |  | R̂(λ) = [(I_sample − I_dark) / (I_ref − I_dark)] R_ref(λ)","textChars":104,"textLines":3,"bbox":[880,224,316,132]}
+{"kind":"textbox","id":"sh/f6dcbulw","slide":1,"text":"反演目标","textPreview":"反演目标","textChars":4,"textLines":1,"bbox":[472,404,230,34]}
+{"kind":"shape","id":"sh/4fu18jqh","slide":1,"bbox":[472,452,746,120]}
+{"kind":"textbox","id":"sh/x0nuxc3y","slide":1,"text":"min_{p,a,b}  Σ_i [ R̂_i − a·R_TMM(λ_i; p) − b ]²","textPreview":"min_{p,a,b}  Σ_i [ R̂_i − a·R_TMM(λ_i; p) − b ]²","textChars":48,"textLines":1,"bbox":[500,484,690,50]}
+{"kind":"textbox","id":"sh/h4byhgn2","slide":1,"text":"p 是待反演膜厚；a 和 b 吸收光源谱、探测器响应与绝对强度标定残差。","textPreview":"p 是待反演膜厚；a 和 b 吸收光源谱、探测器响应与绝对强度标定残差。","textChars":36,"textLines":1,"bbox":[505,538,680,30]}
+{"kind":"textbox","id":"sh/sji5snel","slide":1,"text":"来源：wiki/03_Methods/multilayer_white_light_interferometry_theory.md；膜层参数来自 main_cavity.py","textPreview":"来源：wiki/03_Methods/multilayer_white_light_interferometry_theory.md；膜层参数来自 main_cavity.py","textChars":88,"textLines":1,"bbox":[48,660,980,24]}
+{"kind":"notes","id":"nt/3itcgr","slide":1,"text":""}
+{"kind":"slide","id":"sl/hr5u6k","slide":2,"title":"去掉 1 mm 空气腔后，膜厚反演在理想 TMM 验证中可稳定收敛","textShapes":16}
+{"kind":"textbox","id":"sh/7qpg3ex0","slide":2,"text":"去掉 1 mm 空气腔后，膜厚反演在理想 TMM 验证中可稳定收敛","textPreview":"去掉 1 mm 空气腔后，膜厚反演在理想 TMM 验证中可稳定收敛","textChars":33,"textLines":1,"bbox":[48,36,1080,72]}
+{"kind":"textbox","id":"sh/0bi9s36h","slide":2,"text":"仿真结果","textPreview":"仿真结果","textChars":4,"textLines":1,"bbox":[1090,48,135,30]}
+{"kind":"shape","id":"sh/pwb2hwfy","slide":2,"bbox":[48,116,1184,4]}
+{"kind":"textbox","id":"sh/ed8v6psf","slide":2,"text":"film-only 反演验证","textPreview":"film-only 反演验证","textChars":14,"textLines":1,"bbox":[62,148,380,38]}
+{"kind":"textbox","id":"sh/7y1kre1w","slide":2,"text":"合成光谱：Air / HSQ / PSS / SOC / TiO2 / Cu\n噪声：加性反射率高斯噪声 σ_R = 0.005\n拟合：least_squares + 强度尺度/偏置校正","textPreview":"合成光谱：Air / HSQ / PSS / SOC / TiO2 / Cu | 噪声：加性反射率高斯噪声 σ_R = 0.005 | 拟合：least_squares + 强度尺度/偏置校正","textChars":92,"textLines":3,"bbox":[62,196,460,110]}
+{"kind":"shape","id":"sh/wjudg7ad","slide":2,"bbox":[62,328,236,126]}
+{"kind":"textbox","id":"sh/p4r65wju","slide":2,"text":"B1","textPreview":"B1","textChars":2,"textLines":1,"bbox":[82,346,80,24]}
+{"kind":"textbox","id":"sh/ih4byhgn","slide":2,"text":"TiO2 only\nMAE 0.0066 nm","textPreview":"TiO2 only | MAE 0.0066 nm","textChars":23,"textLines":2,"bbox":[82,379,196,58]}
+{"kind":"shape","id":"sh/72x4nap4","slide":2,"bbox":[62,472,236,126]}
+{"kind":"textbox","id":"sh/zqtcj6to","slide":2,"text":"B2","textPreview":"B2","textChars":2,"textLines":1,"bbox":[82,490,80,24]}
+{"kind":"textbox","id":"sh/65wjudg7","slide":2,"text":"SOC + TiO2\nmax MAE\n0.011 nm","textPreview":"SOC + TiO2 | max MAE | 0.011 nm","textChars":27,"textLines":3,"bbox":[82,522,196,64]}
+{"kind":"shape","id":"sh/hwfyxobm","slide":2,"bbox":[320,328,246,270]}
+{"kind":"textbox","id":"sh/obm58z25","slide":2,"text":"B3","textPreview":"B3","textChars":2,"textLines":1,"bbox":[340,346,80,24]}
+{"kind":"textbox","id":"sh/zed8v6ps","slide":2,"text":"Four films\nmax MAE\n0.143 nm\ncond. no. 18.8","textPreview":"Four films | max MAE | 0.143 nm | cond. no. 18.8","textChars":42,"textLines":4,"bbox":[340,378,198,126]}
+{"kind":"textbox","id":"sh/6xkf6dcb","slide":2,"text":"四层同时拟合仍需扩大 Monte Carlo 并检查相关矩阵。","textPreview":"四层同时拟合仍需扩大 Monte Carlo 并检查相关矩阵。","textChars":31,"textLines":1,"bbox":[340,520,198,54]}
+{"kind":"textbox","id":"sh/oza1gvy9","slide":2,"text":"0.0066 nm","textPreview":"0.0066 nm","textChars":9,"textLines":1,"bbox":[710,465,95,18]}
+{"kind":"textbox","id":"sh/z61032ls","slide":2,"text":"0.011 nm","textPreview":"0.011 nm","textChars":8,"textLines":1,"bbox":[872,453,95,18]}
+{"kind":"textbox","id":"sh/al87ed8b","slide":2,"text":"0.143 nm","textPreview":"0.143 nm","textChars":8,"textLines":1,"bbox":[1040,207,95,18]}
+{"kind":"textbox","id":"sh/ih4byhgn","slide":2,"text":"结论：在当前简化材料库和理想归一化假设下，膜层反演比 1 mm 空气腔解调更符合测厚目标。下一步应把样本数、噪声模型和参考谱标定误差纳入正式验证。","textPreview":"结论：在当前简化材料库和理想归一化假设下，膜层反演比 1 mm 空气腔解调更符合测厚目标。下一步应把样本数、噪声模型和参考谱标定误差纳入正式验证。","textChars":73,"textLines":1,"bbox":[625,532,560,90]}
+{"kind":"textbox","id":"sh/72x4nap4","slide":2,"text":"数据：work/04_results_and_datasets/tmm_inverse_validation_20260707_153155/metrics_summary.csv","textPreview":"数据：work/04_results_and_datasets/tmm_inverse_validation_20260707_153155/metrics_summary.csv","textChars":90,"textLines":1,"bbox":[48,660,980,24]}
+{"kind":"chart","id":"ch/xc3ylc7u","slide":2,"name":"","chartType":"bar","bbox":[625,172,555,330]}
+{"kind":"notes","id":"nt/hr5u6k","slide":2,"text":""}

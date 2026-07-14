@@ -1,0 +1,3 @@
+﻿scenario,case,noise_sigma_reflectance,param,n,success_rate,bias_nm,MAE_nm,RMSE_nm,P95Abs_nm,MaxAbs_nm,mean_near_solution_count,max_equivalent_spread_nm,mean_abs_wavelength_offset_nm,mean_abs_wavelength_scale_ppm
+stackrt_generator_tmm_fallback,B1_film_tio2,0.005,TiO2,1,1,0.02739090295,0.02739090295,0.02739090295,0.02739090295,0.02739090295,1,0,0.01958180631,177.2753235
+tmm_generator_nominal,B1_film_tio2,0.005,TiO2,1,1,0.06203540362,0.06203540362,0.06203540362,0.06203540362,0.06203540362,2,3.759289768e-09,0.01958180631,177.2753235
