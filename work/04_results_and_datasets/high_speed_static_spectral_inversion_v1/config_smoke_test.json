@@ -1,0 +1,32 @@
+{
+  "project_version": "high_speed_static_spectral_inversion_v1_smoke",
+  "random_seed": 20260717,
+  "spectral": {"wavelength_min_nm": 450.0, "wavelength_max_nm": 580.0, "step_nm": 0.02},
+  "dataset": {
+    "profile": "smoke",
+    "sizes": {"smoke": 3, "development": 30, "final": 100},
+    "trajectory": "tracking",
+    "noise": {
+      "ideal": {"noise_sigma": 0.0, "source_scale_sigma": 0.0, "source_offset_sigma": 0.0, "wavelength_offset_sigma_nm": 0.0, "wavelength_scale_sigma_ppm": 0.0},
+      "noisy": {"noise_sigma": 0.001, "source_scale_sigma": 0.01, "source_offset_sigma": 0.002, "wavelength_offset_sigma_nm": 0.001, "wavelength_scale_sigma_ppm": 1.0}
+    }
+  },
+  "fit": {
+    "loss": "linear",
+    "correct_air_threshold_um": 0.25,
+    "max_frame_step_um": 0.10,
+    "local_max_nfev": 15,
+    "sobol_starts": 4,
+    "global_budget": 40,
+    "cluster_air_um": 0.10,
+    "refine_clusters": 2,
+    "fft_candidates": 3,
+    "timeout_s": 60.0
+  },
+  "benchmark": {
+    "algorithms": ["local", "sobol", "de_best1bin", "de_rand1bin", "cmaes", "direct", "fft_hybrid"],
+    "modes": ["absolute", "tracking"],
+    "random_seeds": [20260717],
+    "comparison": "smoke_equal_budget"
+  }
+}

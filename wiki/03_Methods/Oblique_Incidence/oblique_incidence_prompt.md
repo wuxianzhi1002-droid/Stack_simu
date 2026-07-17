@@ -1,4 +1,4 @@
-﻿你现在在我的 Lumerical/StackRT 项目目录中工作。请基于现有 01_Lumerical_Workflow 工作流，新增一套“掠入射三角测量 + 多层膜 ASD + 多通灵敏度”的完整仿真验证代码。
+你现在在我的 Lumerical/StackRT 项目目录中工作。请基于现有 01_Lumerical_Workflow 工作流，新增一套“掠入射三角测量 + 多层膜 ASD + 多通灵敏度”的完整仿真验证代码。
 
 项目已有背景：
 1. 当前项目中已经有 work/01_simulation_models/01_Lumerical_Workflow/main_angle.py、main_cavity.py、solve_npz_fft.py 等脚本。

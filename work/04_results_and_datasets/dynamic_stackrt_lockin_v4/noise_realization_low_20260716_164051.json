@@ -1,0 +1,37 @@
+{
+  "generator_version": "main_dynamic_v4",
+  "noise_level": "low",
+  "random_seed": 624856589,
+  "noise_realization": {
+    "profile": "low",
+    "profile_config": {
+      "n_real_sigma_rel": 0.0005,
+      "k_sigma_rel": 0.01,
+      "angle_sigma_deg": 0.05,
+      "wavelength_offset_sigma_nm": 0.005,
+      "amplitude_sigma_rel": 0.001,
+      "frame_gain_sigma_rel": 0.0002,
+      "reflectance_sigma_abs": 0.0002
+    },
+    "material_n_real_rel_delta": {
+      "HSQ": -0.00015863698184010144,
+      "PSS": -0.000519875250353527,
+      "SOC": -0.0004908720838412668,
+      "TiO2": 0.0006108591212242878
+    },
+    "material_k_rel_delta": {
+      "HSQ": -0.01861999965774489,
+      "PSS": 0.0037894046210103795,
+      "SOC": -0.007115717008894723,
+      "TiO2": -0.009256091726905743
+    },
+    "angle_error_deg": -0.09231511729172644,
+    "wavelength_offset_nm": 0.008968170144475467,
+    "amplitude_rel_error": 0.0011025742426819423
+  },
+  "nominal_amplitude_nm": 5.0,
+  "actual_amplitude_nm": 5.005512871213409,
+  "actual_angle_deg": -0.09231511729172644,
+  "reflectance_clip_fraction": 2.2e-05,
+  "npz_path": "d:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v4\\dynamic_spectra_low_20260716_164051.npz"
+}

@@ -4,7 +4,7 @@ status: reviewed
 created: 2026-07-13
 updated: 2026-07-13
 sources:
-  - ../work/02_analysis_code/dev_tools/Invoke-MultilineCli.ps1
+  - ../../../work/02_analysis_code/dev_tools/Invoke-MultilineCli.ps1
 tags:
   - cli
   - prompt

@@ -1,10 +1,12 @@
 ---
 type: method
-status: draft
+status: reviewed
 created: 2026-07-08
-updated: 2026-07-08
+updated: 2026-07-15
 sources:
-  - 本次对话：2026-07-08 高度调制锁相信号反演思路
+  - ../../../work/01_simulation_models/01_Lumerical_Workflow/main_dynamic_v2.py
+  - ../../../work/02_analysis_code/tmm_joint_inversion_lockin_v2.py
+  - [[04_Experiments/Simulation_Reports/Height_Modulated_Lockin_Joint_Inversion_Progress_20260714]]
   - [[03_Methods/multilayer_white_light_interferometry_theory]]
   - [[01_Projects/先验约束与调制增强研究方案]]
 tags:
@@ -20,215 +22,198 @@ tags:
 
 ## 一句话结论
 
-在普通宽谱反射/干涉观测 `I(lambda)` 之外，同步调制样品顶面高度 `z(t)=z0+A sin(omega t)` 并锁相提取 `dI/dz`，可以把单一光谱观测扩展为 `(I(lambda), dI/dz(lambda))` 的联合观测；对 HSQ/SOC/Hard Mask/Si 这类多层膜反演，它的研究价值在于增加对顶面高度、膜厚和材料参数的局部敏感度约束，而不是单纯提高光谱分辨率。
+在普通光谱 `I(lambda)` 之外，对参考空气腔长度施加已知正弦调制并提取带符号的一阶锁相通道，可以构造 `(I(lambda), dI/dL(lambda))` 联合观测；它的目标是增加参数敏感度约束，而不是提高光谱仪本身的分辨率。当前仿真已完成全流程闭环，但 `A=5 nm` 下必须用有限幅值锁相 forward model，不能继续把局部中心差分当作无偏替代。
 
 ## 适用场景
 
-本方法面向当前研究中的多层薄膜反演问题：
+- 测量结构中存在参考反射面或外部空气腔，腔长变化会改变可观测干涉相位。
+- 待估参数包括空气腔长、HSQ/PSS/SOC/Hard Mask 等膜厚，后续可扩展少量材料参数。
+- 正向模型使用与数据生成一致的 TMM/StackRT，而不是只依赖单一余弦玩具模型。
+- 采样能够覆盖整数个调制周期，并已知调制幅值、频率和参考相位。
 
-- 样品结构：空气 / HSQ / SOC / Hard Mask / Si，或其仿真替代材料栈。
-- 待反演参数：顶面高度 `z_surface`、膜厚 `d_HSQ`、`d_SOC`、`d_HM`，以及必要时的材料折射率/消光系数参数。
-- 正向模型：优先使用 TMM/StackRT 或经 Lumerical/FDTD 校准过的等效 forward model，而不是只用单一余弦玩具模型。
-- 观测数据：普通光谱 `I(lambda)` 和高度调制后的锁相信号 `S_lockin(lambda)`。
+如果系统只是无参考臂的普通反射率测量，整体样品刚体平移不会改变反射率强度，此时不能把顶面绝对高度直接写成可辨识参数。
 
-## 必要修正
+## 为什么 toy model 不足以证明可辨识性
 
-用户给出的抽象模型：
-
-$$
-I(\lambda)=0.5+0.4\cos\left(rac{4\pi(n d+z)}{\lambda}
-ight)
-$$
-
-适合说明锁相提取导数的数学流程，但不适合作为证明 `z` 和 `d` 可同时唯一反演的物理模型。原因是该模型只依赖组合量 `n d+z`，所以 `z` 和 `d` 在这个简化模型中天然耦合；即使额外加入 `dI/dz`，导数仍然只依赖同一个相位组合量，不能真正打破退化。
-
-在真实研究中，需要把 forward model 改成更接近测量系统的形式：
+抽象模型
 
 $$
-I(\lambda)=F(\lambda; z_{surface}, d_{HSQ}, d_{SOC}, d_{HM}, n_i(\lambda), k_i(\lambda), c_{sys})
+I(\lambda)=0.5+0.4\cos\left(\frac{4\pi(nd+z)}{\lambda}\right)
 $$
 
-其中 `z_surface` 应通过参考臂、外部空气腔或白光干涉测量几何进入相位；膜厚则通过各层内部相位、界面 Fresnel 系数和吸收项进入 TMM。只有当 `z` 和各层 `d_i` 对光谱的 Jacobian 方向不完全共线时，联合观测才会提高可观测性。
+适合演示锁相数学，但只依赖组合量 `nd+z`。`z` 和 `d` 的 Jacobian 方向天然共线，加入 `dI/dz` 也不能自动把两者分离。
 
-## 信号模型
-
-高度调制为：
+真实模型应写为：
 
 $$
-z(t)=z_0+A\sin(\omega t)
+I(\lambda)=F\left(\lambda;L_{\mathrm{air}},d_1,d_2,\ldots,n_i(\lambda),k_i(\lambda),c_{\mathrm{sys}}\right),
 $$
 
-当 `A` 足够小，且系统在一个调制周期内近似线性时：
+其中空气腔相位、各膜层内部传播相位、Fresnel 系数和吸收项通过不同路径进入模型。只有不同参数的 Jacobian 不完全共线时，额外锁相通道才可能改善可观测性。
+
+## 数字锁相定义
+
+调制空气腔长度：
 
 $$
-I(\lambda,t) pprox I(\lambda,z_0)+Arac{\partial I}{\partial z}(\lambda,z_0)\sin(\omega t)
+L(t)=L_0+A\sin(2\pi f_{\mathrm{mod}}t).
 $$
 
-用同频参考 `r(t)=sin(omega t)` 做数字锁相：
+先对每个波长去直流，再计算第 `h` 次谐波：
 
 $$
-S(\lambda)=rac{1}{N}\sum_t I(\lambda,t)r(t)
+X_h(\lambda)=\frac{2}{N_t}\sum_t I_{\mathrm{AC}}(t,\lambda)
+\sin(2\pi h f_{\mathrm{mod}}t),
 $$
 
-若参考信号与调制同相、采样覆盖整数周期，则：
-
 $$
-S(\lambda) pprox rac{A}{2}rac{\partial I}{\partial z}
-$$
-
-因此：
-
-$$
-rac{\partial I}{\partial z}(\lambda) pprox rac{2}{A}S(\lambda)
+Y_h(\lambda)=\frac{2}{N_t}\sum_t I_{\mathrm{AC}}(t,\lambda)
+\cos(2\pi h f_{\mathrm{mod}}t).
 $$
 
-工程实现时建议同时计算正交通道：
+幅值和相位为：
 
 $$
-X=\langle I(t)\sin\omega t
-angle,\quad Y=\langle I(t)\cos\omega t
-angle
+R_h=\sqrt{X_h^2+Y_h^2},\qquad
+\phi_h=\operatorname{atan2}(Y_h,X_h).
 $$
 
-这样可以检查相位延迟、触发不同步和机械响应滞后；如果存在相位差，需要用 `sqrt(X^2+Y^2)` 或相位校正后的 `X`，不能直接把单一 sin 通道当作绝对导数。
+小信号极限下：
 
-## 反演流程
+$$
+X_{1f}\approx A\frac{\partial I}{\partial L}.
+$$
 
-1. 采集或仿真普通光谱：`I_meas(lambda)`。
-2. 对顶面高度施加小幅正弦调制，采集时间序列：`I(lambda,t)`。
-3. 对每个波长点做数字锁相，得到 `S_lockin(lambda)`。
-4. 用标定后的调制幅值 `A` 把锁相信号换算成 `dIdz_meas(lambda)`。
-5. 用同一个 forward model 计算：
-   - `I_model(lambda; theta)`
-   - `dIdz_model(lambda; theta)`，可用中心差分、自动微分或解析导数。
-6. 联合拟合参数 `theta=[z_surface,d_HSQ,d_SOC,d_HM,n_i...]`。
-7. 对比 `I` 单独反演和 `(I,dI/dz)` 联合反演的误差、退化方向和置信区间。
+因此联合反演优先使用：
 
-## 代码骨架
+$$
+D_{\mathrm{meas}}(\lambda)=\frac{X_{1f}(\lambda)}{A}.
+$$
 
-```python
-import numpy as np
-from scipy.optimize import least_squares
+`R_1f/A` 只表示响应幅值并且恒为非负，适合显示信号强弱，不适合代替有符号导数。若实验存在机械或电子相位延迟，应先由参考标定旋转 `X/Y` 坐标，再确定物理同相通道。
 
+## 小信号与有限幅值
 
-def forward_tmm(wavelength_nm, params):
-    """Return modeled spectrum for the current multilayer stack.
+Taylor 展开为：
 
-    params should include z_surface, layer thicknesses, and compact
-    material parameters. In production, call StackRT/TMM here.
-    """
-    raise NotImplementedError
+$$
+I(L_0+A\sin\omega t)
+=I(L_0)+A I'(L_0)\sin\omega t
++\frac{A^2}{2}I''(L_0)\sin^2\omega t+\cdots.
+$$
 
+当 `A` 足够小时，`X_1f/A` 接近局部一阶导数。随着 `A` 增大：
 
-def lockin_demodulate(I_time, t, fm_hz, amplitude_nm):
-    ref_x = np.sin(2 * np.pi * fm_hz * t)
-    ref_y = np.cos(2 * np.pi * fm_hz * t)
+- 时间平均光谱不再等于 `I(L0)`。
+- 1f 不再严格等于 `A*I'(L0)`。
+- 2f、3f 开始携带可测的非线性响应。
 
-    x = I_time.T @ ref_x / len(t)
-    y = I_time.T @ ref_y / len(t)
+因此有两种正确建模方式：
 
-    dIdz_x = 2 * x / amplitude_nm
-    dIdz_y = 2 * y / amplitude_nm
-    return dIdz_x, dIdz_y
+1. 小幅值方案：先验证 `A` 足够小，再用中心差分近似导数。
+2. 有限幅值方案：对每个候选参数模拟完整 `L(t)`，用与数据完全相同的锁相算法生成模型观测。
 
+当前 `A=5 nm` 数据应采用第二种方式。
 
-def numerical_dIdz(wavelength_nm, params, dz_nm=0.05):
-    p_plus = dict(params)
-    p_minus = dict(params)
-    p_plus["z_surface"] += dz_nm
-    p_minus["z_surface"] -= dz_nm
-    return (
-        forward_tmm(wavelength_nm, p_plus)
-        - forward_tmm(wavelength_nm, p_minus)
-    ) / (2 * dz_nm)
+## 联合反演残差
 
+设参数向量为：
 
-def residual_vector(x, wavelength_nm, I_meas, dIdz_meas, sigma_I, sigma_dz):
-    params = unpack_params(x)
-    I_model = forward_tmm(wavelength_nm, params)
-    dIdz_model = numerical_dIdz(wavelength_nm, params)
+$$
+\theta=[L_{\mathrm{air}},d_{\mathrm{HSQ}},d_{\mathrm{PSS}},d_{\mathrm{SOC}},d_{\mathrm{TiO2}}].
+$$
 
-    return np.concatenate([
-        (I_model - I_meas) / sigma_I,
-        (dIdz_model - dIdz_meas) / sigma_dz,
-    ])
+联合残差建议写为：
 
+$$
+r(\theta)=
+\begin{bmatrix}
+(I_{\mathrm{model}}-I_{\mathrm{meas}})/\sigma_I\\
+(D_{\mathrm{model}}-D_{\mathrm{meas}})/\sigma_D\\
+(\theta-\theta_0)/\sigma_\theta
+\end{bmatrix}.
+$$
 
-result = least_squares(
-    residual_vector,
-    x0=x0,
-    bounds=(lower_bounds, upper_bounds),
-    args=(wavelength_nm, I_meas, dIdz_meas, sigma_I, sigma_dz),
-)
-```
+其中 `sigma_I` 和 `sigma_D` 应来自实验噪声、重复测量或明确的 robust scale。两个通道量纲不同，不能未经归一化直接拼接。
 
-注意：`sigma_I` 和 `sigma_dz` 必须按实验噪声或仿真噪声标定。否则两个 residual 的量纲和幅值不同，优化器可能只拟合其中一个观测量。
+有限幅值模型应使用：
 
-## 与当前 HSQ/SOC/Hard Mask/Si 研究的对接
+$$
+I_{\mathrm{model}}(\lambda)=\langle I(\lambda,L(t);\theta)\rangle_t,
+$$
 
-推荐的第一版参数化：
+$$
+D_{\mathrm{model}}(\lambda)=\frac{X_{1f,\mathrm{model}}(\lambda)}{A}.
+$$
 
-```python
-params = {
-    "z_surface": z_nm,
-    "d_HSQ": d_hsq_nm,
-    "d_SOC": d_soc_nm,
-    "d_HM": d_hm_nm,
-    "mat_HSQ": compact_material_params_hsq,
-    "mat_SOC": compact_material_params_soc,
-    "mat_HM": compact_material_params_hm,
-}
-```
+## 推荐对照组
 
-材料参数不建议直接把每个波长点的 `n(lambda)`、`k(lambda)` 都作为自由参数。更稳妥的做法是：
-
-- 第一阶段：固定材料库，只反演 `z_surface` 和膜厚。
-- 第二阶段：给每种材料增加少量低维参数，例如 `n_offset`、`n_slope`、`k_scale`。
-- 第三阶段：把材料参数的先验范围写入 bounds 或 Bayesian prior，避免把光谱噪声解释成材料色散。
-
-## 验证指标
-
-为了证明“调制增强可观测性”确实有效，建议至少做四组对照：
-
-| 对照 | 输入 | 目标 |
+| 对照 | 输入 | 目的 |
 |---|---|---|
-| baseline | `I(lambda)` | 复现现有光谱反演性能 |
-| lockin only | `dI/dz(lambda)` | 检查导数通道本身携带的信息 |
-| joint | `I(lambda)+dI/dz(lambda)` | 目标方法 |
-| joint + prior | `I(lambda)+dI/dz(lambda)+工艺先验` | 当前研究最可能落地的方案 |
+| I-only | `I(lambda)` | 光谱基线 |
+| D-only | `X_1f(lambda)/A` | 判断调制通道独立信息量 |
+| joint | `I + X_1f/A` | 联合观测目标方法 |
+| joint + prior | 联合观测与工艺先验 | 当前最可能落地的方案 |
 
-核心评价不只看 MAE，还要看：
+所有对照必须使用相同 bounds、相同真值分布和可比的多起点策略。还应分别报告有先验和无先验结果，避免把先验中心等于真值时的高精度误判为观测本身的能力。
 
-- Jacobian/Fisher 矩阵的条件数是否下降。
-- `z_surface` 与 `d_i` 的参数相关性是否降低。
-- 多解样本的候选解数量是否减少。
-- 在 `z` 先验误差 `<=10 nm`、膜厚工艺扰动和材料参数扰动下是否仍稳定。
+## 评价指标
 
-## 实验参数口径
+- 各参数偏差、MAE、RMSE 和失败率。
+- I 与 D 两个物理通道各自的未归一化残差。
+- Jacobian 奇异值、条件数和参数相关系数。
+- 多起点落入不同局部极小值的比例。
+- 真值偏离名义参数后能否仍恢复正确解。
+- 调制幅值扫描下的 1f/2f/3f 比例和非线性偏差。
+- 加入噪声、波长漂移、线展宽、材料色散误差后的鲁棒性。
 
-- 调制幅值 `A`：应小于光谱相位非线性显著变化的尺度，先从 `5-20 nm` 扫描；过大会引入二阶项，过小会被噪声吞没。
-- 调制频率 `fm`：应低于光谱采集 Nyquist 频率，并避开机械共振、环境振动和电源干扰频率。
-- 采样时间：覆盖整数个调制周期，减少锁相泄漏。
-- 光谱预处理：暗场扣除、白板/参考归一化、坏点掩膜、波长标定必须在锁相前后保持一致。
-- 差分步长 `dz_nm`：数值求导时需做步长收敛测试，例如 `0.01, 0.05, 0.1 nm`。
+## 当前仿真状态
+
+详细证据、参数、三组对照和问题定位见：
+
+[[04_Experiments/Simulation_Reports/Height_Modulated_Lockin_Joint_Inversion_Progress_20260714]]
+
+截至 2026-07-14：
+
+- StackRT 动态光谱与 1f/2f/3f 锁相保存已完成。
+- StackRT 与独立 TMM 单时刻光谱可在浮点误差级闭环。
+- 联合反演 v2 已采用匹配的 TMM 约定，并修正未收敛尝试被选为最优解的问题。
+- v2 的 `A=1 nm` 和 `A=5 nm` rank 1 都使用了与仿真真值相同的首个初值，并启用了真值中心软先验；这些结果只能作为局部数值闭环，不能作为盲反演精度。
+- 排除真值起点后，其余随机起点普遍进入错误局部极小值，表明 8 个随机起点和当前一次性 least-squares 流程不足。
+- `A=5 nm` 还存在有限幅值时间平均/Fourier 观测与静态光谱/局部中心差分模型不一致的问题。
+- v3 必须隔离真值、取消真值起点、增加起点数，并采用能够跨越 1 mm 腔密集相位局部极小值的分阶段初始化或全局搜索。
+
+v3 已于 2026-07-15 完成上述修正：每种模式使用独立差分进化生成候选池，再对 32 个非真值起点做局部精修；当前理想闭环中三种模式均达到 `32/32` 收敛。详见：
+
+[[04_Experiments/Simulation_Reports/TMM_Joint_Inversion_Lockin_v3_20260715]]
+
+## 参数与数据规范
+
+- 调制幅值必须写入数据文件；若未保存，可由 `0.5*ptp(L_t)` 反算并交叉检查。
+- 频率、采样率、相位零点和窗口长度必须随数据保存。
+- 膜层名称、厚度、材料模型和频率轴约定必须进入元数据。
+- 反演使用手动指定 NPZ 时，仍应检查命令行幅值是否与 NPZ 元数据或 `L_t` 一致。
+- `spectra[i]` 必须与同索引 `L_t[i]` 配对，不能把任意时间点当作静态中心位置。
 
 ## 已知风险
 
-- 如果测量系统只是普通反射率，没有参考臂或外部相位参考，整体样品高度平移不会改变强度反射率；此时 `z_surface` 不会自然出现在 `I(lambda)` 中。
-- 单余弦 toy model 中 `n d+z` 完全耦合，不能用来证明多参数可辨识，只能用来演示锁相数学。
-- 锁相信号的比例系数依赖调制幅值、参考相位、采样窗口和归一化约定，必须实验标定。
-- 多层膜逆问题仍可能有多解；`dI/dz` 是增加约束，不是保证唯一解。
-- 若材料 `n,k` 自由度过高，联合观测可能被材料参数吸收，反而降低膜厚反演稳定性。
-
-## 下一步实现建议
-
-1. 在当前 TMM/StackRT forward model 上增加一个 `z_surface` 或参考腔长度参数，明确它对应真实光路中的哪一段 OPD。
-2. 生成仿真数据集：同一组膜厚和材料参数下，输出 `I(lambda)`、中心差分 `dI/dz(lambda)`、以及不同 `A` 和噪声水平下的模拟锁相信号。
-3. 用 `least_squares` 做小规模可辨识性验证，再扩展到 Residual MLP/CNN 输入通道。
-4. 报告中把研究贡献表述为“通过主动高度调制改变测量可观测性”，而不是“用更复杂网络拟合原始光谱”。
+- 多层膜逆问题仍可能有多解；额外通道增加约束，但不保证唯一解。
+- 材料 `n,k` 自由度过高时，会吸收膜厚或空气腔误差。
+- 1f 的符号依赖参考相位；实验系统需要相位标定。
+- 非整数周期、采样抖动、机械传递函数和光谱仪积分时间会改变锁相比例。
+- 当前闭环无实验噪声，不能直接当作真实精度指标。
 
 ## 来源路径
 
-- 本页直接来源：2026-07-08 对“高度调制 + 数字锁相 + 联合反演”的方法讨论。
-- 理论连接：[[03_Methods/multilayer_white_light_interferometry_theory]]。
-- 研究方案连接：[[01_Projects/先验约束与调制增强研究方案]]。
+- `../../../work/01_simulation_models/01_Lumerical_Workflow/main_dynamic_v2.py`
+- `../../../work/02_analysis_code/tmm_joint_inversion_lockin_v2.py`
+- `../../../work/04_results_and_datasets/dynamic_stackrt_lockin_v2/dynamic_spectra_20260714_161153.npz`
+- `../../../work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_165223/`
+- [[04_Experiments/Simulation_Reports/Dynamic_StackRT_TMM_Single_Spectrum_20260713]]
+- [[01_Projects/先验约束与调制增强研究方案]]
+
+## 待验证问题
+
+- 完整有限幅值 forward model 是否能让 `A=5 nm` 的 joint 回到真值。
+- 最佳调制幅值及 2f/3f 的实际利用方式。
+- 在真值偏离先验中心、加入噪声后，联合观测是否降低多解率和参数相关性。

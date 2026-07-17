@@ -19,22 +19,29 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parents[1]
 OUTPUT_ROOT = REPO_ROOT / "work" / "04_results_and_datasets"
 DEFAULT_INPUT_DIR = OUTPUT_ROOT / "dynamic_stackrt_lockin_v2"
+DEFAULT_INPUT_NPZ = DEFAULT_INPUT_DIR / "dynamic_spectra_20260714_161153.npz"
 
 PARAMS = ["Air", "HSQ", "PSS", "SOC", "TiO2"]
 # Fit units: Air in um, films in nm.
 NOMINAL = {
+    # "Air": 1000.0,
+    # "HSQ": 40.0,
+    # "PSS": 5.0,
+    # "SOC": 50.0,
+    # "TiO2": 20.0,
     "Air": 1000.0,
-    "HSQ": 40.0,
-    "PSS": 5.0,
-    "SOC": 50.0,
-    "TiO2": 20.0,
+    "HSQ": 30.0,
+    "PSS": 10.0,
+    "SOC": 40.0,
+    "TiO2": 40.0,
 }
+
 BOUNDS = {
-    "Air": (995.0, 1005.0),
-    "HSQ": (20.0, 60.0),
+    "Air": (998.0, 1002.0),
+    "HSQ": (20.0, 40.0),
     "PSS": (1.0, 20.0),
-    "SOC": (30.0, 80.0),
-    "TiO2": (5.0, 60.0),
+    "SOC": (30.0, 50.0),
+    "TiO2": (30.0, 50.0),
 }
 PRIOR_SIGMA = {
     "Air": 2.0,
@@ -51,7 +58,7 @@ FREQUENCY_AXIS_C_M_S = 3.0e8
 @dataclass
 class FitConfig:
     input_npz: str
-    amplitude_nm: float = 1.0
+    amplitude_nm: float
     wavelength_min_nm: float = 220.0
     wavelength_max_nm: float = 580.0
     stride: int = 10
@@ -146,13 +153,6 @@ def tmm_reflectance(
     numerator = q0 * m11 + q0 * qs * m12 - m21 - qs * m22
     denominator = q0 * m11 + q0 * qs * m12 + m21 + qs * m22
     return np.abs(numerator / denominator) ** 2
-
-
-def find_latest_npz(input_dir: Path) -> Path:
-    files = sorted(input_dir.glob("dynamic_spectra_*.npz"), key=lambda p: p.stat().st_mtime)
-    if not files:
-        raise FileNotFoundError(f"No dynamic_spectra_*.npz found in {input_dir}")
-    return files[-1]
 
 
 def fit_vector_to_um(values: np.ndarray) -> dict[str, float]:
@@ -590,8 +590,13 @@ def run(config: FitConfig, modes: list[str]) -> Path:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="V2 joint inversion using StackRT-matched TMM and lock-in dI/dL(lambda).")
-    parser.add_argument("--input-npz", type=str, default=None, help="Input dynamic_spectra_*.npz. Defaults to latest in dynamic_stackrt_lockin_v2.")
-    parser.add_argument("--amplitude-nm", type=float, default=1.0, help="Height/air-gap modulation amplitude used to compute lockin_1f_X / A_um.")
+    parser.add_argument(
+        "--input-npz",
+        type=str,
+        default=str(DEFAULT_INPUT_NPZ),
+        help="Input dynamic_spectra_*.npz. Defaults to the explicit DEFAULT_INPUT_NPZ near the top of this script.",
+    )
+    parser.add_argument("--amplitude-nm", type=float, default=5.0, help="Height/air-gap modulation amplitude used to compute lockin_1f_X / A_um.")
     parser.add_argument("--wavelength-min-nm", type=float, default=220.0)
     parser.add_argument("--wavelength-max-nm", type=float, default=580.0)
     parser.add_argument("--stride", type=int, default=10, help="Use every Nth wavelength sample for fitting. Use 1 for full spectrum.")
@@ -607,11 +612,8 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    input_npz = args.input_npz
-    if input_npz is None:
-        input_npz = str(find_latest_npz(DEFAULT_INPUT_DIR))
     config = FitConfig(
-        input_npz=input_npz,
+        input_npz=str(args.input_npz),
         amplitude_nm=float(args.amplitude_nm),
         wavelength_min_nm=float(args.wavelength_min_nm),
         wavelength_max_nm=float(args.wavelength_max_nm),

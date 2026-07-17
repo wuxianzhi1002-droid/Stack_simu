@@ -27,42 +27,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "wiki/06_Issues/每周组会讨论.md",
+                "file": "wiki/01_Projects/Chat_Logs/高速静态光谱TMM反演算法对比.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "每周组会讨论"
-            }
-          },
-          {
-            "id": "0312ca2dfbe23657",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "wiki/02_Literature/悉识科技资料/Acuitik_Products_v2.6_Chinese.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Acuitik_Products_v2.6_Chinese"
-            }
-          },
-          {
-            "id": "de69be49e164d656",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "wiki/04_Experiments/Simulation_Reports/Dynamic_StackRT_TMM_Single_Spectrum_20260713.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Dynamic_StackRT_TMM_Single_Spectrum_20260713"
+              "title": "高速静态光谱TMM反演算法对比"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -119,7 +93,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 463.5
+    "width": 429.5
   },
   "right": {
     "id": "fdfbd62229900548",
@@ -236,53 +210,53 @@
       "realclaudian:Open Claudian": false
     }
   },
-  "active": "de69be49e164d656",
+  "active": "fc58976863adf234",
   "lastOpenFiles": [
-    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_152135/summary_report.md",
-    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_152135/fit_summary.json",
-    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_152135/jacobian_singular_values.png",
-    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_152135/joint_residual.png",
-    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_152135/best_fit_dIdL.png",
-    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_152135/best_fit_spectrum.png",
-    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_152135/multistart_results.csv",
-    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_152135/fit_results.csv",
-    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_152135",
-    "work/02_analysis_code/tmm_joint_inversion_lockin_v2.py",
-    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm/README.md",
-    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm/random_cavity_sweep_summary.json",
-    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm/random_cavity_sweep_worst_case.png",
-    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm/random_cavity_sweep_residual_heatmap.png",
-    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm/random_cavity_sweep_matching_metrics.png",
-    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm/random_cavity_sweep_spectra.npz",
-    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm/random_cavity_sweep_metrics.csv",
-    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm_npz/README.md",
-    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm_npz/random_cavity_sweep_summary.json",
-    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm_npz/random_cavity_sweep_worst_case.png",
-    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm_npz/random_cavity_sweep_residual_heatmap.png",
-    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm_npz/random_cavity_sweep_matching_metrics.png",
-    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/random_cavity_sweep_stackrt_tmm_npz/random_cavity_sweep_spectra.npz",
-    "wiki/log.md",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_152530/summary_report.md",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_152530/fit_summary.json",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_152530/jacobian_singular_values.png",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_152530/joint_residual.png",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_152530/best_fit_dIdL.png",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_152530/best_fit_spectrum.png",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_152530/multistart_results.csv",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_152530/fit_results.csv",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_152530",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_152324/summary_report.md",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_152324/fit_summary.json",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_152324/jacobian_singular_values.png",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_152324/joint_residual.png",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_152324/best_fit_dIdL.png",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_152324/best_fit_spectrum.png",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_152324/multistart_results.csv",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_152324/fit_results.csv",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_152324",
+    "work/04_results_and_datasets/high_speed_static_spectral_inversion_v1/src/__pycache__/aggregate_reports.cpython-312.pyc",
+    "work/04_results_and_datasets/high_speed_static_spectral_inversion_v1/src/aggregate_reports.py",
+    "work/04_results_and_datasets/high_speed_static_spectral_inversion_v1/benchmark_runs/20260717_125402/plots/air_mae.png",
+    "work/04_results_and_datasets/high_speed_static_spectral_inversion_v1/benchmark_runs/20260717_125402/plots/air_order_rate.png",
+    "work/04_results_and_datasets/high_speed_static_spectral_inversion_v1/report/global_optimizer_comparison.md",
+    "work/04_results_and_datasets/high_speed_static_spectral_inversion_v1/README.md",
+    "wiki/01_Projects/Chat_Logs/chat0614.md",
+    "wiki/01_Projects/Chat_Logs/高速静态光谱TMM反演算法对比.md",
+    "wiki/index.md",
     "wiki/06_Issues/每周组会讨论.md",
-    "wiki/02_Literature/悉识科技资料/悉识膜厚仪细节沟通.md",
-    "wiki/04_Experiments/Simulation_Reports/Dynamic_StackRT_TMM_Single_Spectrum_20260713.md",
-    "work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/README.md",
-    "work/04_results_and_datasets/tmm_joint_inversion_lockin_20260713_180219/summary_report.md",
-    "work/04_results_and_datasets/tmm_joint_inversion_lockin_20260713_173238/summary_report.md",
-    "wiki/05_CodeNotes/Agent_Prompts/CLI_Multiline_Input_Workaround.md",
-    "wiki/04_Experiments/ML_Runs/residual_mlp_simple_pca_label_uncertainty_v3_20260706_160929.md",
-    "wiki/03_Methods/Acuitik_NanoSense_measurement_assessment.md",
-    "wiki/03_Methods/multilayer_white_light_interferometry_theory.md",
-    "wiki/02_Literature/悉识科技资料/回复清华大学的问询.md",
+    "wiki/04_Experiments/Simulation_Reports/Height_Modulated_Lockin_Joint_Inversion_Progress_20260714.md",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260715_112455/summary_report.md",
+    "wiki/04_Experiments/Simulation_Reports/TMM_Joint_Inversion_Lockin_v3_20260715.md",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260715_105659/summary_report.md",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260715_105328/summary_report.md",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260715_104939/summary_report.md",
+    "work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260715_104211/summary_report.md",
     "wiki/03_Methods/Signal_Processing/height_modulated_lockin_observability.md",
-    "wiki/04_Experiments/ML_Runs/residual_mlp_simple_pca_label_uncertainty_v4_20260707_011244.md",
+    "wiki/03_Methods/Signal_Processing/sdi_principle.md",
+    "wiki/04_Experiments/Simulation_Reports/Zemax_Simulation_Summary.md",
     "wiki/04_Experiments/Simulation_Reports/TMM_StackRT_Inverse_Validation_20260707_20260708.md",
-    "wiki/01_Projects/研究方向困难与下一步计划.md",
-    "wiki/01_Projects/先验约束与调制增强研究方案.md",
-    "2026-07-08.md",
-    "work/04_results_and_datasets/stackrt_vs_tmm_inverse_validation_v2_20260708_021808/summary_report.md",
-    "work/04_results_and_datasets/stackrt_vs_tmm_inverse_validation_v2_20260708_021309/summary_report.md",
-    "work/04_results_and_datasets/stackrt_vs_tmm_inverse_validation_20260707_204445/summary_report.md",
-    "work/04_results_and_datasets/tmm_inverse_validation_robust_20260707_203937/summary_report.md",
-    "work/04_results_and_datasets/stackrt_vs_tmm_inverse_validation_20260707_221053/summary_report.md"
+    "wiki/04_Experiments/Simulation_Reports/Simulation_Report_without_external_cavity.md",
+    "wiki/04_Experiments/Simulation_Reports/Root_Simulation_Report.md",
+    "wiki/04_Experiments/Simulation_Reports/oblique_grazing_summary.md",
+    "wiki/04_Experiments/Simulation_Reports/Dynamic_StackRT_TMM_Single_Spectrum_20260713.md",
+    "wiki/04_Experiments/Simulation_Reports/Lumerical_Workflow_Simulation_Report.md",
+    "wiki/04_Experiments/Simulation_Reports/Acuitik_Reflectance_Calculator_20260706.md",
+    "wiki/03_Methods/Acuitik_NanoSense_measurement_assessment.md"
   ]
 }

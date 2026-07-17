@@ -1,4 +1,4 @@
-﻿---
+---
 type: project
 status: draft
 created: 2026-07-03

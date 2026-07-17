@@ -2,6 +2,13 @@
 
 本页专门记录 `../work/` 中的重要来源路径。Obsidian Vault 不复制大型数据或仿真输出，只记录路径、用途和知识页入口。
 
+## 2026-07-16 动态 StackRT 多档噪声生成 v4
+
+| 路径 | 类型 | 用途 | 状态 |
+|---|---|---|---|
+| `../work/01_simulation_models/01_Lumerical_Workflow/main_dynamic_v4.py` | 仿真代码 | 生成 clean/low/medium/high 四档折射率、角度、波长、调制幅值和测量噪声动态 NPZ | 代码与 mock 保存链路已验证；真实 Lumerical 运行待会话恢复 |
+| `../work/04_results_and_datasets/dynamic_stackrt_lockin_v4/` | 计划输出目录 | 保存按噪声等级命名的 NPZ、锁相图、动态图和 realization JSON | 尚未生成；不得视为已有正式数据 |
+
 ## 当前核心来源
 
 | 路径                                                    | 类型    | 用途                                           | 知识页                                                          |
@@ -17,6 +24,24 @@
 | `../work/06_environment/04_Environment_Config/`       | 环境说明  | conda/pip 环境配置记录                             | [[05_CodeNotes/STACK_simu_code_map]]                         |
 | `../work/99_legacy_misc/新建文件夹/`                       | 遗留代码  | 恢复、FFT、裁剪等历史脚本                               | [[05_CodeNotes/STACK_simu_code_map]]                         |
 | `01_Projects/Lumerical_Automation_Summary.md`         | 知识页   | Lumerical 自动化工作总结，已放入 wiki                   | [[01_Projects/Lumerical_Automation_Summary]]                 |
+
+## 2026-07-14 高度调制锁相与联合反演
+
+| 路径 | 类型 | 用途 | 知识页 |
+|---|---|---|---|
+| `../work/01_simulation_models/01_Lumerical_Workflow/main_dynamic_v2.py` | 仿真与信号处理代码 | 生成 StackRT 动态光谱，并提取 1f/2f/3f 的 `X/Y/R/phase` 与 `dIdL_1f` | [[04_Experiments/Simulation_Reports/Height_Modulated_Lockin_Joint_Inversion_Progress_20260714]] |
+| `../work/02_analysis_code/tmm_joint_inversion_lockin_v2.py` | 反演代码 | 使用匹配 StackRT 约定的 TMM 执行 I-only、D-only、joint 多起点反演 | [[04_Experiments/Simulation_Reports/Height_Modulated_Lockin_Joint_Inversion_Progress_20260714]] |
+| `../work/04_results_and_datasets/dynamic_stackrt_lockin_v2/dynamic_spectra_20260714_161153.npz` | 原始仿真输出 | 新膜栈 `30/10/40/40 nm`、`A=5 nm` 的最终同步动态光谱与锁相数据 | [[04_Experiments/Simulation_Reports/Height_Modulated_Lockin_Joint_Inversion_Progress_20260714]] |
+| `../work/04_results_and_datasets/dynamic_stackrt_lockin_v2/single_spectrum_compare_tmm_stackrt/` | 前向验证结果 | 验证 StackRT 与独立 TMM 的单光谱数值约定和闭环误差 | [[04_Experiments/Simulation_Reports/Dynamic_StackRT_TMM_Single_Spectrum_20260713]] |
+| `../work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_152135/` | 小幅值反演结果 | 旧膜栈、`A=1 nm` 的理想小信号三组对照基准 | [[04_Experiments/Simulation_Reports/Height_Modulated_Lockin_Joint_Inversion_Progress_20260714]] |
+| `../work/04_results_and_datasets/tmm_joint_inversion_lockin_v2_20260714_165223/` | 最终反演结果 | 新膜栈、`A=5 nm`、幅值口径修正后的 I/D/joint 对照与 multistart 诊断 | [[04_Experiments/Simulation_Reports/Height_Modulated_Lockin_Joint_Inversion_Progress_20260714]] |
+
+## 2026-07-15 无真值起点联合反演 v3
+
+| 路径 | 类型 | 用途 | 知识页 |
+|---|---|---|---|
+| `../work/02_analysis_code/tmm_joint_inversion_lockin_v3.py` | 反演代码 | 有限幅值 TMM 观测模型、每模式独立差分进化和 32 起点局部精修；真值仅用于拟合后评估 | [[04_Experiments/Simulation_Reports/TMM_Joint_Inversion_Lockin_v3_20260715]] |
+| `../work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260715_112455/` | 验证结果 | 无真值起点、无先验的 I/D/joint 最终运行，含起点审计和全部 rank | [[04_Experiments/Simulation_Reports/TMM_Joint_Inversion_Lockin_v3_20260715]] |
 
 ## 2026-07-13 动态 StackRT 单光谱对比
 
