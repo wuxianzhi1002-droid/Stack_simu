@@ -43,26 +43,26 @@ python src\validate_project.py
 python src\validate_project.py --stackrt --stackrt-count 3
 ```
 
-本机默认 API 路径为 `D:\Program Files\Lumerical\v241\api\python`。若安装位置不同，只需修改新目录中 `src/main_static_stackrt.py` 的两个路径常量。
+本机默认FDTD路径为`D:\Program Files\Lumerical\v241\bin\fdtd-solutions.exe`。默认真实数据后端通过CLI/LSF批量调用StackRT，避开本地Python Interop限制；`stackrt-interop`仅作为可选后端保留。
 
 ## 生成数据
 
 真实 StackRT 理想数据：
 
 ```powershell
-python src\generate_static_dataset.py --backend stackrt --noise-level ideal --trajectory random
+python src\generate_static_dataset.py --backend stackrt-cli --noise-level ideal --trajectory random
 ```
 
 真实 StackRT 噪声数据：
 
 ```powershell
-python src\generate_static_dataset.py --backend stackrt --noise-level noisy --trajectory random
+python src\generate_static_dataset.py --backend stackrt-cli --noise-level noisy --trajectory random
 ```
 
 连续跟踪序列：
 
 ```powershell
-python src\generate_static_dataset.py --backend stackrt --noise-level noisy --trajectory tracking --output datasets\static_stackrt_noisy_tracking.npz
+python src\generate_static_dataset.py --backend stackrt-cli --noise-level noisy --trajectory tracking --output datasets\static_stackrt_cli_noisy_tracking.npz
 ```
 
 环境无法启动 Lumerical 时，可验证软件闭环：
@@ -78,14 +78,14 @@ python src\generate_static_dataset.py --config config_smoke_test.json --backend 
 完整默认比较：
 
 ```powershell
-python src\run_all_benchmarks.py --dataset datasets\static_stackrt_ideal.npz
+python src\run_all_benchmarks.py --dataset datasets\static_stackrt_cli_ideal.npz
 ```
 
 噪声数据分别比较 `linear` 和 `soft_l1`：
 
 ```powershell
-python src\run_all_benchmarks.py --dataset datasets\static_stackrt_noisy.npz --loss linear
-python src\run_all_benchmarks.py --dataset datasets\static_stackrt_noisy.npz --loss soft_l1
+python src\run_all_benchmarks.py --dataset datasets\static_stackrt_cli_noisy.npz --loss linear
+python src\run_all_benchmarks.py --dataset datasets\static_stackrt_cli_noisy.npz --loss soft_l1
 ```
 
 快速全算法 smoke：
@@ -97,7 +97,7 @@ python src\run_all_benchmarks.py --config config_smoke_test.json --dataset datas
 单算法调试：
 
 ```powershell
-python src\run_all_benchmarks.py --dataset datasets\static_stackrt_ideal.npz --algorithms fft_hybrid local --modes absolute tracking --max-samples 10
+python src\run_all_benchmarks.py --dataset datasets\static_stackrt_cli_ideal.npz --algorithms fft_hybrid local --modes absolute tracking --max-samples 10
 ```
 
 ## 算法

@@ -1,0 +1,9 @@
+clear;
+wavelength = linspace(450e-9, 580e-9, 11);
+f = 3e8 / wavelength;
+n = [5.8284; 1.0; 1.41; 1.1+2.5i];
+d = [0; 1000e-6; 30e-9; 0];
+result = stackrt(n, d, f, 0);
+Rp = result.Rp;
+matlabsave("C:/Users/wuxianzhi/AppData/Local/Temp/.ansys/stackrt_cli_smoke_output", wavelength, Rp);
+exit;

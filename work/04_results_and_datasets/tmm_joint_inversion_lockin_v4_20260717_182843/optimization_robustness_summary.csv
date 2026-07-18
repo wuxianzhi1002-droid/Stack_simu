@@ -1,0 +1,20 @@
+﻿noise_case,global_success,global_message,global_nit,global_nfev,global_best_energy,local_success_fraction,condition_number,multistart_distance_median,multistart_distance_max,air_angle_correlation,boundary_hits,minimum_start_distance_to_truth,exact_truth_start_count
+amplitude_high,False,Maximum number of iterations has been exceeded.,50,3672,0.001653479713,1,22038.93073,0.1010723899,0.3480627632,0.9914274176,,0.2672462442,0
+amplitude_low,False,Maximum number of iterations has been exceeded.,50,3672,0.0002853158796,1,28915.28557,0.1463040044,0.2357917179,0.9982151056,,0.4363284242,0
+amplitude_medium,False,Maximum number of iterations has been exceeded.,50,3672,0.0002628618777,1,33516.754,0.3389952551,0.6916863431,0.9720968283,,0.1669661179,0
+angle_high,False,Maximum number of iterations has been exceeded.,50,3672,0.0003103649259,1,22123.13454,0.08897916378,0.1994614242,0.9501405713,,0.1482714512,0
+angle_low,False,Maximum number of iterations has been exceeded.,50,3672,0.001031419393,1,22964.46364,0.09772952918,0.2578698562,0.9919658347,,0.2994047856,0
+angle_medium,False,Maximum number of iterations has been exceeded.,50,3672,0.000297977981,1,25231.19686,0.1765842959,0.4668051695,0.9948361789,,0.2315968569,0
+clean,False,Maximum number of iterations has been exceeded.,50,3672,0.002055803396,1,26880.82738,0.1368293121,0.278515933,0.9984780212,,0.6660474186,0
+combined_high,False,Maximum number of iterations has been exceeded.,50,3672,0.05399080818,1,32107.5206,0.05384102057,0.4473678268,0.9890025527,HSQ,0.4671528963,0
+combined_low,False,Maximum number of iterations has been exceeded.,50,3672,0.002283558506,1,26390.97079,0.140864454,0.410274983,0.9940359831,,0.2825968009,0
+combined_medium,False,Maximum number of iterations has been exceeded.,50,3672,0.00327040808,1,35323.84461,0.1850896754,0.2815303853,0.9982273559,,0.2419342716,0
+detector_high,False,Maximum number of iterations has been exceeded.,50,3672,0.0003873815507,1,22493.44433,0.04374675762,0.1459396673,0.9631121086,,0.05512550745,0
+detector_low,False,Maximum number of iterations has been exceeded.,50,3672,0.0007033731196,1,22092.75608,0.04789102733,0.1467999404,0.9750722484,,0.1139935682,0
+detector_medium,False,Maximum number of iterations has been exceeded.,50,3672,0.001072572131,1,33455.00394,0.0615552303,0.1762050716,0.9981873319,,0.6982566965,0
+material_high,False,Maximum number of iterations has been exceeded.,50,3672,0.00144349321,1,23641.20973,0.1671672831,0.2652735664,0.9976460944,,0.4903636127,0
+material_low,False,Maximum number of iterations has been exceeded.,50,3672,0.0008351472706,1,22626.81124,0.22807804,0.3730754944,0.9858258918,,0.2626688073,0
+material_medium,False,Maximum number of iterations has been exceeded.,50,3672,0.002028113305,1,36503.58809,0.05932624521,0.1748238549,0.9995256924,,0.8807389144,0
+wavelength_high,False,Maximum number of iterations has been exceeded.,50,3672,0.1002651169,1,18678.93337,0.03663822772,0.2172675706,0.969202064,HSQ;SOC,0.5454152029,0
+wavelength_low,False,Maximum number of iterations has been exceeded.,50,3672,0.001202787701,1,23909.71081,0.131508752,0.2881477808,0.9955646125,,0.5196859627,0
+wavelength_medium,False,Maximum number of iterations has been exceeded.,50,3672,0.005695724787,1,19367.45484,0.2216122449,0.3227489889,0.9909935578,SOC,0.5497052769,0

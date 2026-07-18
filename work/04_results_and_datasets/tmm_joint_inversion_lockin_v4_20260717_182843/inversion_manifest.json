@@ -1,0 +1,45 @@
+{
+  "version": "tmm_joint_inversion_lockin_v4",
+  "inputs": [
+    "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_amplitude_high_20260717_181902.npz",
+    "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_amplitude_low_20260717_181902.npz",
+    "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_amplitude_medium_20260717_181902.npz",
+    "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_angle_high_20260717_181902.npz",
+    "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_angle_low_20260717_181902.npz",
+    "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_angle_medium_20260717_181902.npz",
+    "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_clean_20260717_181902.npz",
+    "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_combined_high_20260717_181902.npz",
+    "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_combined_low_20260717_181902.npz",
+    "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_combined_medium_20260717_181902.npz",
+    "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_detector_high_20260717_181902.npz",
+    "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_detector_low_20260717_181902.npz",
+    "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_detector_medium_20260717_181902.npz",
+    "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_material_high_20260717_181902.npz",
+    "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_material_low_20260717_181902.npz",
+    "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_material_medium_20260717_181902.npz",
+    "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_wavelength_high_20260717_181902.npz",
+    "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_wavelength_low_20260717_181902.npz",
+    "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_wavelength_medium_20260717_181902.npz"
+  ],
+  "config": {
+    "input_npz": "",
+    "amplitude_nm": -1.0,
+    "wavelength_min_nm": 220.0,
+    "wavelength_max_nm": 580.0,
+    "stride": 10,
+    "multistarts": 16,
+    "max_nfev": 250,
+    "global_popsize": 12,
+    "global_maxiter": 50,
+    "global_stride": 50,
+    "global_phase_samples": 8,
+    "local_phase_samples": 16,
+    "random_seed": 20260717,
+    "use_prior": false,
+    "loss": "soft_l1"
+  },
+  "modes": [
+    "joint"
+  ],
+  "failures": []
+}

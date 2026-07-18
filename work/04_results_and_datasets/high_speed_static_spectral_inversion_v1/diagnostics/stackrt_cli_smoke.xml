@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites testcount="1" failures="0" errors="1">
+    <testsuite name="stackrt_cli_smoke" tests="1">
+        <testcase name="D:\激光干涉仪\simulation\Lumerical_simulation\STACK_simu\work\04_results_and_datasets\high_speed_static_spectral_inversion_v1\diagnostics\stackrt_cli_smoke.lsf" failures="0" errors="1">
+            <error result="error" message="in matlabsave: can not open file D:/激光干涉仪/simulation/Lumerical_simulation/STACK_simu/work/04_results_and_datasets/high_speed_static_spectral_inversion_v1/diagnostics/stackrt_cli_smoke_output.mat for writing" buffer="D:\激光干涉仪\simulation\Lumerical_simulation\STACK_simu\work\04_results_and_datasets\high_speed_static_spectral_inversion_v1\diagnostics\stackrt_cli_smoke.lsf" file="D:\激光干涉仪\simulation\Lumerical_simulation\STACK_simu\work\04_results_and_datasets\high_speed_static_spectral_inversion_v1\diagnostics\stackrt_cli_smoke.lsf" line="8"/>
+        </testcase>
+    </testsuite>
+</testsuites>

@@ -1,0 +1,183 @@
+{
+  "generator_version": "main_dynamic_v5",
+  "timestamp": "20260717_181902",
+  "root_seed": 20260717,
+  "backend": "batch",
+  "requested_cases": [
+    "clean",
+    "angle_low",
+    "angle_medium",
+    "angle_high",
+    "wavelength_low",
+    "wavelength_medium",
+    "wavelength_high",
+    "material_low",
+    "material_medium",
+    "material_high",
+    "amplitude_low",
+    "amplitude_medium",
+    "amplitude_high",
+    "detector_low",
+    "detector_medium",
+    "detector_high",
+    "combined_low",
+    "combined_medium",
+    "combined_high"
+  ],
+  "angle_limit_deg": 0.1,
+  "artifacts": [
+    {
+      "case": "clean",
+      "seed": 2416604853,
+      "npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_clean_20260717_181902.npz",
+      "metadata": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\noise_realization_clean_20260717_181902.json",
+      "lockin_plot": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\lockin_analysis_clean_20260717_181902.png",
+      "dashboard": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_analysis_dashboard_clean_20260717_181902.png"
+    },
+    {
+      "case": "angle_low",
+      "seed": 3359872371,
+      "npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_angle_low_20260717_181902.npz",
+      "metadata": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\noise_realization_angle_low_20260717_181902.json",
+      "lockin_plot": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\lockin_analysis_angle_low_20260717_181902.png",
+      "dashboard": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_analysis_dashboard_angle_low_20260717_181902.png"
+    },
+    {
+      "case": "angle_medium",
+      "seed": 3945160631,
+      "npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_angle_medium_20260717_181902.npz",
+      "metadata": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\noise_realization_angle_medium_20260717_181902.json",
+      "lockin_plot": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\lockin_analysis_angle_medium_20260717_181902.png",
+      "dashboard": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_analysis_dashboard_angle_medium_20260717_181902.png"
+    },
+    {
+      "case": "angle_high",
+      "seed": 3962699459,
+      "npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_angle_high_20260717_181902.npz",
+      "metadata": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\noise_realization_angle_high_20260717_181902.json",
+      "lockin_plot": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\lockin_analysis_angle_high_20260717_181902.png",
+      "dashboard": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_analysis_dashboard_angle_high_20260717_181902.png"
+    },
+    {
+      "case": "wavelength_low",
+      "seed": 1661050778,
+      "npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_wavelength_low_20260717_181902.npz",
+      "metadata": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\noise_realization_wavelength_low_20260717_181902.json",
+      "lockin_plot": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\lockin_analysis_wavelength_low_20260717_181902.png",
+      "dashboard": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_analysis_dashboard_wavelength_low_20260717_181902.png"
+    },
+    {
+      "case": "wavelength_medium",
+      "seed": 3092984778,
+      "npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_wavelength_medium_20260717_181902.npz",
+      "metadata": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\noise_realization_wavelength_medium_20260717_181902.json",
+      "lockin_plot": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\lockin_analysis_wavelength_medium_20260717_181902.png",
+      "dashboard": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_analysis_dashboard_wavelength_medium_20260717_181902.png"
+    },
+    {
+      "case": "wavelength_high",
+      "seed": 1158805266,
+      "npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_wavelength_high_20260717_181902.npz",
+      "metadata": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\noise_realization_wavelength_high_20260717_181902.json",
+      "lockin_plot": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\lockin_analysis_wavelength_high_20260717_181902.png",
+      "dashboard": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_analysis_dashboard_wavelength_high_20260717_181902.png"
+    },
+    {
+      "case": "material_low",
+      "seed": 2530969932,
+      "npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_material_low_20260717_181902.npz",
+      "metadata": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\noise_realization_material_low_20260717_181902.json",
+      "lockin_plot": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\lockin_analysis_material_low_20260717_181902.png",
+      "dashboard": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_analysis_dashboard_material_low_20260717_181902.png"
+    },
+    {
+      "case": "material_medium",
+      "seed": 3313923774,
+      "npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_material_medium_20260717_181902.npz",
+      "metadata": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\noise_realization_material_medium_20260717_181902.json",
+      "lockin_plot": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\lockin_analysis_material_medium_20260717_181902.png",
+      "dashboard": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_analysis_dashboard_material_medium_20260717_181902.png"
+    },
+    {
+      "case": "material_high",
+      "seed": 3769213041,
+      "npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_material_high_20260717_181902.npz",
+      "metadata": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\noise_realization_material_high_20260717_181902.json",
+      "lockin_plot": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\lockin_analysis_material_high_20260717_181902.png",
+      "dashboard": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_analysis_dashboard_material_high_20260717_181902.png"
+    },
+    {
+      "case": "amplitude_low",
+      "seed": 1604319046,
+      "npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_amplitude_low_20260717_181902.npz",
+      "metadata": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\noise_realization_amplitude_low_20260717_181902.json",
+      "lockin_plot": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\lockin_analysis_amplitude_low_20260717_181902.png",
+      "dashboard": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_analysis_dashboard_amplitude_low_20260717_181902.png"
+    },
+    {
+      "case": "amplitude_medium",
+      "seed": 3303205691,
+      "npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_amplitude_medium_20260717_181902.npz",
+      "metadata": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\noise_realization_amplitude_medium_20260717_181902.json",
+      "lockin_plot": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\lockin_analysis_amplitude_medium_20260717_181902.png",
+      "dashboard": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_analysis_dashboard_amplitude_medium_20260717_181902.png"
+    },
+    {
+      "case": "amplitude_high",
+      "seed": 358875019,
+      "npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_amplitude_high_20260717_181902.npz",
+      "metadata": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\noise_realization_amplitude_high_20260717_181902.json",
+      "lockin_plot": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\lockin_analysis_amplitude_high_20260717_181902.png",
+      "dashboard": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_analysis_dashboard_amplitude_high_20260717_181902.png"
+    },
+    {
+      "case": "detector_low",
+      "seed": 3175214095,
+      "npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_detector_low_20260717_181902.npz",
+      "metadata": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\noise_realization_detector_low_20260717_181902.json",
+      "lockin_plot": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\lockin_analysis_detector_low_20260717_181902.png",
+      "dashboard": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_analysis_dashboard_detector_low_20260717_181902.png"
+    },
+    {
+      "case": "detector_medium",
+      "seed": 2576883442,
+      "npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_detector_medium_20260717_181902.npz",
+      "metadata": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\noise_realization_detector_medium_20260717_181902.json",
+      "lockin_plot": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\lockin_analysis_detector_medium_20260717_181902.png",
+      "dashboard": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_analysis_dashboard_detector_medium_20260717_181902.png"
+    },
+    {
+      "case": "detector_high",
+      "seed": 2573934764,
+      "npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_detector_high_20260717_181902.npz",
+      "metadata": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\noise_realization_detector_high_20260717_181902.json",
+      "lockin_plot": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\lockin_analysis_detector_high_20260717_181902.png",
+      "dashboard": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_analysis_dashboard_detector_high_20260717_181902.png"
+    },
+    {
+      "case": "combined_low",
+      "seed": 758726564,
+      "npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_combined_low_20260717_181902.npz",
+      "metadata": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\noise_realization_combined_low_20260717_181902.json",
+      "lockin_plot": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\lockin_analysis_combined_low_20260717_181902.png",
+      "dashboard": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_analysis_dashboard_combined_low_20260717_181902.png"
+    },
+    {
+      "case": "combined_medium",
+      "seed": 12012435,
+      "npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_combined_medium_20260717_181902.npz",
+      "metadata": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\noise_realization_combined_medium_20260717_181902.json",
+      "lockin_plot": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\lockin_analysis_combined_medium_20260717_181902.png",
+      "dashboard": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_analysis_dashboard_combined_medium_20260717_181902.png"
+    },
+    {
+      "case": "combined_high",
+      "seed": 2179254733,
+      "npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_combined_high_20260717_181902.npz",
+      "metadata": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\noise_realization_combined_high_20260717_181902.json",
+      "lockin_plot": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\lockin_analysis_combined_high_20260717_181902.png",
+      "dashboard": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_analysis_dashboard_combined_high_20260717_181902.png"
+    }
+  ],
+  "failures": []
+}

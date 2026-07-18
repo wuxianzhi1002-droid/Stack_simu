@@ -3,6 +3,7 @@ scipy>=1.13
 matplotlib>=3.8
 pandas>=2.0
 tabulate>=0.9
+h5py>=3.10
 
 # Optional only. The project includes a NumPy restart CMA-ES implementation.
 # cma>=3.3.0

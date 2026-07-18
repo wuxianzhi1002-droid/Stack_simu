@@ -8,7 +8,7 @@ from typing import Any
 
 import numpy as np
 
-from main_static_stackrt import StaticStackRTGenerator, TMMStaticSmokeGenerator
+from main_static_stackrt import StaticStackRTCLIGenerator, StaticStackRTGenerator, TMMStaticSmokeGenerator
 from model_config import LOWER_BOUNDS, UPPER_BOUNDS, load_config, wavelength_axis_um
 
 
@@ -64,6 +64,16 @@ def apply_measurement_effects(
     }
 
 
+def realize_measurement_nuisance(noise_config: dict[str, float], rng: np.random.Generator) -> dict[str, float]:
+    return {
+        "noise_sigma": float(noise_config["noise_sigma"]),
+        "wavelength_offset_nm": float(rng.normal(0.0, noise_config["wavelength_offset_sigma_nm"])),
+        "wavelength_scale_ppm": float(rng.normal(0.0, noise_config["wavelength_scale_sigma_ppm"])),
+        "source_scale": float(1.0 + rng.normal(0.0, noise_config["source_scale_sigma"])),
+        "source_offset": float(rng.normal(0.0, noise_config["source_offset_sigma"])),
+    }
+
+
 def generate_dataset(
     config: dict[str, Any],
     output: Path,
@@ -83,16 +93,32 @@ def generate_dataset(
     spectra = np.empty((count, wavelengths_um.size), dtype=float)
     nuisance = {name: np.empty(count, dtype=float) for name in ("noise_sigma", "wavelength_offset_nm", "wavelength_scale_ppm", "source_scale", "source_offset")}
 
-    generator_class = StaticStackRTGenerator if backend == "stackrt" else TMMStaticSmokeGenerator
-    with generator_class(wavelengths_um) as generator:
+    if backend == "stackrt-cli":
+        physical_axes = np.empty_like(spectra)
         for index in range(count):
-            spectra[index], realized = apply_measurement_effects(wavelengths_um, generator, truth[index], noise_config, rng)
+            realized = realize_measurement_nuisance(noise_config, rng)
             for name, value in realized.items():
                 nuisance[name][index] = value
+            physical_axes[index] = (
+                wavelengths_um * (1.0 + realized["wavelength_scale_ppm"] * 1e-6)
+                + realized["wavelength_offset_nm"] / 1000.0
+            )
+        clean_spectra = StaticStackRTCLIGenerator().spectra(physical_axes, truth)
+        for index in range(count):
+            spectra[index] = nuisance["source_scale"][index] * clean_spectra[index] + nuisance["source_offset"][index]
+            if nuisance["noise_sigma"][index] > 0.0:
+                spectra[index] += rng.normal(0.0, nuisance["noise_sigma"][index], size=wavelengths_um.size)
+    else:
+        generator_class = StaticStackRTGenerator if backend == "stackrt-interop" else TMMStaticSmokeGenerator
+        with generator_class(wavelengths_um) as generator:
+            for index in range(count):
+                spectra[index], realized = apply_measurement_effects(wavelengths_um, generator, truth[index], noise_config, rng)
+                for name, value in realized.items():
+                    nuisance[name][index] = value
 
     output.parent.mkdir(parents=True, exist_ok=True)
     generation = {
-        "generator": "StackRT" if backend == "stackrt" else "TMM_SMOKE_TEST_NOT_STACKRT",
+        "generator": "StackRT_CLI" if backend == "stackrt-cli" else ("StackRT_INTEROP" if backend == "stackrt-interop" else "TMM_SMOKE_TEST_NOT_STACKRT"),
         "backend": backend,
         "noise_level": noise_level,
         "trajectory": trajectory_name,
@@ -119,7 +145,7 @@ def build_parser() -> argparse.ArgumentParser:
     project_root = Path(__file__).resolve().parents[1]
     parser = argparse.ArgumentParser(description="Generate static StackRT spectra or labelled TMM smoke data.")
     parser.add_argument("--config", default=str(project_root / "config_default.json"))
-    parser.add_argument("--backend", choices=("stackrt", "tmm-smoke"), default="stackrt")
+    parser.add_argument("--backend", choices=("stackrt-cli", "stackrt-interop", "tmm-smoke"), default="stackrt-cli")
     parser.add_argument("--noise-level", choices=("ideal", "noisy"), default="ideal")
     parser.add_argument("--sample-count", type=int)
     parser.add_argument("--trajectory", choices=("random", "tracking"))
@@ -131,7 +157,7 @@ def main() -> None:
     args = build_parser().parse_args()
     config = load_config(args.config)
     project_root = Path(__file__).resolve().parents[1]
-    label = "stackrt" if args.backend == "stackrt" else "tmm_smoke_not_stackrt"
+    label = args.backend.replace("-", "_") if args.backend != "tmm-smoke" else "tmm_smoke_not_stackrt"
     output = Path(args.output) if args.output else project_root / "datasets" / f"static_{label}_{args.noise_level}.npz"
     result = generate_dataset(config, output, args.backend, args.noise_level, args.sample_count, args.trajectory)
     with np.load(result) as data:

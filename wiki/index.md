@@ -15,7 +15,7 @@
 
 - [[03_Methods/Signal_Processing/height_modulated_lockin_observability]]：高度调制锁相联合反演方法
 - [[04_Experiments/Simulation_Reports/Height_Modulated_Lockin_Joint_Inversion_Progress_20260714]]：锁相提取、TMM 约定、三组反演及 `A=5 nm` 模型偏差
-- [[04_Experiments/Simulation_Reports/TMM_Joint_Inversion_Lockin_v3_20260715]]：无真值起点、有限幅值模型与 32 起点全局到局部反演
+- [[TMM_Joint_Inversion_Lockin_v3_20260715]]：无真值起点、有限幅值模型与 32 起点全局到局部反演
 - [[04_Experiments/Simulation_Reports/Dynamic_StackRT_TMM_Single_Spectrum_20260713]]：StackRT 与 TMM 单光谱前向闭环
 
 ## 目录

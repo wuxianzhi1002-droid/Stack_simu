@@ -1,4 +1,4 @@
----
+﻿---
 type: project
 status: draft
 created: 2026-07-04
@@ -27,7 +27,7 @@ tags:
 
 - 动态 1 mm 腔首帧 StackRT-TMM 单光谱对比：[[04_Experiments/Simulation_Reports/Dynamic_StackRT_TMM_Single_Spectrum_20260713]]
 - 高度调制锁相提取与 TMM 联合反演进展：[[04_Experiments/Simulation_Reports/Height_Modulated_Lockin_Joint_Inversion_Progress_20260714]]
-- 无真值起点 TMM 锁相联合反演 v3：[[04_Experiments/Simulation_Reports/TMM_Joint_Inversion_Lockin_v3_20260715]]
+- 无真值起点 TMM 锁相联合反演 v3：[[TMM_Joint_Inversion_Lockin_v3_20260715]]
 
 ## ML 输出
 
@@ -48,3 +48,14 @@ tags:
 - 输出文件本体留在 `work/`。
 - 每个重要输出应有一个 Markdown 摘要，说明来源路径、生成条件、关键结论和适用限制。
 - 复盘后有复用价值的内容，应回流到 [[B_概念沉淀库]] 或 [[C_方法与Skill库]]。
+
+## 2026-07-17 TMM 锁相联合反演噪声对比
+
+- [[TMM_Joint_Inversion_Noise_Comparison_20260717|TMM 锁相联合反演：不同噪声等级拟合误差对比]]：汇总 clean、low、medium、high 下 Air、HSQ、PSS、SOC、TiO2 的 rank-1 拟合误差，并比较 I-only、D-only 与 Joint。
+## 2026-07-17 V5 动态噪声消融
+
+- [[TMM_Joint_Inversion_V5_Noise_Ablation_20260717|V5 StackRT 噪声消融与角度联合反演分析]]：记录 `dynamic_stackrt_lockin_v5` 与 `tmm_joint_inversion_lockin_v4` 的闭环结论，指出波长轴偏移是当前主导误差源，其次是材料 `n/k` 偏差。
+
+## 2026-07-17 高速静态光谱反演基准
+
+- [[04_Experiments/Simulation_Reports/High_Speed_Static_Spectral_Inversion_v1_20260717|高速静态光谱 TMM 反演基准 v1]]：沉淀 `high_speed_static_spectral_inversion_v1` 的独立项目结构、速度现状和 `100 Hz` 差距。

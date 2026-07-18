@@ -1,0 +1,203 @@
+{
+  "config": {
+    "input_npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v4\\dynamic_spectra_high_20260716_164051.npz",
+    "amplitude_nm": 5.0,
+    "wavelength_min_nm": 220.0,
+    "wavelength_max_nm": 580.0,
+    "stride": 10,
+    "multistarts": 32,
+    "max_nfev": 300,
+    "global_popsize": 16,
+    "global_maxiter": 60,
+    "global_stride": 50,
+    "global_phase_samples": 8,
+    "local_phase_samples": 16,
+    "random_seed": 20260715,
+    "use_prior": false,
+    "loss": "soft_l1"
+  },
+  "input_npz_resolved": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v4\\dynamic_spectra_high_20260716_164051.npz",
+  "params": [
+    "Air",
+    "HSQ",
+    "PSS",
+    "SOC",
+    "TiO2"
+  ],
+  "evaluation_truth_fit_units": {
+    "Air": 1000.0,
+    "HSQ": 30.0,
+    "PSS": 10.0,
+    "SOC": 40.0,
+    "TiO2": 40.0
+  },
+  "bounds_fit_units": {
+    "Air": [
+      998.0,
+      1002.0
+    ],
+    "HSQ": [
+      20.0,
+      40.0
+    ],
+    "PSS": [
+      1.0,
+      20.0
+    ],
+    "SOC": [
+      30.0,
+      50.0
+    ],
+    "TiO2": [
+      30.0,
+      50.0
+    ]
+  },
+  "prior_center_fit_units": {
+    "Air": 1000.0,
+    "HSQ": 30.0,
+    "PSS": 10.5,
+    "SOC": 40.0,
+    "TiO2": 40.0
+  },
+  "prior_sigma_fit_units": {
+    "Air": 2.0,
+    "HSQ": 10.0,
+    "PSS": 5.0,
+    "SOC": 10.0,
+    "TiO2": 10.0
+  },
+  "truth_usage_policy": "evaluation only after optimization; never used in initialization, residuals, priors, or ranking",
+  "postfit_initialization_audit": {
+    "I": {
+      "start_count": 32,
+      "exact_truth_start_count": 0,
+      "minimum_scaled_distance_to_truth": 0.8583401248112853,
+      "maximum_scaled_distance_to_truth": 0.9417566056596579
+    },
+    "D": {
+      "start_count": 32,
+      "exact_truth_start_count": 0,
+      "minimum_scaled_distance_to_truth": 0.6650410745565389,
+      "maximum_scaled_distance_to_truth": 0.859473009483391
+    },
+    "joint": {
+      "start_count": 32,
+      "exact_truth_start_count": 0,
+      "minimum_scaled_distance_to_truth": 0.7201304757048546,
+      "maximum_scaled_distance_to_truth": 0.8055389311439741
+    }
+  },
+  "global_search": {
+    "I": {
+      "success": false,
+      "message": "Maximum number of iterations has been exceeded.",
+      "nfev": 4880,
+      "nit": 60,
+      "best_energy": 0.7972002053016121,
+      "best_vector": [
+        999.8901160544378,
+        20.15538425792489,
+        1.1522213928487623,
+        30.01651015937368,
+        33.42164194130405
+      ],
+      "population_size": 80,
+      "scales": {
+        "sigma_I": 0.14080435013575027,
+        "sigma_dIdL": 7.705703060932954
+      },
+      "initialization": "differential_evolution with Latin-hypercube population; no truth or nominal seed"
+    },
+    "D": {
+      "success": false,
+      "message": "Maximum number of iterations has been exceeded.",
+      "nfev": 4880,
+      "nit": 60,
+      "best_energy": 0.7500180492576155,
+      "best_vector": [
+        999.6709139507713,
+        27.876145869791145,
+        6.766622008063021,
+        49.606786043968604,
+        30.021461657344183
+      ],
+      "population_size": 80,
+      "scales": {
+        "sigma_I": 0.14080435013575027,
+        "sigma_dIdL": 7.705703060932954
+      },
+      "initialization": "differential_evolution with Latin-hypercube population; no truth or nominal seed"
+    },
+    "joint": {
+      "success": false,
+      "message": "Maximum number of iterations has been exceeded.",
+      "nfev": 4880,
+      "nit": 60,
+      "best_energy": 1.018179530113449,
+      "best_vector": [
+        999.662976900664,
+        25.719626571118347,
+        12.282744998903237,
+        49.996379495095326,
+        30.005066994394674
+      ],
+      "population_size": 80,
+      "scales": {
+        "sigma_I": 0.14080435013575027,
+        "sigma_dIdL": 7.705703060932954
+      },
+      "initialization": "differential_evolution with Latin-hypercube population; no truth or nominal seed"
+    }
+  },
+  "tmm_convention": {
+    "frequency_axis": "f = 3e8 / lambda_nominal",
+    "phase_wavelength": "lambda_phase = 299792458 / f",
+    "normal_incidence_admittance": "q = n",
+    "complex_index": "n + i*k",
+    "matrix_off_diagonal_sign": "-i",
+    "observation_model": "finite sinusoidal modulation, mean spectrum, and lockin_1f_X/A",
+    "initialization": "independent differential evolution per mode with Latin-hypercube population",
+    "multistart_selection": "top global-population candidates; successful local fits first, then ascending cost"
+  },
+  "fit_results_csv": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_joint_inversion_lockin_v3_20260717_161806\\fit_results.csv",
+  "multistart_results_csv": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_joint_inversion_lockin_v3_20260717_161806\\multistart_results.csv",
+  "plot_paths": {
+    "best_fit_spectrum": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_joint_inversion_lockin_v3_20260717_161806\\best_fit_spectrum.png",
+    "best_fit_dIdL": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_joint_inversion_lockin_v3_20260717_161806\\best_fit_dIdL.png",
+    "joint_residual": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_joint_inversion_lockin_v3_20260717_161806\\joint_residual.png",
+    "jacobian_singular_values": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_joint_inversion_lockin_v3_20260717_161806\\jacobian_singular_values.png"
+  },
+  "diagnostics": {
+    "I": {
+      "singular_values": [
+        3282.659017353524,
+        4.059916159050649,
+        1.647379716071174,
+        0.36818188500955656,
+        0.23763681230812028
+      ],
+      "condition_number": 13813.764733963959
+    },
+    "D": {
+      "singular_values": [
+        4808.877433162441,
+        9.497176687626226,
+        3.1355687532752894,
+        0.5227568438929592,
+        0.2226909842860325
+      ],
+      "condition_number": 21594.396596611838
+    },
+    "joint": {
+      "singular_values": [
+        5644.876435237128,
+        10.02079846917432,
+        3.919620281621978,
+        0.6933382076108948,
+        0.31455490432899186
+      ],
+      "condition_number": 17945.59982232282
+    }
+  }
+}

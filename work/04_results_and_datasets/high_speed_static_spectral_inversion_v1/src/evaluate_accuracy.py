@@ -143,8 +143,8 @@ def write_report(project_root: Path, run_dir: Path, dataset_path: Path, summary:
 ## 13. 完整运行命令
 
 ```powershell
-python src/generate_static_dataset.py --backend stackrt --noise-level ideal
-python src/run_all_benchmarks.py --dataset datasets/static_stackrt_ideal.npz
+python src/generate_static_dataset.py --backend stackrt-cli --noise-level ideal
+python src/run_all_benchmarks.py --dataset datasets/static_stackrt_cli_ideal.npz
 ```
 """
     report_path.write_text(text, encoding="utf-8")

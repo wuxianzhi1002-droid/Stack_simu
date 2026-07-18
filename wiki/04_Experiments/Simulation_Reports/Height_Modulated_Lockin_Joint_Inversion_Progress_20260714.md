@@ -50,7 +50,7 @@ guesses = [initial_vector()]
 
 后续修正与无真值起点验证见：
 
-[[04_Experiments/Simulation_Reports/TMM_Joint_Inversion_Lockin_v3_20260715]]
+[[TMM_Joint_Inversion_Lockin_v3_20260715]]
 
 ## 研究目标
 

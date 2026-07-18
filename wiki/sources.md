@@ -1,4 +1,4 @@
-# Sources
+﻿# Sources
 
 本页专门记录 `../work/` 中的重要来源路径。Obsidian Vault 不复制大型数据或仿真输出，只记录路径、用途和知识页入口。
 
@@ -40,8 +40,8 @@
 
 | 路径 | 类型 | 用途 | 知识页 |
 |---|---|---|---|
-| `../work/02_analysis_code/tmm_joint_inversion_lockin_v3.py` | 反演代码 | 有限幅值 TMM 观测模型、每模式独立差分进化和 32 起点局部精修；真值仅用于拟合后评估 | [[04_Experiments/Simulation_Reports/TMM_Joint_Inversion_Lockin_v3_20260715]] |
-| `../work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260715_112455/` | 验证结果 | 无真值起点、无先验的 I/D/joint 最终运行，含起点审计和全部 rank | [[04_Experiments/Simulation_Reports/TMM_Joint_Inversion_Lockin_v3_20260715]] |
+| `../work/02_analysis_code/tmm_joint_inversion_lockin_v3.py` | 反演代码 | 有限幅值 TMM 观测模型、每模式独立差分进化和 32 起点局部精修；真值仅用于拟合后评估 | [[TMM_Joint_Inversion_Lockin_v3_20260715]] |
+| `../work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260715_112455/` | 验证结果 | 无真值起点、无先验的 I/D/joint 最终运行，含起点审计和全部 rank | [[TMM_Joint_Inversion_Lockin_v3_20260715]] |
 
 ## 2026-07-13 动态 StackRT 单光谱对比
 
@@ -78,12 +78,12 @@
 
 | ?? | ?? | ?? | ??? |
 |---|---|---|---|
-| `../work/02_analysis_code/tmm_inverse_validation_robust.py` | ?? | ???? TMM ????????????????????????????? | [[04_Experiments/Simulation_Reports/TMM_StackRT_Inverse_Validation_20260707_20260708]] |
-| `../work/02_analysis_code/stackrt_vs_tmm_inverse_validation.py` | ?? | StackRT ???? TMM ????????????? | [[04_Experiments/Simulation_Reports/TMM_StackRT_Inverse_Validation_20260707_20260708]] |
-| `../work/02_analysis_code/stackrt_vs_tmm_inverse_validation_v2.py` | ?? | ? StackRT ? `Cu` ?????? TMM ??????? mismatch ?? | [[04_Experiments/Simulation_Reports/TMM_StackRT_Inverse_Validation_20260707_20260708]] |
-| `../work/04_results_and_datasets/tmm_inverse_validation_20260707_153155/` | ???? | ?? forward model ?? TMM ?????? | [[04_Experiments/Simulation_Reports/TMM_StackRT_Inverse_Validation_20260707_20260708]] |
-| `../work/04_results_and_datasets/tmm_inverse_validation_robust_20260707_203937/` | ???? | ?? realistic ???? robust TMM ???? | [[04_Experiments/Simulation_Reports/TMM_StackRT_Inverse_Validation_20260707_20260708]] |
-| `../work/04_results_and_datasets/stackrt_vs_tmm_inverse_validation_v2_20260708_021808/` | ???? | ?? `Cu` ?? StackRT vs TMM mismatch ???? | [[04_Experiments/Simulation_Reports/TMM_StackRT_Inverse_Validation_20260707_20260708]] |
+| `../work/02_analysis_code/tmm_inverse_validation_robust.py` | ?? | ???? TMM ????????????????????????????? | [[TMM_StackRT_Inverse_Validation_20260707_20260708]] |
+| `../work/02_analysis_code/stackrt_vs_tmm_inverse_validation.py` | ?? | StackRT ???? TMM ????????????? | [[TMM_StackRT_Inverse_Validation_20260707_20260708]] |
+| `../work/02_analysis_code/stackrt_vs_tmm_inverse_validation_v2.py` | ?? | ? StackRT ? `Cu` ?????? TMM ??????? mismatch ?? | [[TMM_StackRT_Inverse_Validation_20260707_20260708]] |
+| `../work/04_results_and_datasets/tmm_inverse_validation_20260707_153155/` | ???? | ?? forward model ?? TMM ?????? | [[TMM_StackRT_Inverse_Validation_20260707_20260708]] |
+| `../work/04_results_and_datasets/tmm_inverse_validation_robust_20260707_203937/` | ???? | ?? realistic ???? robust TMM ???? | [[TMM_StackRT_Inverse_Validation_20260707_20260708]] |
+| `../work/04_results_and_datasets/stackrt_vs_tmm_inverse_validation_v2_20260708_021808/` | ???? | ?? `Cu` ?? StackRT vs TMM mismatch ???? | [[TMM_StackRT_Inverse_Validation_20260707_20260708]] |
 | `../work/03_ml_inverse_modeling/ML try/Residual MLP/train_residual_mlp_simple_pca_label_uncertainty_v4.py` | ?? | `?10 nm` ????????????????????? | [[04_Experiments/ML_Runs/residual_mlp_simple_pca_label_uncertainty_v4_20260707_011244]] |
 | `../work/03_ml_inverse_modeling/ML try/Residual MLP/residual_mlp_simple_pca_label_uncertainty_v4_20260707_011244/` | ???? | `label_uncertainty_v4` ????????????? | [[04_Experiments/ML_Runs/residual_mlp_simple_pca_label_uncertainty_v4_20260707_011244]] |
 
@@ -107,3 +107,27 @@
 | `02_Literature/悉识科技资料/回复清华大学的问询.md` | 厂商问询回复 | 多层膜 `~0.5 nm` 精度适用条件、校准和模型约束说明 | [[03_Methods/Acuitik_NanoSense_measurement_assessment]] |
 | `02_Literature/悉识科技资料/案例1.pdf` | 应用案例 | 玻璃基底单层/多层膜测量结果，用于判断复杂 stack 风险 | [[03_Methods/Acuitik_NanoSense_measurement_assessment]] |
 | `02_Literature/悉识科技资料/案例2.pdf` | 应用案例 | NS-Micro 对 PI-Si 微区膜厚测量的流程、光斑和结果 | [[03_Methods/Acuitik_NanoSense_measurement_assessment]] |
+
+## 2026-07-17 锁相联合反演噪声对比
+
+| 路径 | 类型 | 用途 | 知识页 |
+|---|---|---|---|
+| `../work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_152324/` | clean 反演结果 | 无噪声闭环基线 | [[TMM_Joint_Inversion_Noise_Comparison_20260717]] |
+| `../work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_152530/` | low 反演结果 | 低噪声误差对比 | [[TMM_Joint_Inversion_Noise_Comparison_20260717]] |
+| `../work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_154420/` | medium 反演结果 | 中噪声误差对比 | [[TMM_Joint_Inversion_Noise_Comparison_20260717]] |
+| `../work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260717_161806/` | high 反演结果 | 高噪声误差对比 | [[TMM_Joint_Inversion_Noise_Comparison_20260717]] |
+## 2026-07-17 V5 动态噪声消融与角度联合反演
+
+| 路径 | 类型 | 用途 | 知识页 |
+|---|---|---|---|
+| `../work/01_simulation_models/01_Lumerical_Workflow/main_dynamic_v5.py` | 仿真代码 | 生成含角度、波长、材料、幅值、探测器与组合扰动的 StackRT 动态数据 | [[TMM_Joint_Inversion_V5_Noise_Ablation_20260717]] |
+| `../work/02_analysis_code/tmm_joint_inversion_lockin_v4.py` | 反演代码 | 在联合反演中加入 `Angle` 参数并匹配 V5 数据格式 | [[TMM_Joint_Inversion_V5_Noise_Ablation_20260717]] |
+| `../work/04_results_and_datasets/dynamic_stackrt_lockin_v5/` | 动态仿真输出 | 保存 V5 各噪声因子/等级的 NPZ、锁相图和 realization JSON | [[TMM_Joint_Inversion_V5_Noise_Ablation_20260717]] |
+| `../work/04_results_and_datasets/tmm_joint_inversion_lockin_v4_20260717_182843/` | 消融分析结果 | 汇总单次 realization 下的厚度误差、主导噪声项和优化诊断 | [[TMM_Joint_Inversion_V5_Noise_Ablation_20260717]] |
+
+## 2026-07-17 高速静态光谱反演基准 v1
+
+| 路径 | 类型 | 用途 | 知识页 |
+|---|---|---|---|
+| `../work/04_results_and_datasets/high_speed_static_spectral_inversion_v1/README.md` | 项目说明 | 记录独立静态光谱反演基准的结构、命令入口和边界条件 | [[04_Experiments/Simulation_Reports/High_Speed_Static_Spectral_Inversion_v1_20260717]] |
+| `../work/04_results_and_datasets/high_speed_static_spectral_inversion_v1/report/global_optimizer_comparison.md` | 基准报告 | 汇总多算法精度、Air 阶次命中率和在线延迟统计 | [[04_Experiments/Simulation_Reports/High_Speed_Static_Spectral_Inversion_v1_20260717]] |

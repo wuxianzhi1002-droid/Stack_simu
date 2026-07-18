@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites testcount="1" failures="0" errors="1">
+    <testsuite name="stackrt_test" tests="1">
+        <testcase name="stackrt_test.lsf" failures="0" errors="1">
+            <error result="error" message="in matlabload: cannot open file stackrt_input.mat for reading. Please confirm the file is a MATLAB v7 file or higher. See https://go.lumeri.ca/matlabload for more details." buffer="stackrt_test.lsf" file="stackrt_test.lsf" line="1"/>
+        </testcase>
+    </testsuite>
+</testsuites>

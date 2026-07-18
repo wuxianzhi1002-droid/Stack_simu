@@ -1,4 +1,4 @@
-# Log
+﻿# Log
 
 ## 2026-07-16
 
@@ -162,3 +162,17 @@
 - 使用 Acuitik 薄膜反射率计算器网页 API 计算 `HSQ / PSS / SOC / TiO2(or HfO2) / Si substitute` 的 400-800 nm 垂直入射反射谱；输出 CSV、PNG 和 JSON 摘要到 `../work/04_results_and_datasets/acuitik_reflectance_20260706/`，并新增记录页 `wiki/04_Experiments/Simulation_Reports/Acuitik_Reflectance_Calculator_20260706.md`。
 - 按“网页内置材料优先”口径补算 Acuitik 替代栈 `SiO2 / Acrylic / Acrylic / Al2O3 / Si`；输出到 `../work/04_results_and_datasets/acuitik_reflectance_20260706_builtin_substitutes/`，并在同一记录页标注 TiO2/HfO2 在该网页材料库中均由 Al2O3 替代。
 - 对 `1 mm` 空气腔效应做本地 TMM 高分辨率测试：仅加入空气层不会改变反射率强度；加入弱 SiO2 参考层后出现约 `0.18 nm` 周期的密集条纹，并说明 Acuitik 默认 `500` 点扫描会欠采样。结果保存到 `../work/04_results_and_datasets/acuitik_reflectance_20260706_1mm_air_gap/`。
+
+## 2026-07-17
+
+- 新增 `wiki/04_Experiments/Simulation_Reports/TMM_Joint_Inversion_Noise_Comparison_20260717.md` 及配套 PNG，对比 clean、low、medium、high 下 I-only、D-only、Joint 的 Air 和四个膜层绝对误差。
+- 已核对四个结果目录与输入等级一一对应；图中 Air 误差统一从 μm 转为 nm，另给出四膜层平均绝对误差。
+- 当前单次 realization 中误差不随等级严格单调，且多组膜厚结果触及 bounds；正式鲁棒性结论仍需多随机种子统计。
+## 2026-07-18
+
+- 巡检 `work/` 与 `wiki/`，继续保持 `work/` 只读；本轮未发现失效的本地图片链接，也未发现失效的显式 `../work/...` 路径引用。
+- 新增 `wiki/04_Experiments/Simulation_Reports/TMM_Joint_inversion/TMM_Joint_Inversion_V5_Noise_Ablation_20260717.md`，回流 `main_dynamic_v5.py`、`tmm_joint_inversion_lockin_v4.py`、`dynamic_stackrt_lockin_v5/` 与 `tmm_joint_inversion_lockin_v4_20260717_182843/analysis_report.md` 的关键结论。
+- 新增 `wiki/04_Experiments/Simulation_Reports/High_Speed_Static_Spectral_Inversion_v1_20260717.md`，沉淀 `high_speed_static_spectral_inversion_v1` 的独立项目说明、当前速度量级与 `100 Hz` 差距。
+- 更新 `wiki/sources.md` 与 `wiki/00_Knowledge_Flow/D_输出成果索引.md`，补上上述两组来源和知识入口。
+- 更新 `wiki/06_Issues/open_questions.md`，补充 V5 噪声统计、波长轴 nuisance 参数以及高速静态基准后续优先级这三类待人工确认问题。
+- 补修 `wiki/04_Experiments/Simulation_Reports/TMM_Joint_inversion/TMM_Joint_Inversion_Lockin_v3_20260715.md` 中两处已失效的旧结果截图引用；因原 `112455` 输出目录不存在，改为保留文字说明而不继续嵌入死链。

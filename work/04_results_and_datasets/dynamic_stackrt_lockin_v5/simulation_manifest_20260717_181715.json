@@ -1,0 +1,18 @@
+{
+  "generator_version": "main_dynamic_v5",
+  "timestamp": "20260717_181715",
+  "root_seed": 20260717,
+  "backend": "batch",
+  "requested_cases": [
+    "clean"
+  ],
+  "angle_limit_deg": 0.1,
+  "artifacts": [],
+  "failures": [
+    {
+      "case": "clean",
+      "seed": 2416604853,
+      "error": "StackRT batch failed; see D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\_stackrt_batch_bridge\\stackrt_batch.log"
+    }
+  ]
+}

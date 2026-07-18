@@ -1,0 +1,43 @@
+{
+  "generator_version": "main_dynamic_v5",
+  "noise_case": "combined_high",
+  "noise_level": "high",
+  "noise_factor": "combined",
+  "random_seed": 2179254733,
+  "noise_realization": {
+    "case": "combined_high",
+    "level": "high",
+    "factor": "combined",
+    "profile_config": {
+      "n_real_sigma_rel": 0.005,
+      "k_sigma_rel": 0.1,
+      "angle_sigma_deg": 0.1,
+      "wavelength_offset_sigma_nm": 0.005,
+      "amplitude_sigma_rel": 0.01,
+      "frame_gain_sigma_rel": 0.005,
+      "reflectance_sigma_abs": 0.005
+    },
+    "material_n_real_rel_delta": {
+      "HSQ": -0.002580990845501012,
+      "PSS": -0.003302627892053878,
+      "SOC": -0.000652258178234897,
+      "TiO2": 0.011992781954597688
+    },
+    "material_k_rel_delta": {
+      "HSQ": -0.15435877737232842,
+      "PSS": -0.059777520819612955,
+      "SOC": 0.01798952526268584,
+      "TiO2": -0.03864034288681312
+    },
+    "angle_input_convention": "nonnegative StackRT first-incident-medium angle in degrees",
+    "angle_limit_deg": 0.1,
+    "angle_error_deg": 0.0588126030805206,
+    "wavelength_offset_nm": -0.005267863935779506,
+    "amplitude_rel_error": -0.011065939943699235
+  },
+  "nominal_amplitude_nm": 5.0,
+  "actual_amplitude_nm": 4.944670300281505,
+  "actual_angle_deg": 0.0588126030805206,
+  "reflectance_clip_fraction": 0.001041125,
+  "npz_path": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_combined_high_20260717_181902.npz"
+}

@@ -1,0 +1,17 @@
+{
+  "generator_version": "main_dynamic_v5",
+  "timestamp": "20260717_171931",
+  "root_seed": 20260717,
+  "requested_cases": [
+    "clean"
+  ],
+  "angle_limit_deg": 0.1,
+  "artifacts": [],
+  "failures": [
+    {
+      "case": "clean",
+      "seed": 2416604853,
+      "error": "'Exception [<Global>::appOpened]: Session not found'"
+    }
+  ]
+}

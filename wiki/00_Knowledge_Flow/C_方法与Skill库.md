@@ -22,7 +22,7 @@ tags:
 - 信号处理方法：[[03_Methods/Signal_Processing/sdi_principle]]
 - 高度调制锁相增强反演可观测性：[[03_Methods/Signal_Processing/height_modulated_lockin_observability]]
 - 高度调制锁相与 TMM 联合反演仿真进展：[[04_Experiments/Simulation_Reports/Height_Modulated_Lockin_Joint_Inversion_Progress_20260714]]
-- 无真值起点的 TMM 锁相联合反演 v3：[[04_Experiments/Simulation_Reports/TMM_Joint_Inversion_Lockin_v3_20260715]]
+- 无真值起点的 TMM 锁相联合反演 v3：[[TMM_Joint_Inversion_Lockin_v3_20260715]]
 - lumerical gui仿真参数设置：[[03_Methods/Simulation/Simulation_Parameters_Guide]]
 - 代码和数据结构地图：[[05_CodeNotes/STACK_simu_code_map]]
 - ML 数据集生成要求：[[05_CodeNotes/ML_CodeNotes/ML_try_prompt]]

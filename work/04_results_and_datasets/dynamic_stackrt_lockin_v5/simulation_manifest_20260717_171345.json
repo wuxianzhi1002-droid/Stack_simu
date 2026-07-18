@@ -1,0 +1,35 @@
+{
+  "generator_version": "main_dynamic_v5",
+  "timestamp": "20260717_171345",
+  "root_seed": 20260717,
+  "requested_cases": [
+    "clean",
+    "angle_low",
+    "angle_medium",
+    "angle_high",
+    "wavelength_low",
+    "wavelength_medium",
+    "wavelength_high",
+    "material_low",
+    "material_medium",
+    "material_high",
+    "amplitude_low",
+    "amplitude_medium",
+    "amplitude_high",
+    "detector_low",
+    "detector_medium",
+    "detector_high",
+    "combined_low",
+    "combined_medium",
+    "combined_high"
+  ],
+  "angle_limit_deg": 0.1,
+  "artifacts": [],
+  "failures": [
+    {
+      "case": "clean",
+      "seed": 2416604853,
+      "error": "'Exception [<Global>::appOpened]: Session not found'"
+    }
+  ]
+}

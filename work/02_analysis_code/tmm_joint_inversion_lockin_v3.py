@@ -19,7 +19,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parents[1]
 OUTPUT_ROOT = REPO_ROOT / "work" / "04_results_and_datasets"
 DEFAULT_INPUT_DIR = OUTPUT_ROOT / "dynamic_stackrt_lockin_v4"
-DEFAULT_INPUT_NPZ = DEFAULT_INPUT_DIR / "dynamic_spectra_low_20260716_164051.npz"
+DEFAULT_INPUT_NPZ = DEFAULT_INPUT_DIR / "dynamic_spectra_high_20260716_164051.npz"
 
 PARAMS = ["Air", "HSQ", "PSS", "SOC", "TiO2"]
 

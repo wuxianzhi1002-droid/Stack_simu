@@ -1,0 +1,12 @@
+n_real=readdata("n_real.txt");
+n_imag=readdata("n_imag.txt");
+n_matrix=n_real+1i*n_imag;
+freqs=readdata("freqs.txt");
+thicknesses=readdata("thicknesses.txt");
+L_t=readdata("L_t.txt");
+Nt=length(L_t);
+Nf=length(freqs);
+spectra=matrix(Nt,Nf);
+for(i=1:Nt){current=thicknesses;current(2)=L_t(i);result=stackrt(n_matrix,current,freqs,0.058812603080520602);spectra(i,1:Nf)=transpose(result.Rp);}
+matlabsave("stackrt_dynamic_output",spectra);
+exit;

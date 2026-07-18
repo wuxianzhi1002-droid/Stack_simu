@@ -1,0 +1,9 @@
+n_real=readdata("n_real.txt");
+n_imag=readdata("n_imag.txt");
+n_matrix=n_real+1i*n_imag;
+freqs=readdata("freqs.txt");
+thicknesses=readdata("thicknesses.txt");
+result=stackrt(n_matrix,thicknesses,freqs,0);
+Rp=result.Rp;
+matlabsave("stackrt_output",Rp);
+exit;

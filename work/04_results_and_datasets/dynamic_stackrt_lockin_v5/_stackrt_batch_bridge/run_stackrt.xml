@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites testcount="1" failures="0" errors="1">
+    <testsuite name="run_stackrt" tests="1">
+        <testcase name="run_stackrt.lsf" failures="0" errors="1">
+            <error result="error" message="Error: run_stackrt.lsf line 10: syntax error&#10;" buffer="run_stackrt.lsf" file="run_stackrt.lsf" line="0"/>
+        </testcase>
+    </testsuite>
+</testsuites>

@@ -1,0 +1,43 @@
+{
+  "generator_version": "main_dynamic_v5",
+  "noise_case": "clean",
+  "noise_level": "clean",
+  "noise_factor": "clean",
+  "random_seed": 2416604853,
+  "noise_realization": {
+    "case": "clean",
+    "level": "clean",
+    "factor": "clean",
+    "profile_config": {
+      "n_real_sigma_rel": 0.0,
+      "k_sigma_rel": 0.0,
+      "angle_sigma_deg": 0.0,
+      "wavelength_offset_sigma_nm": 0.0,
+      "amplitude_sigma_rel": 0.0,
+      "frame_gain_sigma_rel": 0.0,
+      "reflectance_sigma_abs": 0.0
+    },
+    "material_n_real_rel_delta": {
+      "HSQ": 0.0,
+      "PSS": 0.0,
+      "SOC": 0.0,
+      "TiO2": 0.0
+    },
+    "material_k_rel_delta": {
+      "HSQ": 0.0,
+      "PSS": 0.0,
+      "SOC": 0.0,
+      "TiO2": 0.0
+    },
+    "angle_input_convention": "nonnegative StackRT first-incident-medium angle in degrees",
+    "angle_limit_deg": 0.1,
+    "angle_error_deg": 0.0,
+    "wavelength_offset_nm": 0.0,
+    "amplitude_rel_error": 0.0
+  },
+  "nominal_amplitude_nm": 5.0,
+  "actual_amplitude_nm": 5.0,
+  "actual_angle_deg": 0.0,
+  "reflectance_clip_fraction": 0.0,
+  "npz_path": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_clean_20260717_181902.npz"
+}

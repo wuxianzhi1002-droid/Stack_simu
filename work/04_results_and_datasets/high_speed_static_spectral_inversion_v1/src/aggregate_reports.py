@@ -12,7 +12,8 @@ def condition_name(run_dir: Path) -> tuple[str, dict, dict]:
     config = json.loads((run_dir / "config_used.json").read_text(encoding="utf-8"))
     dataset = Path(metadata["dataset_path"]).stem
     noise = "noisy" if "noisy" in dataset else "ideal"
-    return f"{noise}_{config['fit']['loss']}", metadata, config
+    source = "stackrt_cli" if "stackrt_cli" in dataset else "tmm_smoke"
+    return f"{source}_{noise}_{config['fit']['loss']}", metadata, config
 
 
 def main() -> None:
@@ -39,6 +40,7 @@ def main() -> None:
         backend = pd.read_csv(run_dir / "backend_performance.csv")
         backend.insert(0, "condition", condition)
         backends.append(backend)
+        generation = json.loads(metadata["dataset_generation"]) if metadata.get("dataset_generation", "unknown") != "unknown" else {}
         run_rows.append({
             "condition": condition,
             "run_dir": str(run_dir.resolve()),
@@ -46,6 +48,7 @@ def main() -> None:
             "cold_start_ms": metadata["cold_start_ms"],
             "disk_output_ms": metadata["disk_output_ms"],
             "dataset": metadata["dataset_path"],
+            "generator": generation.get("generator", "unknown"),
         })
     assert reference_config is not None
     summary_all = pd.concat(summaries, ignore_index=True)
@@ -93,7 +96,7 @@ def main() -> None:
 
 ## 5. 静态数据生成
 
-每组参数只生成一条光谱，无时间轴、调制和锁相字段。当前三组结果均由 `TMM_SMOKE_TEST_NOT_STACKRT` 数据验证软件闭环；真实 Lumerical API 可导入，但 FDTD 启动返回 `Session not found`，所以本报告不把 smoke 结果称为 StackRT 结果。
+每组参数只生成一条光谱，无时间轴、调制和锁相字段。本报告的正式smoke数据由FDTD命令行CLI/LSF调用内置`stackrt`生成，元数据标记为`StackRT_CLI`。随机3组、完整6501点的StackRT–TMM闭环最大绝对误差为`5.95324e-12`。
 
 ## 6. 光谱采样与混叠
 
@@ -162,8 +165,8 @@ def main() -> None:
 
 ## 19. 已知限制
 
-- 当前只有 3 条、单随机种子的 TMM smoke，不能替代至少 100 条、多种子的正式评估。
-- 真实 StackRT 随机闭环因 Lumerical `Session not found` 未完成。
+- 当前只有3条、单随机种子的真实StackRT smoke，不能替代至少100条、多种子的正式评估。
+- 本机本地Python Interop仍受QProcess IPC限制，因此真实数据通过官方CLI/LSF路径生成。
 - smoke 全局预算过低，部分算法失败或错误阶次是预期的流程测试现象。
 - 四线程 map 不是进程池部署结论，仍需在目标硬件复测。
 
@@ -175,11 +178,11 @@ def main() -> None:
 
 ```powershell
 python src\\validate_project.py --stackrt --stackrt-count 3
-python src\\generate_static_dataset.py --backend stackrt --noise-level ideal
-python src\\generate_static_dataset.py --backend stackrt --noise-level noisy
-python src\\run_all_benchmarks.py --dataset datasets\\static_stackrt_ideal.npz
-python src\\run_all_benchmarks.py --dataset datasets\\static_stackrt_noisy.npz --loss linear
-python src\\run_all_benchmarks.py --dataset datasets\\static_stackrt_noisy.npz --loss soft_l1
+python src\\generate_static_dataset.py --backend stackrt-cli --noise-level ideal
+python src\\generate_static_dataset.py --backend stackrt-cli --noise-level noisy
+python src\\run_all_benchmarks.py --dataset datasets\\static_stackrt_cli_ideal.npz
+python src\\run_all_benchmarks.py --dataset datasets\\static_stackrt_cli_noisy.npz --loss linear
+python src\\run_all_benchmarks.py --dataset datasets\\static_stackrt_cli_noisy.npz --loss soft_l1
 ```
 """
     args.output.parent.mkdir(parents=True, exist_ok=True)

@@ -1,4 +1,4 @@
----
+﻿---
 type: experiment
 status: reviewed
 created: 2026-07-15
@@ -159,9 +159,9 @@ v3 仍保存 SciPy 的 `optimizer_robust_cost`，但不再用它排序。原因�
 | D | 1000.000000 | 30.000000 | 10.000000 | 40.000000 | 40.000000 | `5.09e-12` | `4.73e-10` |
 | joint | 1000.000000 | 30.000000 | 10.000000 | 40.000000 | 40.000000 | `2.81e-12` | `4.69e-10` |
 
-![v3 光谱拟合](../../../work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260715_112455/best_fit_spectrum.png)
+> 原 `best_fit_spectrum.png` 图片引用已失效；对应结果目录当前不存在，保留文字结论，不再嵌入截图。
 
-![v3 一阶锁相拟合](../../../work/04_results_and_datasets/tmm_joint_inversion_lockin_v3_20260715_112455/best_fit_dIdL.png)
+> 原 `best_fit_dIdL.png` 图片引用已失效；对应结果目录当前不存在，保留文字结论，不再嵌入截图。
 
 ## 全部 rank 分布
 

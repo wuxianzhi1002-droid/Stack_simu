@@ -4,9 +4,10 @@
   "title": "hello",
   "titleGenerationStatus": "failed",
   "createdAt": 1783067172786,
-  "updatedAt": 1783360677682,
-  "lastResponseAt": 1783360677682,
+  "updatedAt": 1784364032118,
+  "lastResponseAt": 1784363938849,
   "sessionId": "019f2753-7977-7141-9a68-d8b63d966c9f",
+  "selectedModel": "gpt-5.6-luna",
   "providerState": {
     "threadId": "019f2753-7977-7141-9a68-d8b63d966c9f",
     "sessionFilePath": "C:\\Users\\wuxianzhi\\.codex\\sessions\\2026\\07\\03\\rollout-2026-07-03T17-33-34-019f2753-7977-7141-9a68-d8b63d966c9f.jsonl",
@@ -16,10 +17,10 @@
     "inputTokens": 40635,
     "cacheCreationInputTokens": 0,
     "cacheReadInputTokens": 22912,
-    "contextWindow": 258400,
-    "contextWindowIsAuthoritative": true,
+    "contextWindow": 200000,
+    "contextWindowIsAuthoritative": false,
     "contextTokens": 40635,
-    "percentage": 16,
-    "model": "gpt-5.5"
+    "percentage": 20,
+    "model": "gpt-5.6-luna"
   }
 }

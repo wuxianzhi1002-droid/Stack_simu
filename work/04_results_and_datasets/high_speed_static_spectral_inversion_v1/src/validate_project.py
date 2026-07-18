@@ -2,13 +2,15 @@ from __future__ import annotations
 
 import argparse
 import inspect
+import json
+from datetime import datetime
 from pathlib import Path
 
 import numpy as np
 
 from benchmark_latency import run_benchmark
 from generate_static_dataset import sample_parameters
-from main_static_stackrt import StaticStackRTGenerator
+from main_static_stackrt import StaticStackRTCLIGenerator
 from model_config import NOMINAL_TRUTH, load_config, wavelength_axis_um
 from objective_functions import FitProblem, variable_projection
 from spectrum_preprocess import preprocess_spectrum
@@ -47,23 +49,43 @@ def validate_stackrt(config_path: Path, count: int) -> None:
     wavelength = wavelength_axis_um(config)
     tmm = StackRTMatchedTMM(wavelength)
     rng = np.random.default_rng(20260717)
+    values_batch = sample_parameters(count, rng, "random")
+    axes = np.repeat(wavelength[None, :], count, axis=0)
+    references = StaticStackRTCLIGenerator().spectra(axes, values_batch)
     errors = []
-    with StaticStackRTGenerator(wavelength) as stackrt:
-        for values in sample_parameters(count, rng, "random"):
-            reference = stackrt.spectrum(values)
-            prediction = tmm.reflectance(values)
-            errors.append(float(np.max(np.abs(reference - prediction))))
+    for values, reference in zip(values_batch, references):
+        prediction = tmm.reflectance(values)
+        errors.append(float(np.max(np.abs(reference - prediction))))
     maximum = max(errors)
+    tolerance = 1e-8
+    diagnostics_dir = Path(__file__).resolve().parents[1] / "diagnostics"
+    diagnostics_dir.mkdir(parents=True, exist_ok=True)
+    evidence = {
+        "created": datetime.now().isoformat(timespec="seconds"),
+        "generator": "StackRT_CLI",
+        "sample_count": count,
+        "wavelength_count": int(wavelength.size),
+        "wavelength_min_nm": float(wavelength.min() * 1000.0),
+        "wavelength_max_nm": float(wavelength.max() * 1000.0),
+        "max_abs_error": maximum,
+        "per_sample_max_abs_error": errors,
+        "tolerance": tolerance,
+        "passed": maximum <= tolerance,
+        "parameters": values_batch.tolist(),
+    }
+    evidence_path = diagnostics_dir / "stackrt_tmm_closure.json"
+    evidence_path.write_text(json.dumps(evidence, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"StackRT-TMM max absolute error over {count} random cases: {maximum:.6g}")
-    if maximum > 1e-8:
-        raise AssertionError(f"StackRT-TMM agreement failed: {maximum:.6g} > 1e-8")
+    print(f"Closure evidence: {evidence_path}")
+    if maximum > tolerance:
+        raise AssertionError(f"StackRT-TMM agreement failed: {maximum:.6g} > {tolerance:.6g}")
 
 
 def main() -> None:
     root = Path(__file__).resolve().parents[1]
     parser = argparse.ArgumentParser(description="Validate the independent static inversion project.")
     parser.add_argument("--config", default=str(root / "config_default.json"))
-    parser.add_argument("--stackrt", action="store_true", help="Also open Lumerical and run random StackRT closure tests.")
+    parser.add_argument("--stackrt", action="store_true", help="Also run FDTD CLI/LSF random StackRT closure tests.")
     parser.add_argument("--stackrt-count", type=int, default=3)
     args = parser.parse_args()
     validate_numpy_pipeline(Path(args.config))

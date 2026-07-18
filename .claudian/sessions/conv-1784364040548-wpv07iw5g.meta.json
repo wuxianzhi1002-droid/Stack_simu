@@ -1,0 +1,10 @@
+{
+  "id": "conv-1784364040548-wpv07iw5g",
+  "providerId": "codex",
+  "title": "把这份报告翻译为中文的，创建为同一路径的副本",
+  "titleGenerationStatus": "failed",
+  "createdAt": 1784364040548,
+  "updatedAt": 1784364047131,
+  "sessionId": null,
+  "selectedModel": "gpt-5.5"
+}

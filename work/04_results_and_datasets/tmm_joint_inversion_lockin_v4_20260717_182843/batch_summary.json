@@ -1,0 +1,16 @@
+{
+  "version": "tmm_joint_inversion_lockin_v4",
+  "case_count": 19,
+  "modes": [
+    "joint"
+  ],
+  "best_film_mae_case": "angle_high",
+  "worst_film_mae_case": "combined_high",
+  "boundary_hit_cases": [
+    "combined_high",
+    "wavelength_high",
+    "wavelength_medium"
+  ],
+  "median_condition_number": 23909.71081,
+  "median_multistart_distance": 0.131508752
+}

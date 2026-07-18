@@ -1,0 +1,135 @@
+{
+  "version": "tmm_joint_inversion_lockin_v4",
+  "input_npz_resolved": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_angle_high_20260717_181902.npz",
+  "metadata": {
+    "noise_case": "angle_high",
+    "noise_level": "high",
+    "noise_factor": "angle",
+    "generator_version": "main_dynamic_v5",
+    "random_seed": 3962699459,
+    "nominal_amplitude_nm": 5.0,
+    "actual_amplitude_nm": 5.0,
+    "actual_angle_deg": 0.008272410811787907,
+    "wavelength_offset_nm": 0.0,
+    "reflectance_clip_fraction": 0.0
+  },
+  "config": {
+    "input_npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_angle_high_20260717_181902.npz",
+    "amplitude_nm": 5.0,
+    "wavelength_min_nm": 220.0,
+    "wavelength_max_nm": 580.0,
+    "stride": 10,
+    "multistarts": 16,
+    "max_nfev": 250,
+    "global_popsize": 12,
+    "global_maxiter": 50,
+    "global_stride": 50,
+    "global_phase_samples": 8,
+    "local_phase_samples": 16,
+    "random_seed": 20260717,
+    "use_prior": false,
+    "loss": "soft_l1"
+  },
+  "params": [
+    "Air",
+    "HSQ",
+    "PSS",
+    "SOC",
+    "TiO2",
+    "Angle"
+  ],
+  "bounds": {
+    "Air": [
+      998.0,
+      1002.0
+    ],
+    "HSQ": [
+      20.0,
+      40.0
+    ],
+    "PSS": [
+      1.0,
+      20.0
+    ],
+    "SOC": [
+      30.0,
+      50.0
+    ],
+    "TiO2": [
+      30.0,
+      50.0
+    ],
+    "Angle": [
+      0.0,
+      0.1
+    ]
+  },
+  "evaluation_truth": {
+    "Air": 1000.0,
+    "HSQ": 30.0,
+    "PSS": 10.0,
+    "SOC": 40.0,
+    "TiO2": 40.0,
+    "Angle": 0.008272410811787907
+  },
+  "truth_usage_policy": "loaded for reporting but hidden from optimization, initialization, residuals, priors, and ranking",
+  "postfit_initialization_audit": {
+    "joint": {
+      "start_count": 16,
+      "exact_truth_start_count": 0,
+      "minimum_scaled_distance_to_truth": 0.14827145124539487,
+      "maximum_scaled_distance_to_truth": 0.25635999328132664
+    }
+  },
+  "global_search": {
+    "joint": {
+      "success": false,
+      "message": "Maximum number of iterations has been exceeded.",
+      "nfev": 3672,
+      "nit": 50,
+      "best_energy": 0.000310364925884524,
+      "best_vector": [
+        1000.0032023221526,
+        30.297383234863343,
+        11.444007205285892,
+        38.503528972515184,
+        39.55714629555692,
+        0.023525134034502668
+      ],
+      "population_size": 72,
+      "scales": {
+        "sigma_I": 0.1706151757195748,
+        "sigma_dIdL": 8.908652898596621
+      },
+      "initialization": "differential_evolution with Latin-hypercube population; no truth or nominal seed"
+    }
+  },
+  "diagnostics": {
+    "joint": {
+      "singular_values": [
+        6060.520022995565,
+        363.19510467208136,
+        5.614100869359853,
+        2.4948196865602523,
+        0.3736077392376871,
+        0.2739449065404819
+      ],
+      "condition_number": 22123.134536542217
+    }
+  },
+  "plot_paths": {
+    "best_fit_spectrum": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_joint_inversion_lockin_v4_20260717_182843\\angle_high\\best_fit_spectrum.png",
+    "best_fit_dIdL": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_joint_inversion_lockin_v4_20260717_182843\\angle_high\\best_fit_dIdL.png",
+    "joint_residual": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_joint_inversion_lockin_v4_20260717_182843\\angle_high\\joint_residual.png",
+    "jacobian_singular_values": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\tmm_joint_inversion_lockin_v4_20260717_182843\\angle_high\\jacobian_singular_values.png"
+  },
+  "tmm_convention": {
+    "frequency_axis": "f = 3e8 / lambda_nominal",
+    "phase_wavelength": "lambda_phase = 299792458 / f",
+    "polarization": "p",
+    "oblique_admittance": "q_p = n / cos(theta_layer)",
+    "snell_invariant": "n0*sin(theta0) = nj*sin(thetaj)",
+    "angle_parameter": "nonnegative StackRT incident-medium angle, bounded 0 to 0.1 deg",
+    "observation_model": "finite modulation mean I and lockin 1f X / nominal A"
+  }
+}

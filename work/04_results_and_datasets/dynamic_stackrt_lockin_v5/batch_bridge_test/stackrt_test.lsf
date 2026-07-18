@@ -1,0 +1,5 @@
+matlabload("stackrt_input.mat");
+result=stackrt(n_matrix,thicknesses,freqs,angle_deg);
+Rp=result.Rp;
+matlabsave("stackrt_output.mat",Rp);
+exit;

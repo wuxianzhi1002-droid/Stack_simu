@@ -1,0 +1,13 @@
+backend,repeat,candidate_count,elapsed_ms,candidates_per_second,max_abs_vs_reference
+uncached_model_per_candidate,0,32,114.0215,280.6488250023022,0.0
+single_thread_loop,0,32,110.0963,290.6546359868588,0.0
+numpy_vectorized_batch,0,32,245.0325,130.5949210818973,0.0
+scipy_workers_style_thread_map_4,0,32,49.4404,647.243954336939,0.0
+uncached_model_per_candidate,1,32,116.8247,273.9146772899909,0.0
+single_thread_loop,1,32,107.5027,297.666942318658,0.0
+numpy_vectorized_batch,1,32,255.2571,125.36379987079692,0.0
+scipy_workers_style_thread_map_4,1,32,53.5627,597.4306747045986,0.0
+uncached_model_per_candidate,2,32,149.5307,214.0028770011777,0.0
+single_thread_loop,2,32,137.5272,232.68124414661247,0.0
+numpy_vectorized_batch,2,32,271.0563,118.05665465071277,0.0
+scipy_workers_style_thread_map_4,2,32,60.8133,526.2006830742617,0.0

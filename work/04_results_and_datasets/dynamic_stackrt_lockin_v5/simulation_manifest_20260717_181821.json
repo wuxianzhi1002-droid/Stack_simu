@@ -1,0 +1,21 @@
+{
+  "generator_version": "main_dynamic_v5",
+  "timestamp": "20260717_181821",
+  "root_seed": 20260717,
+  "backend": "batch",
+  "requested_cases": [
+    "clean"
+  ],
+  "angle_limit_deg": 0.1,
+  "artifacts": [
+    {
+      "case": "clean",
+      "seed": 2416604853,
+      "npz": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_clean_20260717_181821.npz",
+      "metadata": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\noise_realization_clean_20260717_181821.json",
+      "lockin_plot": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\lockin_analysis_clean_20260717_181821.png",
+      "dashboard": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_analysis_dashboard_clean_20260717_181821.png"
+    }
+  ],
+  "failures": []
+}

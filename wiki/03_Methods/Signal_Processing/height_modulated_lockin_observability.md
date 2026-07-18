@@ -185,7 +185,7 @@ $$
 
 v3 已于 2026-07-15 完成上述修正：每种模式使用独立差分进化生成候选池，再对 32 个非真值起点做局部精修；当前理想闭环中三种模式均达到 `32/32` 收敛。详见：
 
-[[04_Experiments/Simulation_Reports/TMM_Joint_Inversion_Lockin_v3_20260715]]
+[[TMM_Joint_Inversion_Lockin_v3_20260715]]
 
 ## 参数与数据规范
 

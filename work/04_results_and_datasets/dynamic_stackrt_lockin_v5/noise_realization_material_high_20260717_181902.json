@@ -1,0 +1,43 @@
+{
+  "generator_version": "main_dynamic_v5",
+  "noise_case": "material_high",
+  "noise_level": "high",
+  "noise_factor": "material",
+  "random_seed": 3769213041,
+  "noise_realization": {
+    "case": "material_high",
+    "level": "high",
+    "factor": "material",
+    "profile_config": {
+      "n_real_sigma_rel": 0.005,
+      "k_sigma_rel": 0.1,
+      "angle_sigma_deg": 0.0,
+      "wavelength_offset_sigma_nm": 0.0,
+      "amplitude_sigma_rel": 0.0,
+      "frame_gain_sigma_rel": 0.0,
+      "reflectance_sigma_abs": 0.0
+    },
+    "material_n_real_rel_delta": {
+      "HSQ": 0.0032681959141622487,
+      "PSS": -0.0010887512640284287,
+      "SOC": 0.0030078524527949965,
+      "TiO2": 0.005026337010625574
+    },
+    "material_k_rel_delta": {
+      "HSQ": 0.07258434197392151,
+      "PSS": -0.023037973764655398,
+      "SOC": -0.013256953635965511,
+      "TiO2": 0.025858224329585455
+    },
+    "angle_input_convention": "nonnegative StackRT first-incident-medium angle in degrees",
+    "angle_limit_deg": 0.1,
+    "angle_error_deg": 0.0,
+    "wavelength_offset_nm": 0.0,
+    "amplitude_rel_error": 0.0
+  },
+  "nominal_amplitude_nm": 5.0,
+  "actual_amplitude_nm": 5.0,
+  "actual_angle_deg": 0.0,
+  "reflectance_clip_fraction": 0.0,
+  "npz_path": "D:\\激光干涉仪\\simulation\\Lumerical_simulation\\STACK_simu\\work\\04_results_and_datasets\\dynamic_stackrt_lockin_v5\\dynamic_spectra_material_high_20260717_181902.npz"
+}
