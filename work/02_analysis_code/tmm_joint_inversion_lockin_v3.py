@@ -31,7 +31,7 @@ EVALUATION_TRUTH = {
     "PSS": 10.0,
     "SOC": 40.0,
     "TiO2": 40.0,
-}
+}  
 
 BOUNDS = {
     "Air": (998.0, 1002.0),
